@@ -225,7 +225,7 @@ class otchet(View):
 
                 for o in table:
                     if o == 'publication':
-                        print(1)
+                        
                         count=2
                         sheet = workbook.create_sheet('Публикации')
                         sheet['A1']="Тип публикации"
@@ -286,7 +286,7 @@ class otchet(View):
 
             for o in table:
                 if o == 'publication':
-                    print(1)
+
                     count=2
                     sheet = workbook.create_sheet('Публикации')
                     sheet['A1']="Тип публикации"
