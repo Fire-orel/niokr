@@ -1,0 +1,1 @@
+<QueryDict: {'csrfmiddlewaretoken': ['QQoOm3HQ8eNnIlc6UlQFjRnfcIkh8JEBuVwJBhhQ9xQTNn4L2otCAJzwMqBMZ8yo'], 'type_publication': ['1'], 'full_name_author': ['Данила Сергеевич Номоконов'], 'name_publication': ['ывакфып'], 'exit_data': ['rgrg'], 'year': ['2024'], 'place_publication': ['rgr'], 'volume_publication': ['13'], 'eLIBRARY_ID': ['121341'], 'doi_publication': ['214314']}>

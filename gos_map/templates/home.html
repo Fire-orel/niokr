@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container mt-4">
+        {% comment %} <h1>Welcome to the Home Page</h1> {% endcomment %}
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="records-tab" data-bs-toggle="tab" data-bs-target="#records" type="button" role="tab" aria-controls="records" aria-selected="true">Карта</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#otchet" type="button" role="tab" aria-controls="another-records" aria-selected="false">Отчёты</button>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
+                <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addMapModal">
+                    Добавить новую запись
+                </button>
+                <table id="mapTable" class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Год</th>
+                            <th>Квартал</th>
+                            <th>Кафедра</th>
+                            <th>Комментарий</th>
+                            <th>Ответсвенный</th>
+                            <th>Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for map in maps %}
+                        <tr>
+                            <td>{{ map.id }}</td>
+                            <td>{{ map.year }}</td>
+                            <td>{{ map.quarter }}</td>
+                            <td>{{ map.department }}</td>
+                            <td>{{ map.comment }}</td>
+                            <td>{{ map.responsible }}</td>
+                            <td>{{ map.get_status_display}}</td>
+                            <td> <a href="{% url 'map_details' map.id %}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-pane fade" id="otchet" role="tabpanel" aria-labelledby="another-records-tab">
+
+                <table id="anotherRecordsTable" class="table mt-3">
+                    <form action="{% url 'otchet' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="faculty">Факультет:</label>
+                            <select name="faculty" id="faculty" multiple style="width: 200px;">
+                                <!-- Варианты выбора факультетов -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="department">Кафедра:</label>
+                            <select name="department" id="department" multiple style="width: 200px;">
+                                <!-- Варианты выбора кафедр -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="quarter">Квартал:</label>
+                            <select name="quarter" id="quarter" multiple style="width: 200px;">
+                                <option value="1">1 квартал</option>
+                                <option value="2">2 квартал</option>
+                                <option value="3">3 квартал</option>
+                                <option value="4">4 квартал</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="table">Таблицы:</label>
+                            <select name="table" id="table" multiple style="width: 200px;">
+                                <option value="publication">Публикации</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id='table_type_div' style="display: none;">
+                            <label for="table_type">Типы публикации:</label>
+                            <select name="table_type" id="table_type" multiple style="width: 200px; ">
+                                {% for type_publication in type_publications %}
+                                <option value={{type_publication.id }}>{{type_publication.name_type_publications}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="year">Год:</label>
+                            <input type="text" name="year" id="year">
+                        </div>
+                        <button type="submit">Сформировать отчет</button>
+                    </form>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addMapModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавить</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <form id="addMapForm" action="{% url 'chek_map' %}" method="post">
+                        {% csrf_token %}
+                        {{ mapform.as_p }}
+                        <div id="error-message" class="alert alert-danger" style="display:none;"></div>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    {% endblock  %}

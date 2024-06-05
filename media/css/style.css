@@ -1,0 +1,12 @@
+.form-group {
+    margin-bottom: 20px; /* Расстояние между полями */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px; /* Расстояние между меткой и полем ввода */
+}
+#mapTable td {
+    word-wrap: break-word; /* Разрешить перенос слов */
+}
