@@ -75,3 +75,131 @@ url = 'https://cabinet.zabgu.ru/api/v1/physical-person/'
 api_key = os.getenv("api_key")
 
 process_api(url, api_key)
+
+
+
+
+if len(quarter)!=0:
+            for i in quarter:
+                workbook = Workbook()
+                workbook.remove(workbook.active)
+                map_date=Map.objects.filter(quarter=i)
+                map_list.append(map_date[0])
+
+                for o in table:
+                    if o == 'publication':
+
+                        count=2
+                        sheet = workbook.create_sheet('Публикации')
+                        sheet['A1']="Тип публикации"
+                        sheet['B1']="ФИО автора"
+                        sheet['C1']="Наименование публикации"
+                        sheet['D1']="Выходные данные публикации (Название журнала, Номер, Том, страницы)"
+                        sheet['E1']="Год"
+                        sheet['F1']="Место опубликования"
+                        sheet['G1']="Объем публикации (п.л.)"
+                        sheet['H1']="eLIBRARY ID"
+                        sheet['I1']="DOI публикации"
+
+
+
+                        for q in map_date:
+                            if not len(type_table_publication)>0:
+                                publications=Publications.objects.filter(id_map=q)
+                                for u in publications:
+                                    sheet[f"A{count}"]=u.type_publication.name_type_publications
+                                    sheet[f"B{count}"]=u.full_name_author
+                                    sheet[f"C{count}"]=u.name_publication
+                                    sheet[f"D{count}"]=u.exit_data
+                                    sheet[f"E{count}"]=u.year
+                                    sheet[f"F{count}"]=u.place_publication
+                                    sheet[f"G{count}"]=u.volume_publication
+                                    sheet[f"H{count}"]=u.eLIBRARY_ID
+                                    sheet[f"I{count}"]=u.doi_publication
+                                    count+=1
+
+                            else:
+                                for u in type_table_publication:
+                                    publications=Publications.objects.filter(id_map=q,type_publication=u)
+                                    for w in publications:
+                                        sheet[f"A{count}"]=w.type_publication.name_type_publications
+                                        sheet[f"B{count}"]=w.full_name_author
+                                        sheet[f"C{count}"]=w.name_publication
+                                        sheet[f"D{count}"]=w.exit_data
+                                        sheet[f"E{count}"]=w.year
+                                        sheet[f"F{count}"]=w.place_publication
+                                        sheet[f"G{count}"]=w.volume_publication
+                                        sheet[f"H{count}"]=w.eLIBRARY_ID
+                                        sheet[f"I{count}"]=w.doi_publication
+                                        count+=1
+
+                response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+                response['Content-Disposition'] = f'attachment; filename=example.xlsx'
+
+                # Сохраняем книгу в объект HttpResponse
+                workbook.save(response)
+
+                # Возвращаем HTTP-ответ с загруженным файлом
+                return response
+        else:
+            workbook = Workbook()
+            workbook.remove(workbook.active)
+            map_date=Map.objects.filter()
+            map_list.append(map_date[0])
+
+            for o in table:
+                if o == 'publication':
+
+                    count=2
+                    sheet = workbook.create_sheet('Публикации')
+                    sheet['A1']="Тип публикации"
+                    sheet['B1']="ФИО автора"
+                    sheet['C1']="Наименование публикации"
+                    sheet['D1']="Выходные данные публикации (Название журнала, Номер, Том, страницы)"
+                    sheet['E1']="Год"
+                    sheet['F1']="Место опубликования"
+                    sheet['G1']="Объем публикации (п.л.)"
+                    sheet['H1']="eLIBRARY ID"
+                    sheet['I1']="DOI публикации"
+
+
+
+                    for q in map_date:
+                        if not len(type_table_publication)>0:
+                            publications=Publications.objects.filter(id_map=q)
+                            for u in publications:
+                                sheet[f"A{count}"]=u.type_publication.name_type_publications
+                                sheet[f"B{count}"]=u.full_name_author
+                                sheet[f"C{count}"]=u.name_publication
+                                sheet[f"D{count}"]=u.exit_data
+                                sheet[f"E{count}"]=u.year
+                                sheet[f"F{count}"]=u.place_publication
+                                sheet[f"G{count}"]=u.volume_publication
+                                sheet[f"H{count}"]=u.eLIBRARY_ID
+                                sheet[f"I{count}"]=u.doi_publication
+                                count+=1
+
+                        else:
+                            for u in type_table_publication:
+                                publications=Publications.objects.filter(id_map=q,type_publication=u)
+                                for w in publications:
+                                    sheet[f"A{count}"]=w.type_publication.name_type_publications
+                                    sheet[f"B{count}"]=w.full_name_author
+                                    sheet[f"C{count}"]=w.name_publication
+                                    sheet[f"D{count}"]=w.exit_data
+                                    sheet[f"E{count}"]=w.year
+                                    sheet[f"F{count}"]=w.place_publication
+                                    sheet[f"G{count}"]=w.volume_publication
+                                    sheet[f"H{count}"]=w.eLIBRARY_ID
+                                    sheet[f"I{count}"]=w.doi_publication
+                                    count+=1
+
+                response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+                response['Content-Disposition'] = 'attachment; filename=example.xlsx'
+
+                # Сохраняем книгу в объект HttpResponse
+                workbook.save(response)
+
+                # Возвращаем HTTP-ответ с загруженным файлом
+                return response
+
