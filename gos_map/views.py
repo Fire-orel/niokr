@@ -264,7 +264,7 @@ class otchet(View):
                                         count+=1
                                 else:
                                     for type in type_table_publication:
-                                        publications=Publications.objects.filter(id_map=type,type_publication=u)
+                                        publications=Publications.objects.filter(id_map=type,type_publication=type)
                                         for w in publications:
                                             print(2)
                                             sheet[f"A{count}"]=w.type_publication.name_type_publications
@@ -311,7 +311,7 @@ class otchet(View):
                             if len(type_table_publication)== 0:
                                 publications=Publications.objects. filter(id_map=map_date)
                                 for u in publications:
-                                    print(u.full_name_author,map_date)
+
                                     sheet[f"A{count}"]=u.type_publication.name_type_publications
                                     sheet[f"B{count}"]=u.full_name_author
                                     sheet[f"C{count}"]=u.name_publication
@@ -324,7 +324,7 @@ class otchet(View):
                                     count+=1
                             else:
                                 for type in type_table_publication:
-                                    publications=Publications.objects.filter(id_map=type,type_publication=u)
+                                    publications=Publications.objects.filter(id_map=type,type_publication=type)
                                     for w in publications:
                                         print(2)
                                         sheet[f"A{count}"]=w.type_publication.name_type_publications
