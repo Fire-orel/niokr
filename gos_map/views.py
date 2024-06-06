@@ -33,7 +33,6 @@ class LoginView(View):
                 if user !=False :
                     if UserManager.get_user_by_login_password(login=username,password=password):
                         request.session['user_id'] = user.id
-
                         request.session['user_full_name'] = user.full_name
                         return redirect('home')
                     else:
@@ -43,6 +42,7 @@ class LoginView(View):
 
             # Если пользователь не найден в базе данных Django, пробуем аутентификацию через LDAP
             ldap_user = self.ldap_authenticate(username, password)
+
             if ldap_user:
                 # Создаем пользователя в базе данных Django
                 first_name=ldap_user['first_name']
@@ -84,7 +84,9 @@ class LoginView(View):
         if len(conn.entries) != 1:
             return None
 
+
         user_info = conn.entries[0]
+
         return {
             'username': user_info.sAMAccountName.value,
             'first_name': user_info.givenName.value,
@@ -97,9 +99,12 @@ class HomeView(View):
 
     def get(self, request):
         user_full_name = request.session.get('user_full_name')
-
+        user_id = request.session.get('user_id')
+        print(UserManager.get_user_id(request.session.get("user_id")).position)
         context = {
             'user_full_name': user_full_name,
+            'user_id':UserManager.get_user_id(request.session.get("user_id")),
+            'user_posistion':UserManager.get_user_id(request.session.get("user_id")).position,
             'maps': Map.objects.all (),
             'mapform':MapForms(),
             'type_publications':TypePublications.objects.all()

@@ -90,7 +90,7 @@
                                 <td>{{ publication.eLIBRARY_ID}}</td>
                                 <td>{{ publication.doi_publication }}</td>
                                 <td>{{ publication.get_status_display}}</td>
-                                <td> <a href="{% url 'map_details' map.id %}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
+                                {% comment %} <td> <a href="{% url 'map_details' map.id %}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td> {% endcomment %}
                                 <td><button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deletePublicationModal" data-id="{{ publication.id }}">Удалить</button></td>
                             </tr>
                             {% endfor %}
