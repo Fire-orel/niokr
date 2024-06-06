@@ -100,7 +100,7 @@ class HomeView(View):
     def get(self, request):
         user_full_name = request.session.get('user_full_name')
         user_id = request.session.get('user_id')
-        print(UserManager.get_user_id(request.session.get("user_id")).position)
+
         context = {
             'user_full_name': user_full_name,
             'user_id':UserManager.get_user_id(request.session.get("user_id")),
@@ -222,12 +222,13 @@ class otchet(View):
         year = request.POST.get('year')
         type_table_publication=request.POST.getlist('table_type')
         # print(quarter,table,type_table_publication)
-        map_list=[]
+        # print(UserManager.get_user_id(request.session.get("user_id")))
+        user_id=UserManager.get_user_id(request.session.get("user_id"))
         zip_buffer = io.BytesIO()
         if len(quarter)!=0:
             for i in quarter:
 
-                map_dates=Map.objects.filter(quarter=i)
+                map_dates=Map.objects.filter(quarter=i,responsible=user_id)
                 with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
                     for map_date in map_dates:
 
