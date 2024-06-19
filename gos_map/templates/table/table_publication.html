@@ -1,0 +1,51 @@
+<div class="tab-pane fade show active" id="publications" role="tabpanel" aria-labelledby="publications-tab">
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#PublicationModal" id='addpublication'>Добавить новую запись</button>
+
+                <table id="publicationTable" class="table mt-3  mx-auto">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Тип публикации</th>
+                            <th>ФИО автора</th>
+                            <th>Наименование публикации</th>
+                            <th>Выходные данные публикации </th>
+                            <th>Год</th>
+                            <th>Место опубликования</th>
+                            <th>Объем публикации (п.л.)</th>
+                            <th>eLIBRARY ID</th>
+                            <th>DOI публикации</th>
+                            <th>Статус</th>
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for publication in publications %}
+                        <tr>
+                            <td>{{ publication.id }}</td>
+                            <td>{{ publication.type_publication}}</td>
+                            <td>{{ publication.full_name_author }}</td>
+                            <td>{{ publication.name_publication  }}</td>
+                            <td>{{ publication.exit_data}}</td>
+                            <td>{{ publication.year }}</td>
+                            <td>{{ publication.place_publication}}</td>
+                            <td>{{ publication.volume_publication}}</td>
+                            <td>{{ publication.eLIBRARY_ID}}</td>
+                            <td>{{ publication.doi_publication }}</td>
+                            <td>{{ publication.get_status_display}}</td>
+
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="editpublication" data-id="{{ publication.id }}"><i class="fas fa-edit"></i></button>
+                            </td>
+
+                            <td>
+                                <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deletePublicationModal" data-id="{{ publication.id }}" id="deletePublication">Удалить</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+        </div>

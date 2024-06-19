@@ -1,8 +1,11 @@
 from django.contrib import admin
-from .models import UserManager,TypePublications,Map,Publications
+from .models import UserManager,TypePublications,Map,Publications,TypeDocuments,TypeProperty,SecurityDocuments
 
 admin.site.register(UserManager)
 admin.site.register(TypePublications)
 admin.site.register(Map)
 admin.site.register(Publications)
+admin.site.register(TypeDocuments)
+admin.site.register(TypeProperty)
+admin.site.register(SecurityDocuments)
 # Register your models here.

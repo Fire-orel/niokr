@@ -1,0 +1,41 @@
+<div class="tab-pane fade" id="securitydocuments" role="tabpanel" aria-labelledby="securitydocuments-tab">
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#SecurityDocumentsModal">Добавить новую запись</button>
+
+            <table id="securitydocuments" class="table mt-3 mx-auto">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Тип документа</th>
+                        <th>Вид интеллектуальной собственности</th>
+                        <th>ФИО автора</th>
+                        <th>Наименование публикации</th>
+                        <th>Номер заявки / патента</th>
+                        <th>Статус</th>
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for securitydocument in securitydocuments %}
+                    <tr>
+                        <td>{{ securitydocument.id }}</td>
+                        <td>{{ securitydocument.type_document}}</td>
+                        <td>{{ securitydocument.type_property }}</td>
+                        <td>{{ securitydocument.full_name_author}}</td>
+                        <td>{{ securitydocument.name_publication}}</td>
+                        <td>{{ securitydocument.application_number }}</td>
+                        <td>{{ securitydocument.get_status_display}}</td>
+
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="editsecuritydocuments" data-id="{{ securitydocument.id }}"><i class="fas fa-edit"></i></button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteSecurityDocumentsModal" data-id="{{ securitydocument.id }}" id="deleteSecurityDocuments">Удалить</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+    </div>

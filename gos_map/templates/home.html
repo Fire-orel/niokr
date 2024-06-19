@@ -32,7 +32,6 @@
                     <tbody>
                         {% for map in maps %}
 
-                        {% if user_position == 'Научный отдел' %}
                             <tr>
                                 <td>{{ map.id }}</td>
                                 <td>{{ map.year }}</td>
@@ -43,18 +42,6 @@
                                 <td>{{ map.get_status_display}}</td>
                                 <td> <a href="{% url 'map_details' map.id %}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
                             </tr>
-                        {%  elif  map.responsible == user_id %}
-                            <tr>
-                                <td>{{ map.id }}</td>
-                                <td>{{ map.year }}</td>
-                                <td>{{ map.quarter }}</td>
-                                <td>{{ map.department }}</td>
-                                <td>{{ map.comment }}</td>
-                                <td>{{ map.responsible }}</td>
-                                <td>{{ map.get_status_display}}</td>
-                                <td> <a href="{% url 'map_details' map.id %}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
-                            </tr>
-                        {% endif %}
 
                         {% endfor %}
                     </tbody>

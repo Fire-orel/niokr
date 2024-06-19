@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container">
+    <div class="container-fluid">
         <a href="{% url 'home' %}" class="btn btn-primary mb-4"><i class="fas fa-arrow-left"></i>Назад
         </a>
         <div class="card">
@@ -49,82 +49,23 @@
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="records-tab" data-bs-toggle="tab" data-bs-target="#records" type="button" role="tab" aria-controls="records" aria-selected="true">Публикации</button>
+                    <button class="nav-link active" id="publications-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab1" data-bs-target="#publications" type="button" role="tab" aria-controls="publications" aria-selected="true" >Публикации</button>
                 </li>
-                {% comment %} <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#another-records" type="button" role="tab" aria-controls="another-records" aria-selected="false">Отчёты</button>
-                </li>{% endcomment %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="securitydocuments-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab2" data-bs-target="#securitydocuments" type="button" role="tab" aria-controls="securitydocuments" aria-selected="true" >Охранные документы</button>
+                </li>
         </ul>
 
-        <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
-            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addPublicationModal">Добавить новую запись</button>
-
-                    <table id="publicationTable" class="table mt-3">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Тип публикации</th>
-                                <th>ФИО автора</th>
-                                <th>Наименование публикации</th>
-                                <th>Выходные данные публикации </th>
-                                <th>Год</th>
-                                <th>Место опубликования</th>
-                                <th>Объем публикации (п.л.)</th>
-                                <th>eLIBRARY ID</th>
-                                <th>DOI публикации</th>
-                                <th>Статус</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for publication in publications %}
-                            <tr>
-                                <td>{{ publication.id }}</td>
-                                <td>{{ publication.type_publication}}</td>
-                                <td>{{ publication.full_name_author }}</td>
-                                <td>{{ publication.name_publication  }}</td>
-                                <td>{{ publication.exit_data}}</td>
-                                <td>{{ publication.year }}</td>
-                                <td>{{ publication.place_publication}}</td>
-                                <td>{{ publication.volume_publication}}</td>
-                                <td>{{ publication.eLIBRARY_ID}}</td>
-                                <td>{{ publication.doi_publication }}</td>
-                                <td>{{ publication.get_status_display}}</td>
-                                {% comment %} <td> <a href="{% url 'map_details' map.id %}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td> {% endcomment %}
-                                <td><button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deletePublicationModal" data-id="{{ publication.id }}">Удалить</button></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-            </div>
-    </div>
-
-
-
-    <div class="modal fade" id="addPublicationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Добавить</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Х</button>
-                </div>
-                <div class="modal-body ">
-                    <form id="addPublicationForm" action="{% url 'add_publication' %}" method="post">
-                        {% csrf_token %}
-                        {% for field in publicationsforms.visible_fields %}
-                        <div class="mb-3">
-                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                            <br>
-                            {{ field }}
-                        </div>
-                        {% endfor %}
-                        <div id="error-message" class="alert alert-danger" style="display:none;"></div>
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </form>
-                </div>
-            </div>
+        <div class="tab-content">
+           {% include "table/table_publication.html" %}
+           {% include "table/table_securitydocuments.html" %}
         </div>
-    </div>
+
+
+    {% include "modal/modal_publication.html" %}
+    {% include "modal/modal_securitydocuments.html" %}
+
+
 
 
     <div class="modal fade" id="deletePublicationModal" tabindex="-1" aria-labelledby="deletePublicationModalLabel" aria-hidden="true">
@@ -135,13 +76,32 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Х</button>
                 </div>
                 <div class="modal-body">
-                    Вы уверены, что хотите удалить эту публикацию?
+                    Вы уверены, что хотите удалить эту запись?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Удалить</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeletePublicationBtn">Удалить</button>
                 </div>
             </div>
         </div>
     </div>
-{% endblock  %}
+
+
+    <div class="modal fade" id="deleteSecurityDocumentsModal" tabindex="-1" aria-labelledby="deleteSecurityDocumentsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteSecurityDocumentsModalLabel">Подтвердите удаление</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Х</button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите удалить эту запись?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteSecurityDocumentsBtn" >Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
