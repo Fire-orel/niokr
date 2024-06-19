@@ -18,6 +18,10 @@ const csrftoken = getCookie('csrftoken');
 
 $(document).ready(function() {
 
+    if (window.location.pathname === '/home/') {
+        localStorage.removeItem('activeTab');
+    }
+
     $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
         localStorage.setItem('activeTab', $(e.target).attr('href'));
@@ -31,7 +35,63 @@ $(document).ready(function() {
         $('#myTab button[data-toggle="tab"]:first').tab('show'); // Установка первой вкладки активной по умолчанию
     }
 
+    $(document).on('click', '#deletePublication', function(){
 
+        var publicationId = $(this).data('id'); // Получаем ID публикации
+        $('#confirmDeletePublicationBtn').data('id', publicationId); // Устанавливаем ID в кнопку подтверждения удаления
+    });
+
+
+    // Обработчик клика по кнопке подтверждения удаления
+    $('#confirmDeletePublicationBtn').click(function() {
+
+
+        var publicationId = $(this).data('id'); // Получаем ID публикации
+
+        // Отправляем запрос на удаление публикации
+        $.ajax({
+            url: `/delete_publication/${publicationId}/`, // Путь к представлению для удаления публикации
+            method: 'POST',
+            headers: {'X-CSRFToken': csrftoken},
+            success: function(response) {
+                // Обновляем страницу или делаем что-то еще при успешном удалении
+                location.reload();
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+
+    $(document).on('click', '#deleteSecurityDocuments', function(){
+
+        var securitydocuments = $(this).data('id'); // Получаем ID публикации
+
+        $('#confirmDeleteSecurityDocumentsBtn').data('id', securitydocuments); // Устанавливаем ID в кнопку подтверждения удаления
+    });
+
+
+    // Обработчик клика по кнопке подтверждения удаления
+    $('#confirmDeleteSecurityDocumentsBtn').click(function() {
+
+
+        var securitydocuments = $(this).data('id');// Получаем ID публикации
+        console.log(securitydocuments)
+
+        // Отправляем запрос на удаление публикации
+        $.ajax({
+            url: `/delete_security_documents/${securitydocuments}/`, // Путь к представлению для удаления публикации
+            method: 'POST',
+            headers: {'X-CSRFToken': csrftoken},
+            success: function(response) {
+                // Обновляем страницу или делаем что-то еще при успешном удалении
+                location.reload();
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
 
 
 
@@ -184,33 +244,7 @@ $(document).ready(function() {
         $('#PublicationForm')[0].reset();
     });
 
-    $(document).on('click', '#deletePublication', function(){
 
-        var publicationId = $(this).data('id'); // Получаем ID публикации
-        $('#confirmDeletePublicationBtn').data('id', publicationId); // Устанавливаем ID в кнопку подтверждения удаления
-    });
-
-
-    // Обработчик клика по кнопке подтверждения удаления
-    $('#confirmDeletePublicationBtn').click(function() {
-
-
-        var publicationId = $(this).data('id'); // Получаем ID публикации
-
-        // Отправляем запрос на удаление публикации
-        $.ajax({
-            url: `/delete_publication/${publicationId}/`, // Путь к представлению для удаления публикации
-            method: 'POST',
-            headers: {'X-CSRFToken': csrftoken},
-            success: function(response) {
-                // Обновляем страницу или делаем что-то еще при успешном удалении
-                location.reload();
-            },
-            error: function(error) {
-                console.error('Error:', error);
-            }
-        });
-    });
 
 
 
@@ -305,35 +339,7 @@ $(document).ready(function() {
     });
 
 
-    $(document).on('click', '#deleteSecurityDocuments', function(){
 
-        var securitydocuments = $(this).data('id'); // Получаем ID публикации
-
-        $('#confirmDeleteSecurityDocumentsBtn').data('id', securitydocuments); // Устанавливаем ID в кнопку подтверждения удаления
-    });
-
-
-    // Обработчик клика по кнопке подтверждения удаления
-    $('#confirmDeleteSecurityDocumentsBtn').click(function() {
-
-
-        var securitydocuments = $(this).data('id');// Получаем ID публикации
-        console.log(securitydocuments)
-
-        // Отправляем запрос на удаление публикации
-        $.ajax({
-            url: `/delete_security_documents/${securitydocuments}/`, // Путь к представлению для удаления публикации
-            method: 'POST',
-            headers: {'X-CSRFToken': csrftoken},
-            success: function(response) {
-                // Обновляем страницу или делаем что-то еще при успешном удалении
-                location.reload();
-            },
-            error: function(error) {
-                console.error('Error:', error);
-            }
-        });
-    });
 
 
 
