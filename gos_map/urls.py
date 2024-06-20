@@ -1,5 +1,9 @@
 from django.urls import path
-from .views import LoginView,HomeView,CheckMap,MapDetails,addPublication,deletePublication,otchet,editPublication,addSecurityDocuments,deleteSecurityDocuments
+from .views.views import LoginView,HomeView,CheckMap,MapDetails,otchet
+
+from gos_map.views.views_publication import addPublication,deletePublication,editPublication
+
+from gos_map.views.views_security_documents import addSecurityDocuments,deleteSecurityDocuments,editSecurityDocuments
 
 urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
@@ -12,6 +16,7 @@ urlpatterns = [
     path('delete_publication/<int:pk>/',deletePublication.as_view(),name='delete_publication'),
 
     path('add_security_documents/',addSecurityDocuments.as_view(),name='add_security_documents'),
+    path('edit_security_documents/<int:pk>/',editSecurityDocuments.as_view(),name='edit_security_documents'),
     path('delete_security_documents/<int:pk>/',deleteSecurityDocuments.as_view(),name='delete_security_documents'),
 
     path("otchet/", otchet.as_view(), name="otchet")

@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="securitydocuments" role="tabpanel" aria-labelledby="securitydocuments-tab">
-    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#SecurityDocumentsModal">Добавить новую запись</button>
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#SecurityDocumentsModal" id='addsecuritydocument'>Добавить новую запись</button>
 
             <table id="securitydocuments" class="table mt-3 mx-auto">
                 <thead>
@@ -22,8 +22,8 @@
                         <td>{{ securitydocument.id }}</td>
                         <td>{{ securitydocument.type_document}}</td>
                         <td>{{ securitydocument.type_property }}</td>
-                        <td>{{ securitydocument.full_name_author}}</td>
-                        <td>{{ securitydocument.name_publication}}</td>
+                        <td>{{ securitydocument.full_name_author_security_documents}}</td>
+                        <td>{{ securitydocument.name_publication_security_documents}}</td>
                         <td>{{ securitydocument.application_number }}</td>
                         <td>{{ securitydocument.get_status_display}}</td>
 

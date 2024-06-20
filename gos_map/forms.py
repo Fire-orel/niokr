@@ -32,10 +32,10 @@ class PublicationForms(forms.ModelForm):
 
     class Meta:
         model=Publications
-        fields = ['type_publication', 'full_name_author','name_publication',"exit_data",'year','place_publication','volume_publication','eLIBRARY_ID','doi_publication']
+        fields = ['type_publication', 'full_name_author_publications','name_publication_publications',"exit_data",'year','place_publication','volume_publication','eLIBRARY_ID','doi_publication']
 
 class SecurityDocumentsForms(forms.ModelForm):
 
     class Meta:
         model = SecurityDocuments
-        fields=['type_document','type_property','full_name_author','name_publication','application_number']
+        fields=['type_document','type_property','full_name_author_security_documents','name_publication_security_documents','application_number']
