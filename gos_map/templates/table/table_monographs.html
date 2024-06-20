@@ -1,0 +1,49 @@
+<div class="tab-pane fade " id="monographs" role="tabpanel" aria-labelledby="monographs-tab">
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#MonographModal" id='addmonographs'>Добавить новую запись</button>
+
+                <table id="monographsTable" class="table mt-3  mx-auto">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Тип монографии</th>
+                            <th>Автор(ы) ФИО (полностью)</th>
+                            <th>Название работы</th>
+                            <th>Тираж </th>
+                            <th>Объем</th>
+                            <th>Издательство (наименование)</th>
+                            <th>Вид издательство</th>
+                            <th>Год издание</th>
+                            <th>Статус</th>
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for monograph in monographs %}
+                        <tr>
+                            <td>{{ monograph.id }}</td>
+                            <td>{{ monograph.type_monographs}}</td>
+                            <td>{{ monograph.full_name_author_Monographs }}</td>
+                            <td>{{ monograph.name_works  }}</td>
+                            <td>{{ monograph.circulation}}</td>
+                            <td>{{ monograph.volume_monographs }}</td>
+                            <td>{{ monograph.publishing_house}}</td>
+                            <td>{{ monograph.type_publishing_house}}</td>
+                            <td>{{ monograph.year_of_publication_monographs}}</td>
+                            <td>{{ monograph.get_status_display}}</td>
+
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="editmonographs" data-id="{{ monograph.id }}"><i class="fas fa-edit"></i></button>
+                            </td>
+
+                            <td>
+                                <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target='#deleteMonographModal' data-id="{{ monograph.id }}" id="deleteMonograph">Удалить</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+        </div>

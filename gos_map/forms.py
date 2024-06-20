@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Map,Publications,SecurityDocuments
+from .models import Map,Publications,SecurityDocuments,Monographs
 from datetime import datetime
 
 
@@ -39,3 +39,15 @@ class SecurityDocumentsForms(forms.ModelForm):
     class Meta:
         model = SecurityDocuments
         fields=['type_document','type_property','full_name_author_security_documents','name_publication_security_documents','application_number']
+
+class MonographsForms(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(MonographsForms, self).__init__(*args, **kwargs)
+        now = datetime.now()
+        current_year = now.year
+        self.fields['year_of_publication_monographs'].initial = current_year
+
+
+    class Meta:
+        model=Monographs
+        fields=['type_monographs','full_name_author_Monographs','name_works','circulation','volume_monographs','publishing_house','type_publishing_house','year_of_publication_monographs']

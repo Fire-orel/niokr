@@ -54,11 +54,15 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="securitydocuments-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab2" data-bs-target="#securitydocuments" type="button" role="tab" aria-controls="securitydocuments" aria-selected="true" >Охранные документы</button>
                 </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="monographs-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab3" data-bs-target="#monographs" type="button" role="tab" aria-controls="monographs" aria-selected="true" >Охранные документы</button>
+                </li>
         </ul>
 
         <div class="tab-content">
            {% include "table/table_publication.html" %}
            {% include "table/table_securitydocuments.html" %}
+           {% include "table/table_monographs.html"%}
         </div>
 
 
@@ -100,6 +104,24 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
                     <button type="button" class="btn btn-danger" id="confirmDeleteSecurityDocumentsBtn" >Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteMonographModal" tabindex="-1" aria-labelledby="deleteMonographModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteMonographModalLabel">Подтвердите удаление</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Х</button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите удалить эту запись?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteMonographBtn" >Удалить</button>
                 </div>
             </div>
         </div>

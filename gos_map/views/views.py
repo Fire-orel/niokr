@@ -4,14 +4,14 @@ from django.contrib.auth import login,logout
 from django.shortcuts import render, redirect,get_object_or_404
 from django.views import View
 from ldap3 import Server, Connection, ALL, NTLM
-from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms
-from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,TypeDocuments,TypeProperty
+from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms,MonographsForms
+from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs
 from django.views.generic import ListView,DetailView,UpdateView
 from django.http import JsonResponse,HttpResponseRedirect,HttpResponse
 from openpyxl import Workbook
 import zipfile
 import io
-from django.core import serializers
+
 
 
 class LoginView(View):
@@ -161,6 +161,8 @@ class MapDetails(View):
         publications=Publications.objects.filter(id_map=Map.get_map_id(pk))
         securitydocuments = SecurityDocuments.objects.filter(id_map=Map.get_map_id(pk))
 
+        monographs=Monographs.objects.filter(id_map=Map.get_map_id(pk))
+
         context = {
             'user_full_name': user_full_name,
             'map':data,
@@ -170,7 +172,10 @@ class MapDetails(View):
 
 
             'securitydocuments':securitydocuments,
-            'securitydocumentsforms':SecurityDocumentsForms()
+            'securitydocumentsforms':SecurityDocumentsForms(),
+
+            'monographs':monographs,
+            'monographsforms':MonographsForms()
 
 
         }

@@ -5,6 +5,8 @@ from gos_map.views.views_publication import addPublication,deletePublication,edi
 
 from gos_map.views.views_security_documents import addSecurityDocuments,deleteSecurityDocuments,editSecurityDocuments
 
+from gos_map.views.views_monograph import editMonographs,deleteMonograph,addMonographs
+
 urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('home/', HomeView.as_view(), name='home'),
@@ -18,6 +20,11 @@ urlpatterns = [
     path('add_security_documents/',addSecurityDocuments.as_view(),name='add_security_documents'),
     path('edit_security_documents/<int:pk>/',editSecurityDocuments.as_view(),name='edit_security_documents'),
     path('delete_security_documents/<int:pk>/',deleteSecurityDocuments.as_view(),name='delete_security_documents'),
+
+    path('add_monographs/',addMonographs.as_view(),name='add_monographs'),
+    path('edit_monographs/<int:pk>/',editMonographs.as_view(),name='edit_monographs'),
+    path('delete_monographs/<int:pk>/',deleteMonograph.as_view(),name='delete_monographs'),
+
 
     path("otchet/", otchet.as_view(), name="otchet")
 ]

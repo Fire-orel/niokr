@@ -17,11 +17,17 @@ class YearField(models.IntegerField):
 
 class UserManager(models.Model):
     login=models.CharField(max_length=100,verbose_name="Логин")
+
     password = models.CharField(max_length=100,verbose_name='Пароль')
+
     full_name = models.CharField(max_length=100,verbose_name="ФИО",blank = True)
+
     position = models.CharField(max_length=100,choices=[("НО","Научный отдел"),("ЗДпоНР","Заместитель декана по научной работе"),("ЗК","Заведующий кафедрой")],verbose_name="Должность",blank = True)
+
     faculty = models.CharField(max_length=100,verbose_name="Факультет",blank = True)
+
     department = models.CharField(max_length=100,verbose_name="Кафедра",blank = True)
+
     last_login = models.DateTimeField(auto_now=True)
 
     def get_user_by_login(login):
@@ -71,10 +77,15 @@ class TypePublications(models.Model):
 
 class Map(models.Model):
     year = models.IntegerField(verbose_name="Год")
+
     quarter = models.CharField(max_length=1,choices=[("1","1"),("2","2"),("3","3"),("4","4")],verbose_name="Квартал")
+
     department = models.CharField(max_length=100,verbose_name="Кафедра")
+
     comment = models.TextField(verbose_name="Комментарий",blank=True)
+
     responsible = models.ForeignKey(UserManager,on_delete=models.SET_NULL,verbose_name="Ответсвенный",null=True)
+
     status = models.CharField(max_length=20,choices=[("E","Редактируется"),("с","Завершено")],default="Редактируется",verbose_name="Статус")
 
     def check_data(year,quarter, department):
@@ -99,16 +110,25 @@ class Map(models.Model):
 
 class Publications(models.Model):
     id_map = models.ForeignKey(Map,on_delete=models.CASCADE,verbose_name="Карта")
+
     type_publication = models.ForeignKey(TypePublications, on_delete=models.SET_NULL,verbose_name="Тип публикации",null=True)
+
     full_name_author_publications = models.CharField(max_length=200,verbose_name="ФИО автора",blank=True)
+
     name_publication_publications = models.CharField(max_length=1000,verbose_name="Наименование публикации",blank=True)
+
     exit_data = models.TextField(verbose_name="Выходные данные публикации (Название журнала, Номер, Том, страницы)",blank=True)
+
     year = models.IntegerField(verbose_name="Год",blank=True)
+
     place_publication = models.TextField(verbose_name="Место опубликования",blank=True)
 
     volume_publication=models.IntegerField(verbose_name="Объем публикации (п.л.)",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
     eLIBRARY_ID=models.CharField(max_length=50,verbose_name="eLIBRARY ID",blank=True,null=True)
+
     doi_publication= models.CharField(max_length=50,verbose_name="DOI публикации",blank=True,null=True)
+
     status = models.CharField(max_length=20,choices=[("E","Редактируется"),("с","Завершено")],default="Редактируется",verbose_name="Статус")
 
     class Meta:
@@ -130,9 +150,10 @@ class TypeDocuments(models.Model):
 
 
 class TypeProperty(models.Model):
-    name_type_Property=models.CharField(max_length=100,verbose_name="Вид интеллектуальной собственности")
+    name_type_property=models.CharField(max_length=100,verbose_name="Вид интеллектуальной собственности")
+
     def __str__(self):
-            return self.name_type_Property
+            return self.name_type_property
 
     class Meta:
         verbose_name="Вид интеллектуальной собственности"
@@ -143,14 +164,66 @@ class TypeProperty(models.Model):
 
 class SecurityDocuments(models.Model):
     id_map = models.ForeignKey(Map,on_delete=models.CASCADE,verbose_name="Карта")
+
     type_document=models.ForeignKey(TypeDocuments,on_delete=models.SET_NULL,verbose_name='Тип документа',null=True)
+
     type_property=models.ForeignKey(TypeProperty,on_delete=models.SET_NULL,verbose_name='Вид интеллектуальной собственности',null=True)
+
     full_name_author_security_documents = models.CharField(max_length=200,verbose_name="ФИО автора",blank=True,null=True)
-    name_publication_security_documents = models.CharField(max_length=1000,verbose_name="Наименование публикации",blank=True,null=True)
+
+    name_publication_security_documents = models.TextField(verbose_name="Наименование публикации",blank=True,null=True)
 
     application_number=models.CharField(max_length=50,verbose_name="Номер заявки / патента",blank=True,null=True)
+
     status = models.CharField(max_length=20,choices=[("E","Редактируется"),("с","Завершено")],default="Редактируется",verbose_name="Статус")
+
+    def __str__(self):
+        return f'{self.name_publication_security_documents} {self.full_name_author_security_documents}'
 
     class Meta:
         verbose_name="Охранные документы"
         verbose_name_plural='Охранные документы'
+
+
+class TypeMonographs(models.Model):
+    name_type_monographs=models.CharField(max_length=100,verbose_name="Тип монографии")
+
+    def __str__(self):
+        return f'{self.name_type_monographs}'
+
+    class Meta:
+        verbose_name="Тип монографии"
+        verbose_name_plural='Тип монографии'
+
+
+
+class Monographs(models.Model):
+    id_map = models.ForeignKey(Map,on_delete=models.CASCADE,verbose_name="Карта")
+
+    type_monographs=models.ForeignKey(TypeMonographs,on_delete=models.SET_NULL,verbose_name='Тип монографии',null=True)
+
+    full_name_author_Monographs = models.TextField(verbose_name="Автор(ы) ФИО (полностью)",blank=True,null=True)
+
+    name_works = models.TextField(verbose_name="Название работы",blank=True,null=True)
+
+
+    circulation=models.IntegerField(verbose_name="Тираж",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    volume_monographs=models.IntegerField(verbose_name="Объем",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    publishing_house=models.CharField(max_length=1000,verbose_name="Издательство (наименование)",blank=True,null=True)
+
+    type_publishing_house=models.CharField(max_length=400,verbose_name="Вид издательство",blank=True,null=True)
+
+    year_of_publication_monographs=models.IntegerField(verbose_name="Год издание",blank=True,null=True)
+
+    status = models.CharField(max_length=20,choices=[("E","Редактируется"),("с","Завершено")],default="Редактируется",verbose_name="Статус")
+
+
+    def __str__(self):
+            return f"{self.name_works} {self.full_name_author_Monographs}"
+
+
+    class Meta:
+        verbose_name="Монографии"
+        verbose_name_plural='Монографии'
