@@ -1,6 +1,14 @@
 
 
 $(document).ready(function() {
+
+    $("#MonographModal").on('hidden.bs.modal',function() {
+        $('#addMonographForm').attr('id','MonographForm');
+        $('#editMonographForm').attr('id','MonographForm');
+        $('#error-message-publication').hide().text('');
+        $('#MonographForm')[0].reset();
+    });
+
     $(document).on('submit','#addMonographForm', function(event) {
 
         event.preventDefault(); // Предотвращаем отправку формы
@@ -26,20 +34,19 @@ $(document).ready(function() {
 
     $(document).on('click', '#deleteMonograph', function(){
 
-        var publicationId = $(this).data('id'); // Получаем ID публикации
-        $('#confirmDeleteMonographBtn').data('id', publicationId); // Устанавливаем ID в кнопку подтверждения удаления
+        var MonographId = $(this).data('id'); // Получаем ID публикации
+        $('#confirmDeleteMonographBtn').data('id', MonographId); // Устанавливаем ID в кнопку подтверждения удаления
     });
 
 
     // Обработчик клика по кнопке подтверждения удаления
     $('#confirmDeleteMonographBtn').click(function() {
 
-
-        var publicationId = $(this).data('id'); // Получаем ID публикации
+        var MonographId = $(this).data('id'); // Получаем ID публикации
 
         // Отправляем запрос на удаление публикации
         $.ajax({
-            url: `/delete_publication/${publicationId}/`, // Путь к представлению для удаления публикации
+            url: `/delete_monographs/${MonographId}/`, // Путь к представлению для удаления публикации
             method: 'POST',
             headers: {'X-CSRFToken': csrftoken},
             success: function(response) {
@@ -61,30 +68,29 @@ $(document).ready(function() {
     });
 
 
-    $(document).on('click', '#editpublication', function(){
-        var publicationId = $(this).data('id');
+    $(document).on('click', '#editmonographs', function(){
+        var monographsId = $(this).data('id');
         $.ajax({
             type: 'GET',
-            url: `/edit_publication/${publicationId}/`,
-            data: publicationId ,
+            url: `/edit_monographs/${monographsId}/`,
+            data: monographsId ,
 
 
             success: function(response) {
-                $('#PublicationForm').attr('id','editPublicationForm');
-                $('#editPublicationForm').attr('action',`/edit_publication/${publicationId}/`);
+                $('#MonographForm').attr('id','editMonographForm');
+                $('#editMonographForm').attr('action',`/edit_monographs/${monographsId}/`);
                 // Если успешный ответ от сервера, открываем модальное окно
                 var formData = JSON.parse(response.form_data)[0].fields;
 
-                $('#PublicationModal').modal('show');
-                $('#id_type_publication').val(formData.type_publication);
-                $('#id_full_name_author_publications').val(formData.full_name_author_publications);
-                $('#id_name_publication_publications').val(formData.name_publication_publications);
-                $('#id_exit_data').val(formData.exit_data);
-                $('#id_year').val(formData.year);
-                $('#id_place_publication').val(formData.place_publication);
-                $('#id_volume_publication').val(formData.volume_publication);
-                $('#id_eLIBRARY_ID').val(formData.eLIBRARY_ID);
-                $('#id_doi_publication').val(formData.doi_publication);
+                $('#MonographModal').modal('show');
+                $('#id_type_monographs').val(formData.type_monographs);
+                $('#id_full_name_author_Monographs').val(formData. full_name_author_Monographs);
+                $('#id_name_works').val(formData.name_works);
+                $('#id_circulation').val(formData.circulation);
+                $('#id_volume_monographs').val(formData.volume_monographs);
+                $('#id_publishing_house').val(formData.publishing_house);
+                $('#id_type_publishing_house').val(formData.type_publishing_house);
+                $('#id_year_of_publication_monographs').val(formData.year_of_publication_monographs);
 
 
             },
@@ -98,7 +104,7 @@ $(document).ready(function() {
 
 
 
-    $(document).on('submit','#editPublicationForm', function(event) {
+    $(document).on('submit','#editMonographForm', function(event) {
 
         event.preventDefault(); // Предотвращаем отправку формы
         $.ajax({
@@ -109,26 +115,21 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.message === 'Success') {
                     // Обрабатываем успешный ответ
-                    $('#PublicationModal').modal('hide').on('hidden.bs.modal', function() {
+                    $('#MonographModal').modal('hide').on('hidden.bs.modal', function() {
                         location.reload();
                     });
                 };
             },
             error: function(xhr) {
                 // Обрабатываем ошибочный ответ
-                $('#error-message-publication').text("Ошибка").show();
+                $('#error-message-monograph').text("Ошибка").show();
             }
         });
     });
 
 
 
-    $("#MonographModal").on('hidden.bs.modal',function() {
-        $('#addMonographModal').attr('id','MonographModal');
-        $('#editMonographModal').attr('id','MonographModal');
-        $('#error-message-publication').hide().text('');
-        $('#MonographForm')[0].reset();
-    });
+
 
 
 

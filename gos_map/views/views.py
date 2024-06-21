@@ -60,7 +60,11 @@ class LoginView(View):
 
                 )
                 user.save()
+
                 login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                request.session['user_id'] = user.pk
+                request.session['user_full_name'] = user.full_name
+
                 return redirect('home')
 
             # Если аутентификация не удалась, выводим сообщение об ошибке

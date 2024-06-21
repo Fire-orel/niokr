@@ -44,7 +44,7 @@ class addMonographs(View):
 class deleteMonograph(View):
     def post(self, request, pk):
         try:
-            monographs = monographs.objects.get(pk=pk)
+            monographs = Monographs.objects.get(pk=pk)
             monographs.delete()
             return JsonResponse({'message': 'Security Documents deleted successfully'}, status=200)
         except Monographs.DoesNotExist:
