@@ -1,0 +1,39 @@
+<div class="tab-pane fade" id="internationalcooperation" role="tabpanel" aria-labelledby="grant-tab">
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#InternationalCooperationModal" id="addinternationalcooperation">Добавить новую запись</button>
+
+
+        <table id="internationalcooperationTable" class="table mt-3 mx-auto">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Наименование научно-исследовательских  и научно-технических проектов </th>
+                    <th>Наименование научных центров, лабораторий, других подразделений, созданнх с участвием международных или иностранных организаций</th>
+                    <th>Наименование тем, проводимых совместных научных исследований </th>
+                    <th>Наименование тем научных исследований, опытно-конструкторских работ, проводимых по заказам международных и иностранных организаций</th>
+                    <th>Наименование научных программ, разработка и реализация которых осуществляется  совместно с международными или иностранными организациями</th>
+                    <th>Статус</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for internationalcooperation in internationalcooperations %}
+                <tr>
+                    <td>{{ internationalcooperation.id }}</td>
+                    <td>{{ internationalcooperation.name_scientific_research }}</td>
+                    <td>{{ internationalcooperation.name_scientific_centers }}</td>
+                    <td>{{ internationalcooperation.name_topics }}</td>
+                    <td>{{ internationalcooperation.name_research_topics }}</td>
+                    <td>{{ internationalcooperation.name_scientific_programs }}</td>
+                    <td>{{ internationalcooperation.get_status_display }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="editinternationalcooperation" data-id="{{ internationalcooperation.id }}"><i class="fas fa-edit"></i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteInternationalCooperationModal" data-id="{{ internationalcooperation.id }}" id="deleteInternationalCooperation"> <i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>

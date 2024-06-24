@@ -29,7 +29,7 @@
                             <td>{{ publication.name_publication_publications  }}</td>
                             <td>{{ publication.exit_data}}</td>
                             <td>{{ publication.year }}</td>
-                            <td>{{ publication.place_publication}}</td>
+                            <td>{{ publication.place_publication_publications}}</td>
                             <td>{{ publication.volume_publication}}</td>
                             <td>{{ publication.eLIBRARY_ID}}</td>
                             <td>{{ publication.doi_publication }}</td>
@@ -40,7 +40,7 @@
                             </td>
 
                             <td>
-                                <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deletePublicationModal" data-id="{{ publication.id }}" id="deletePublication">Удалить</button>
+                                <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deletePublicationModal" data-id="{{ publication.id }}" id="deletePublication"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                         {% endfor %}

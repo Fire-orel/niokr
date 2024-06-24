@@ -1,3 +1,4 @@
+{% load custom_filters %}
 <div class="modal fade" id="PublicationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -8,13 +9,15 @@
             <div class="modal-body ">
                 <form id="PublicationForm"  method="post">
                     {% csrf_token %}
-                    {% for field in publicationsforms.visible_fields %}
-                    <div class="mb-3">
-                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                        <br>
-                        {{ field }}
+                    <div class="row">
+                        {% for field in publicationsforms.visible_fields %}
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            <br>
+                            {{ field | add_class:"fixed-width-input form-control"}}
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                     <div id="error-message-publication" class="alert alert-danger" style="display:none;"></div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>

@@ -1,0 +1,51 @@
+<div class="tab-pane fade" id="grant" role="tabpanel" aria-labelledby="grant-tab">
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#GrantModal" id="addgrant">Добавить новую запись</button>
+
+
+        <table id="grantTable" class="table mt-3 mx-auto">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Тип гранта</th>
+                    <th>Наименование фонда</th>
+                    <th>Наименование конкурса</th>
+                    <th>Код конкурса</th>
+                    <th>Номинация (при наличии)</th>
+                    <th>Наименование темы проекта (без кавычек)</th>
+                    <th>Руководитель проекта (ФИО полностью)</th>
+                    <th>Численность проектного коллектива</th>
+                    <th>Численность молодых ученых</th>
+                    <th>ФИО (полностью) исполнителей</th>
+                    <th>Выиграно </th>
+                    <th>Статус</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for grant in grants %}
+                <tr>
+                    <td>{{ grant.id }}</td>
+                    <td>{{ grant.type_grant }}</td>
+                    <td>{{ grant.name_fund }}</td>
+                    <td>{{ grant.name_competition }}</td>
+                    <td>{{ grant.kod_competition }}</td>
+                    <td>{{ grant.nomination }}</td>
+                    <td>{{ grant.name_project_topic }}</td>
+                    <td>{{ grant.project_manager}}</td>
+                    <td>{{ grant.number_project_team }}</td>
+                    <td>{{ grant.number_young_scientists }}</td>
+                    <td>{{ grant.full_name_performer }}</td>
+                    <td>{{ grant.get_winner_display }}</td>
+                    <td>{{ grant.get_status_display }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="editgrant" data-id="{{ grant.id }}"><i class="fas fa-edit"></i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteGrantModal" data-id="{{ grant.id }}" id="deleteGrant"> <i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>

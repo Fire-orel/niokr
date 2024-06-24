@@ -10,3 +10,24 @@
 #mapTable td {
     word-wrap: break-word; /* Разрешить перенос слов */
 }
+
+.fixed-width-input {
+    width: 200px; /* Установите желаемую фиксированную ширину */
+}
+
+/* .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+th, td {
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} */

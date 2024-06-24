@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'gos_map',
     'django_python3_ldap',
+    'django_select2',
 
 
 ]

@@ -1,0 +1,26 @@
+{% load custom_filters %}
+<div class="modal fade" id="ScientificDirectionsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Х</button>
+            </div>
+            <div class="modal-body">
+                <form id="ScientificDirectionsForm" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        {% for field in scientificdirectionsforms.visible_fields %}
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {{ field | add_class:"fixed-width-input form-control" }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div id="error-message-scientific-directions" class="alert alert-danger" style="display:none;"></div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,6 +7,18 @@ from gos_map.views.views_security_documents import addSecurityDocuments,deleteSe
 
 from gos_map.views.views_monograph import editMonographs,deleteMonograph,addMonographs
 
+from gos_map.views.views_event import addEvent,editEvent,deleteEvent
+
+from gos_map.views.views_grant import addGrant,editGrant,deleteGrant
+
+from gos_map.views.views_nirs import addNIRS,editNIRS,deleteNIRS
+
+from gos_map.views.views_popular_science_publications import addPopularSciencePublications,editPopularSciencePublications,deletePopularSciencePublications
+
+from gos_map.views.views_scientific_directions import addScientificDirections,editScientificDirections,deleteScientificDirections
+
+from gos_map.views.views_international_cooperation import addInternationalCooperation,editInternationalCooperation,deleteInternationalCooperation
+
 urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('home/', HomeView.as_view(), name='home'),
@@ -24,6 +36,30 @@ urlpatterns = [
     path('add_monographs/',addMonographs.as_view(),name='add_monographs'),
     path('edit_monographs/<int:pk>/',editMonographs.as_view(),name='edit_monographs'),
     path('delete_monographs/<int:pk>/',deleteMonograph.as_view(),name='delete_monographs'),
+
+    path('add_event/',addEvent.as_view(),name='add_event'),
+    path('edit_event/<int:pk>/',editEvent.as_view(),name='edit_event'),
+    path('delete_event/<int:pk>/',deleteEvent.as_view(),name='delete_event'),
+
+    path('add_grant/',addGrant.as_view(),name='add_grant'),
+    path('edit_grant/<int:pk>/',editGrant.as_view(),name='edit_grant'),
+    path('delete_grant/<int:pk>/',deleteGrant.as_view(),name='delete_grant'),
+
+    path('add_nirs/',addNIRS.as_view(),name='add_nirs'),
+    path('edit_nirs/<int:pk>/',editNIRS.as_view(),name='edit_nirs'),
+    path('delete_nirs/<int:pk>/',deleteNIRS.as_view(),name='delete_nirs'),
+
+    path('add_popular_science_publications/',addPopularSciencePublications.as_view(),name='add_popular_science_publications'),
+    path('edit_popular_science_publications/<int:pk>/',editPopularSciencePublications.as_view(),name='edit_popular_science_publications'),
+    path('delete_popular_science_publications/<int:pk>/',deletePopularSciencePublications.as_view(),name='delete_popular_science_publications'),
+
+    path('add_scientific_directions/',addScientificDirections.as_view(),name='add_scientific_directions'),
+    path('edit_scientific_directions/<int:pk>/',editScientificDirections.as_view(),name='edit_scientific_directions'),
+    path('delete_scientific_directions/<int:pk>/',deleteScientificDirections.as_view(),name='delete_scientific_directions'),
+
+    path('add_international_cooperation/',addInternationalCooperation.as_view(),name='add_international_cooperation'),
+    path('edit_international_cooperation/<int:pk>/',editInternationalCooperation.as_view(),name='edit_international_cooperation'),
+    path('delete_international_cooperation/<int:pk>/',deleteInternationalCooperation.as_view(),name='delete_international_cooperation'),
 
 
     path("otchet/", otchet.as_view(), name="otchet")

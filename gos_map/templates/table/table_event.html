@@ -1,0 +1,57 @@
+<div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="event-tab">
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#EventModal" id="addevent">Добавить новую запись</button>
+
+
+        <table id="eventTable" class="table mt-3 mx-auto">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Тип участия</th>
+                    <th>ФИО участников ЗабГУ</th>
+                    <th>Название мероприятия</th>
+                    <th>Уровень</th>
+                    <th>Тип мероприятия</th>
+                    <th>Наименование Доклада</th>
+                    <th>Дата проведения</th>
+                    <th>Место проведения</th>
+                    <th>Общее кол-во участников/зарубежных</th>
+                    {% comment %} <th>Кол-во зарубежных участников мероприятия</th> {% endcomment %}
+                    <th>Кол-во экспонатов</th>
+                    <th>С изданием сборника</th>
+                    <th>Полученные награды ЗабГУ</th>
+                    <th>Ссылка на программу мероприятия</th>
+                    <th>Статус</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td>{{ event.id }}</td>
+                    <td>{{ event.type_participation }}</td>
+                    <td>{{ event.full_name_author_event }}</td>
+                    <td>{{ event.name_event }}</td>
+                    <td>{{ event.level }}</td>
+                    <td>{{ event.type_event }}</td>
+                    <td>{{ event.title_report }}</td>
+                    <td>{{ event.date_event|date:"d/m/Y" }}</td>
+                    <td>{{ event.place_event }}</td>
+                    <td>{{ event.number_participants }} / {{ event.number_foreign_participants }}</td>
+                    {% comment %} <td>{{ event.number_foreign_participants }}</td> {% endcomment %}
+                    <td>{{ event.number_exhibits }}</td>
+                    <td>{{ event.publication_collection }}</td>
+                    <td>{{ event.awards }}</td>
+                    <td>{{ event.link }}</td>
+                    <td>{{ event.get_status_display }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="editevent" data-id="{{ event.id }}"><i class="fas fa-edit"></i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteEventModal" data-id="{{ event.id }}" id="deleteEvent"> <i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>

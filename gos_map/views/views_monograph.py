@@ -7,7 +7,7 @@ from gos_map.models import Map,Monographs,TypeMonographs
 class addMonographs(View):
     def post(self, request, *args, **kwargs):
         type_monographs = request.POST.get("type_monographs")
-        full_name_author_Monographs = request.POST.get("full_name_author_Monographs")
+        full_name_author_Monographs = request.POST.get("full_name_author_monographs")
         name_works = request.POST.get("name_works")
         circulation = request.POST.get("circulation")
         volume_monographs = request.POST.get("volume_monographs")
@@ -24,7 +24,7 @@ class addMonographs(View):
         monographs=Monographs.objects.create(
                 id_map = Map.get_map_id(request.session.get('map_id')),
                 type_monographs=TypeMonographs.objects.get(pk=type_monographs),
-                full_name_author_Monographs=full_name_author_Monographs,
+                full_name_author_monographs=full_name_author_Monographs,
                 name_works=name_works,
                 circulation=circulation,
                 volume_monographs=volume_monographs,
@@ -80,7 +80,7 @@ class editMonographs(View):
 
 
         monographs.type_monographs=TypeMonographs.objects.get(pk=type_monographs)
-        monographs.full_name_author_Monographs=full_name_author_Monographs
+        monographs.full_name_author_monographs=full_name_author_Monographs
         monographs.name_works=name_works
         monographs.circulation=circulation
         monographs.volume_monographs=volume_monographs

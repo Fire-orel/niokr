@@ -11,7 +11,7 @@ class addPublication(View):
         name_publication_publications = request.POST.get("name_publication_publications")
         exit_data = request.POST.get("exit_data")
         year = request.POST.get("year")
-        place_publication = request.POST.get("place_publication")
+        place_publication_publications = request.POST.get("place_publication_publications")
         volume_publication = request.POST.get("volume_publication")
         eLIBRARY_ID = request.POST.get("eLIBRARY_ID")
         doi_publication = request.POST.get("doi_publication")
@@ -19,7 +19,7 @@ class addPublication(View):
         status='Редактируется'
 
 
-        if type_publication!="" and full_name_author_publications!="" and name_publication_publications!="" and exit_data!="" and place_publication!="" and eLIBRARY_ID!="" and doi_publication!="":
+        if type_publication!="" and full_name_author_publications!="" and name_publication_publications!="" and exit_data!="" and place_publication_publications!="" and eLIBRARY_ID!="" and doi_publication!="":
             status="Завершено"
         publication=Publications.objects.create(
                 id_map = Map.get_map_id(request.session.get('map_id')),
@@ -28,7 +28,7 @@ class addPublication(View):
                 name_publication_publications=name_publication_publications,
                 exit_data=exit_data,
                 year=year,
-                place_publication=place_publication,
+                place_publication_publications=place_publication_publications,
                 volume_publication=volume_publication,
                 eLIBRARY_ID=eLIBRARY_ID,
                 doi_publication=doi_publication,
@@ -58,7 +58,7 @@ class editPublication(View):
         name_publication_publications = request.POST.get("name_publication_publications")
         exit_data = request.POST.get("exit_data")
         year = request.POST.get("year")
-        place_publication = request.POST.get("place_publication")
+        place_publication_publications = request.POST.get("place_publication_publications")
         volume_publication = request.POST.get("volume_publication")
         eLIBRARY_ID = request.POST.get("eLIBRARY_ID")
         doi_publication = request.POST.get("doi_publication")
@@ -66,16 +66,16 @@ class editPublication(View):
         status='Редактируется'
 
 
-        if type_publication!="" and full_name_author_publications!="" and name_publication_publications!="" and exit_data!="" and place_publication!="" and eLIBRARY_ID!="" and doi_publication!="":
+        if type_publication!="" and full_name_author_publications!="" and name_publication_publications!="" and exit_data!="" and place_publication_publications!="" and eLIBRARY_ID!="" and doi_publication!="":
             status="Завершено"
 
-        print(type_publication)
+
         publications.type_publication=TypePublications.objects.get(pk=type_publication)
         publications.full_name_author_publications=full_name_author_publications
         publications.name_publication_publications=name_publication_publications
         publications.exit_data=exit_data
         publications.year=year
-        publications.place_publication=place_publication
+        publications.place_publication_publications=place_publication_publications
         publications.volume_publication=volume_publication
         publications.eLIBRARY_ID=eLIBRARY_ID
         publications.doi_publication=doi_publication

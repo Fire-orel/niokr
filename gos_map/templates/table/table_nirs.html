@@ -1,0 +1,43 @@
+<div class="tab-pane fade" id="nirs" role="tabpanel" aria-labelledby="grant-tab">
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#NIRSModal" id="addnirs">Добавить новую запись</button>
+
+
+        <table id="nirsTable" class="table mt-3 mx-auto">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Численность студентов</th>
+                    <th>ФИО студентов</th>
+                    <th>Форма участия</th>
+                    <th>Наименование мероприятия</th>
+                    <th>ФИО научного руководителя</th>
+                    <th>Награды/Дипломы</th>
+                    <th>Дата мероприятия</th>
+                    <th>Статус</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for nirs in nirss %}
+                <tr>
+                    <td>{{ nirs.id }}</td>
+                    <td>{{ nirs.number_students }}</td>
+                    <td>{{ nirs.full_name_students }}</td>
+                    <td>{{ nirs.form_participation }}</td>
+                    <td>{{ nirs.name_event_nirs }}</td>
+                    <td>{{ nirs.full_name_scientific_supervisor }}</td>
+                    <td>{{ nirs.awards_diplomas }}</td>
+                    <td>{{ nirs.date_event_nirs }}</td>
+                    <td>{{ nirs.get_status_display }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="editnirs" data-id="{{ nirs.id }}"><i class="fas fa-edit"></i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteNIRSModal" data-id="{{ nirs.id }}" id="deleteNIRS"> <i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>

@@ -4,13 +4,16 @@ from django.contrib.auth import login,logout
 from django.shortcuts import render, redirect,get_object_or_404
 from django.views import View
 from ldap3 import Server, Connection, ALL, NTLM
-from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms,MonographsForms
-from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs
+from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms,MonographsForms,EventForms,GrantForms,NIRSForms,PopularSciencePublicationsForms,ScientificDirectionsForms,InternationalCooperationForms
+from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation
 from django.views.generic import ListView,DetailView,UpdateView
 from django.http import JsonResponse,HttpResponseRedirect,HttpResponse
 from openpyxl import Workbook
 import zipfile
 import io
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 
@@ -73,8 +76,8 @@ class LoginView(View):
         return render(request, self.template_name, {'form': form})
 
     def ldap_authenticate(self, username, password):
-        LDAP_SERVER = "ldap://192.168.0.33"
-        LDAP_USER = f'FIREOREL\\{username}'
+        LDAP_SERVER = os.getenv("server_adress")
+        LDAP_USER = f'{os.getenv('server_domen')}\\{username}'
         LDAP_PASSWORD = password
         LDAP_SEARCH_BASE = 'DC=FIREOREL,DC=ru'
 
@@ -156,18 +159,52 @@ class CheckMap(View):
 
 class MapDetails(View):
     def get(self,request,pk):
+        status="False"
 
         user_full_name = request.session.get('user_full_name')
 
         data = get_object_or_404(Map, pk=pk)
         request.session['map_id']=pk
         # print(request.session['map_id'])
+
         publications=Publications.objects.filter(id_map=Map.get_map_id(pk))
+        publications_count=publications.filter(status="Завершено").count()
+
         securitydocuments = SecurityDocuments.objects.filter(id_map=Map.get_map_id(pk))
+        securitydocuments_count=securitydocuments.filter(status="Завершено").count()
 
         monographs=Monographs.objects.filter(id_map=Map.get_map_id(pk))
+        monographs_count=monographs.filter(status="Завершено").count()
+
+        events=Event.objects.filter(id_map=Map.get_map_id(pk))
+        events_count=events.filter(status="Завершено").count()
+
+        grant=Grant.objects.filter(id_map=Map.get_map_id(pk))
+        grant_count=grant.filter(status="Завершено").count()
+
+        nirs = NIRS.objects.filter(id_map=Map.get_map_id(pk))
+        nirs_count=nirs.filter(status="Завершено").count()
+
+        popularsciencepublications = PopularSciencePublications.objects.filter(id_map=Map.get_map_id(pk))
+        popularsciencepublications_count=popularsciencepublications.filter(status="Завершено").count()
+
+        scientificdirections=ScientificDirections.objects.filter(id_map=Map.get_map_id(pk))
+        scientificdirections_count=scientificdirections.filter(status="Завершено").count()
+
+        internationalcooperation=InternationalCooperation.objects.filter(id_map=Map.get_map_id(pk))
+        internationalcooperation_count=internationalcooperation.filter(status="Завершено").count()
+
+
+
+        if len(publications)==publications_count and len(securitydocuments)==securitydocuments_count and len(monographs)==monographs_count and len(events)==events_count and len(grant)==grant_count and len(nirs)==nirs_count and len(popularsciencepublications)==popularsciencepublications_count and len(scientificdirections)==scientificdirections_count and len(internationalcooperation)==internationalcooperation_count:
+
+            status="True"
+
+
 
         context = {
+            'status':status,
+
             'user_full_name': user_full_name,
             'map':data,
 
@@ -179,7 +216,25 @@ class MapDetails(View):
             'securitydocumentsforms':SecurityDocumentsForms(),
 
             'monographs':monographs,
-            'monographsforms':MonographsForms()
+            'monographsforms':MonographsForms(),
+
+            'events':events,
+            'eventforms':EventForms(),
+
+            'grants':grant,
+            'grantforms':GrantForms(),
+
+            'nirss':nirs,
+            'nirsforms':NIRSForms(),
+
+            'popularsciencepublicationss':popularsciencepublications,
+            'popularsciencepublicationsforms':PopularSciencePublicationsForms(),
+            'scientificdirectionss':scientificdirections,
+            'scientificdirectionsforms':ScientificDirectionsForms(),
+            'internationalcooperations':internationalcooperation,
+            "internationalcooperationforms":InternationalCooperationForms(),
+
+
 
 
         }

@@ -122,7 +122,7 @@ $(document).ready(function() {
             },
             error: function(xhr) {
                 // Обрабатываем ошибочный ответ
-                $('#error-message-security-documents').text("Запись с такими данными уже существует").show();
+                $('#error-message-security-documents').text("Ошибка").show();
             }
         });
     });

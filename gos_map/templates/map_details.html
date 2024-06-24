@@ -36,8 +36,13 @@
                             <div class="col-sm-4"><strong>Ответственный:</strong></div>
                             <div class="col-sm-8"><span class="text-muted">{{ map.responsible }}</span></div>
                         </div>
+                        {% if status == "True" %}
+                        <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="" id="">Завершить редактирование</button>
+                        {% endif %}
 
                     </div>
+
+
 
 
                 </div>
@@ -51,80 +56,83 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="publications-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab1" data-bs-target="#publications" type="button" role="tab" aria-controls="publications" aria-selected="true" >Публикации</button>
                 </li>
+
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="securitydocuments-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab2" data-bs-target="#securitydocuments" type="button" role="tab" aria-controls="securitydocuments" aria-selected="true" >Охранные документы</button>
                 </li>
+
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="monographs-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab3" data-bs-target="#monographs" type="button" role="tab" aria-controls="monographs" aria-selected="true" >Охранные документы</button>
+                    <button class="nav-link" id="monographs-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab3" data-bs-target="#monographs" type="button" role="tab" aria-controls="monographs" aria-selected="true" >Монографии, УП</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="grant-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab4" data-bs-target="#grant" type="button" role="tab" aria-controls="grant" aria-selected="true" >Грант</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="event-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab5" data-bs-target="#event" type="button" role="tab" aria-controls="event" aria-selected="true" >Мероприятия</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="nirs-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab6" data-bs-target="#nirs" type="button" role="tab" aria-controls="nirs" aria-selected="true" >НИРС</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="popularsciencepublications-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab7" data-bs-target="#popularsciencepublications" type="button" role="tab" aria-controls="popularsciencepublications" aria-selected="true" >Научно-популярные издания</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="scientificdirections-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab8" data-bs-target="#scientificdirections" type="button" role="tab" aria-controls="scientificdirections" aria-selected="true" >Научные направления</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="internationalcooperation-tab" data-toggle="tab"data-bs-toggle="tab" href="#tab9" data-bs-target="#internationalcooperation" type="button" role="tab" aria-controls="internationalcooperation" aria-selected="true" >Международное сотрудничество </button>
                 </li>
         </ul>
 
         <div class="tab-content">
            {% include "table/table_publication.html" %}
-           {% include "table/table_securitydocuments.html" %}
+           {% include "table/table_security_documents.html" %}
            {% include "table/table_monographs.html"%}
+           {% include 'table\table_event.html'%}
+           {% include 'table\table_grant.html'%}
+           {% include 'table\table_nirs.html'%}
+           {% include 'table\table_popular_science_publications.html'%}
+           {% include 'table\table_scientific_directions.html'%}
+           {% include 'table\table_international_cooperations.html'%}
         </div>
 
 
     {% include "modal/modal_publication.html" %}
-    {% include "modal/modal_securitydocuments.html" %}
+    {% include "modal/modal_security_documents.html" %}
     {% include "modal/modal_monographs.html" %}
+    {% include "modal/modal_event.html" %}
+    {% include "modal/modal_grant.html" %}
+    {% include "modal/modal_nirs.html" %}
+    {% include "modal/modal_popular_science_publications.html" %}
+    {% include "modal/modal_scientific_directions.html" %}
+    {% include "modal/modal_international_cooperation.html" %}
 
 
 
 
-    <div class="modal fade" id="deletePublicationModal" tabindex="-1" aria-labelledby="deletePublicationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deletePublicationModalLabel">Подтвердите удаление</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Х</button>
-                </div>
-                <div class="modal-body">
-                    Вы уверены, что хотите удалить эту запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeletePublicationBtn">Удалить</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include "modal_delete/delete_publication.html"%}
+    {% include "modal_delete/delete_monographs.html"%}
+    {% include "modal_delete/delete_security_documents.html"%}
+    {% include "modal_delete/delete_event.html"%}
+    {% include "modal_delete/delete_grant.html"%}
+    {% include "modal_delete/delete_nirs.html"%}
+    {% include "modal_delete/delete_popular_science_publications.html"%}
+    {% include "modal_delete/delete_scientific_directions.html"%}
+    {% include "modal_delete/delete_international_cooperation.html"%}
 
 
-    <div class="modal fade" id="deleteSecurityDocumentsModal" tabindex="-1" aria-labelledby="deleteSecurityDocumentsModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteSecurityDocumentsModalLabel">Подтвердите удаление</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Х</button>
-                </div>
-                <div class="modal-body">
-                    Вы уверены, что хотите удалить эту запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteSecurityDocumentsBtn" >Удалить</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal fade" id="deleteMonographModal" tabindex="-1" aria-labelledby="deleteMonographModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteMonographModalLabel">Подтвердите удаление</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Х</button>
-                </div>
-                <div class="modal-body">
-                    Вы уверены, что хотите удалить эту запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteMonographBtn" >Удалить</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+
+
+
+
+
 {% endblock %}

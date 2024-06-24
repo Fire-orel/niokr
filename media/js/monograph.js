@@ -84,7 +84,7 @@ $(document).ready(function() {
 
                 $('#MonographModal').modal('show');
                 $('#id_type_monographs').val(formData.type_monographs);
-                $('#id_full_name_author_Monographs').val(formData. full_name_author_Monographs);
+                $('#id_full_name_author_monographs').val(formData. full_name_author_monographs);
                 $('#id_name_works').val(formData.name_works);
                 $('#id_circulation').val(formData.circulation);
                 $('#id_volume_monographs').val(formData.volume_monographs);

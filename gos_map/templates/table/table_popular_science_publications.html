@@ -1,0 +1,39 @@
+<div class="tab-pane fade" id="popularsciencepublications" role="tabpanel" aria-labelledby="grant-tab">
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#PopularSciencePublicationsModal" id="addpopularsciencepublications">Добавить новую запись</button>
+
+
+        <table id="nirsTable" class="table mt-3 mx-auto">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ф.И.О. автора (полностью)</th>
+                    <th>Название публикации</th>
+                    <th>Место опубликования, издательство, год, № выпуска</th>
+                    <th>Объем публикации</th>
+                    <th>Примечание</th>
+                    <th>Статус</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for popularsciencepublications in popularsciencepublicationss %}
+                <tr>
+                    <td>{{ popularsciencepublications.id }}</td>
+                    <td>{{ popularsciencepublications.full_name_author }}</td>
+                    <td>{{ popularsciencepublications.name_publication_popular_science_publications }}</td>
+                    <td>{{ popularsciencepublications.place_publication_popular_science_publications }}</td>
+                    <td>{{ popularsciencepublications.volume_popular_science_publications }}</td>
+                    <td>{{ popularsciencepublications.note }}</td>
+                    <td>{{ popularsciencepublications.get_status_display }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="editpopularsciencepublications" data-id="{{ popularsciencepublications.id }}"><i class="fas fa-edit"></i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deletePopularSciencePublicationsModal" data-id="{{ popularsciencepublications.id }}" id="deletePopularSciencePublications"> <i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>

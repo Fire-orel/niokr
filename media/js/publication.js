@@ -80,7 +80,7 @@ $(document).ready(function() {
                 $('#id_name_publication_publications').val(formData.name_publication_publications);
                 $('#id_exit_data').val(formData.exit_data);
                 $('#id_year').val(formData.year);
-                $('#id_place_publication').val(formData.place_publication);
+                $('#id_place_publication_publications').val(formData.place_publication_publications);
                 $('#id_volume_publication').val(formData.volume_publication);
                 $('#id_eLIBRARY_ID').val(formData.eLIBRARY_ID);
                 $('#id_doi_publication').val(formData.doi_publication);

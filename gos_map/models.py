@@ -59,6 +59,13 @@ class UserManager(models.Model):
     def __str__(self):
             return self.login
 
+class FullNameАuthor(models.Model):
+    full_name=models.CharField(max_length=500,verbose_name="Ф.И.О.",blank=True,null=True)
+
+    def __str__(self):
+            return self.full_name
+
+
 class TypePublications(models.Model):
     name_type_publications=models.CharField(max_length=100,verbose_name="Тип публикации")
 
@@ -121,7 +128,7 @@ class Publications(models.Model):
 
     year = models.IntegerField(verbose_name="Год",blank=True)
 
-    place_publication = models.TextField(verbose_name="Место опубликования",blank=True)
+    place_publication_publications = models.TextField(verbose_name="Место опубликования",blank=True)
 
     volume_publication=models.IntegerField(verbose_name="Объем публикации (п.л.)",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
 
@@ -202,7 +209,7 @@ class Monographs(models.Model):
 
     type_monographs=models.ForeignKey(TypeMonographs,on_delete=models.SET_NULL,verbose_name='Тип монографии',null=True)
 
-    full_name_author_Monographs = models.TextField(verbose_name="Автор(ы) ФИО (полностью)",blank=True,null=True)
+    full_name_author_monographs = models.TextField(verbose_name="Автор(ы) ФИО (полностью)",blank=True,null=True)
 
     name_works = models.TextField(verbose_name="Название работы",blank=True,null=True)
 
@@ -227,3 +234,233 @@ class Monographs(models.Model):
     class Meta:
         verbose_name="Монографии"
         verbose_name_plural='Монографии'
+
+
+class TypeParticipation(models.Model):
+    name_type_participation=models.CharField(max_length=100,verbose_name="Тип участия")
+    def __str__(self):
+        return f'{self.name_type_participation}'
+
+    class Meta:
+        verbose_name="Тип участия"
+        verbose_name_plural='Тип участия'
+
+class TypeEvent(models.Model):
+    name_type_events=models.CharField(max_length=100,verbose_name="Тип мероприятия")
+    def __str__(self):
+        return f'{self.name_type_events}'
+
+    class Meta:
+        verbose_name="Тип мероприятия"
+        verbose_name_plural='Тип мероприятия'
+
+
+
+class Event (models.Model):
+    id_map = models.ForeignKey(Map,on_delete=models.CASCADE,verbose_name="Карта")
+
+    type_participation=models.ForeignKey(TypeParticipation,on_delete=models.SET_NULL,verbose_name="Тип участия",blank=True,null=True)
+
+    full_name_author_event = models.TextField(verbose_name="ФИО (полностью) участников ЗабГУ",blank=True,null=True)
+
+    name_event_event=models.TextField(verbose_name="Название мероприятия",blank=True,null=True)
+
+    level=models.CharField(max_length=100,verbose_name="Уровень (международное, всероссийское и др.)",blank=True,null=True)
+
+    type_event=models.ForeignKey(TypeEvent,on_delete=models.SET_NULL,verbose_name="Тип мероприятия",blank=True,null=True)
+
+    title_report=models.TextField(verbose_name="Наименование Доклада на мероприятия (для конференций)",blank=True,null=True)
+
+    date_event_event=models.DateField(verbose_name='Дата проведения',blank=True,null=True)
+
+    place_event=models.TextField(verbose_name="Место проведения",blank=True,null=True)
+
+    number_participants=models.IntegerField(verbose_name="Общее кол-во участников мероприятия",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    number_foreign_participants=models.IntegerField(verbose_name="Кол-во зарубежных участников мероприятия",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    number_exhibits=models.IntegerField(verbose_name="Кол-во экспонатов (для выставки)",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    publication_collection=models.CharField(max_length=100,verbose_name="С изданием сборника (для конференций)",blank=True,null=True)
+
+    awards=models.TextField(verbose_name="Полученные награды НПР и студентами ЗабГУ (медали, дипломы, грамоты)",blank=True,null=True)
+
+    link=models.CharField(max_length=500,verbose_name="Ссылка на программу мероприятия",blank=True,null=True)
+
+    status = models.CharField(max_length=20,choices=[("E","Редактируется"),("с","Завершено")],default="Редактируется",verbose_name="Статус")
+
+    def __str__(self):
+        return f'{self.name_event}'
+
+    class Meta:
+        verbose_name="Мероприятия"
+        verbose_name_plural='Мероприятия'
+
+
+class TypeGrant(models.Model):
+    name_type_grant=models.CharField(max_length=100,verbose_name="Тип гранта")
+    def __str__(self):
+        return f'{self.name_type_grant}'
+
+    class Meta:
+        verbose_name="Тип гранта"
+        verbose_name_plural='Тип гранта'
+
+
+class Grant(models.Model):
+    id_map = models.ForeignKey(Map,on_delete=models.CASCADE,verbose_name="Карта")
+
+    type_grant=models.ForeignKey(TypeGrant,on_delete=models.SET_NULL,verbose_name="Тип гранта",blank=True,null=True)
+
+    name_fund=models.CharField(max_length=500,verbose_name="Наименование фонда",blank=True,null=True)
+
+    name_competition=models.CharField(max_length=500,verbose_name="Наименование конкурса",blank=True,null=True)
+
+    kod_competition=models.CharField(max_length=50,verbose_name="Код конкурса",blank=True,null=True)
+
+    nomination=models.CharField(max_length=500,verbose_name="Номинация (при наличии)",blank=True,null=True)
+
+    name_project_topic=models.CharField(max_length=500,verbose_name="Наименование темы проекта (без кавычек)",blank=True,null=True)
+
+    project_manager = models.CharField(max_length=200,verbose_name="Руководитель проекта (ФИО полностью)",blank=True,null=True)
+
+    number_project_team=models.IntegerField(verbose_name="Численность проектного коллектива",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    number_young_scientists=models.IntegerField(verbose_name="Численность молодых ученых",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    full_name_performer = models.CharField(max_length=200,verbose_name="ФИО (полностью) исполнителей",blank=True,null=True)
+
+    winner=models.CharField(max_length=3,choices=[("Д","Да"),("Н","Нет")],default="Н",verbose_name="Выиграно (Да, Нет)")
+
+    status = models.CharField(max_length=20,choices=[("Р","Редактируется"),("З","Завершено")],default="Р",verbose_name="Статус")
+
+
+    def __str__(self):
+        return f'{self.name_project_topic}'
+
+    class Meta:
+        verbose_name="Грант"
+        verbose_name_plural='Грант'
+
+class FormParticipation(models.Model):
+    name_form_participation=models.CharField(max_length=500,verbose_name="Форма участия")
+    def __str__(self):
+        return f'{self.name_form_participation}'
+
+    class Meta:
+        verbose_name="Форма участия"
+        verbose_name_plural='Форма участия'
+
+class NIRS (models.Model):
+    id_map = models.ForeignKey(Map,on_delete=models.CASCADE,verbose_name="Карта")
+
+    number_students=models.IntegerField(verbose_name="Численность студентов",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    full_name_students= models.TextField(verbose_name="ФИО студентов",blank=True,null=True)
+
+    form_participation = models.ForeignKey(FormParticipation,on_delete=models.SET_NULL,verbose_name="Карта",null=True)
+
+    name_event_nirs = models.CharField(max_length=500,verbose_name="Наименование мероприятия",blank=True,null=True)
+
+    full_name_scientific_supervisor=models.CharField(max_length=200,verbose_name="ФИО научного руководителя",blank=True,null=True)
+
+    awards_diplomas = models.TextField(verbose_name="Награды/Дипломы",blank=True,null=True)
+
+    date_event_nirs=models.DateField(verbose_name='Дата мероприятия',blank=True,null=True)
+
+    status = models.CharField(max_length=20,choices=[("Р","Редактируется"),("З","Завершено")],default="Р",verbose_name="Статус")
+
+    def __str__(self):
+        return f'{self.name_event_nirs}'
+
+    class Meta:
+        verbose_name="НИРС"
+        verbose_name_plural='НИРС'
+
+
+class PopularSciencePublications(models.Model):
+    id_map = models.ForeignKey(Map,on_delete=models.CASCADE,verbose_name="Карта")
+
+    full_name_author= models.CharField(max_length=500,verbose_name="Ф.И.О. автора (полностью)",blank=True,null=True)
+
+    name_publication_popular_science_publications = models.CharField(max_length=1000,verbose_name="Название публикации",blank=True)
+
+    place_publication_popular_science_publications = models.TextField(verbose_name="Место опубликования, издательство, год, № выпуска",blank=True,null=True)
+
+    volume_popular_science_publications=models.IntegerField(verbose_name="Объем публикации",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    note = models.TextField(verbose_name="Примечание",blank=True,null=True)
+
+    status = models.CharField(max_length=20,choices=[("Р","Редактируется"),("З","Завершено")],default="Р",verbose_name="Статус")
+
+    def __str__(self):
+        return f'{self.name_publication_popular_science_publications} {self.full_name_author}'
+
+    class Meta:
+        verbose_name="Научно-популярные издания"
+        verbose_name_plural='Научно-популярные издания'
+
+
+
+class ScientificDirections (models.Model):
+    id_map = models.ForeignKey(Map,on_delete=models.CASCADE,verbose_name="Карта")
+
+    name_scientific_direction = models.CharField(max_length=700,verbose_name="Научное направление",blank=True)
+
+    name_scientific_school=models.CharField(max_length=700,verbose_name="Название научной школы",blank=True)
+
+    leading_scientists=models.TextField(verbose_name="Ведущие ученые в данной области (1-3 человека)",blank=True,null=True)
+
+    number_defended_doctoral_dissertations=models.IntegerField(verbose_name="Кол-во защищенных докторских диссертаций",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    number_defended_PhD_theses=models.IntegerField(verbose_name="Кол-во защищенных кандидатских диссертаций",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    number_monographs=models.IntegerField(verbose_name="Кол-во монографий",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    number_articles_WoS_Scopus=models.IntegerField(verbose_name="Кол-во статей WoS/Scopus",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    number_articles_VAK=models.IntegerField(verbose_name="Кол-во статей ВАК",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    number_articles_RIHC=models.IntegerField(verbose_name="Кол-во статей РИНЦ",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    number_applications_inventions=models.IntegerField(verbose_name="Кол-во заявок на изобретения",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    number_security_documents_received=models.IntegerField(verbose_name="Кол-во полученных охранных документов",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    number_organized=models.IntegerField(verbose_name="Кол-во организованных международных и (или) всероссийских научных и (или) научно-практических мероприятий",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    amount_funding=models.IntegerField(verbose_name="Объем финансирования",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
+
+    status = models.CharField(max_length=20,choices=[("Р","Редактируется"),("З","Завершено")],default="Р",verbose_name="Статус")
+
+
+    def __str__(self):
+        return f'{self.name_scientific_direction} {self.name_scientific_school}'
+
+    class Meta:
+        verbose_name="Научные направления"
+        verbose_name_plural='Научные направления'
+
+
+
+class InternationalCooperation(models.Model):
+    id_map = models.ForeignKey(Map,on_delete=models.CASCADE,verbose_name="Карта")
+
+    name_scientific_research=models.TextField(verbose_name="Наименование научно-исследовательских  и научно-технических проектов ",blank=True,null=True)
+
+    name_scientific_centers=models.TextField(verbose_name="Наименование научных центров, лабораторий, других подразделений, созданнх с участвием международных или иностранных организаций",blank=True,null=True)
+
+    name_topics=models.TextField(verbose_name="Наименование тем, проводимых совместных научных исследований",blank=True,null=True)
+
+    name_research_topics=models.TextField(verbose_name="Наименование тем научных исследований, опытно-конструкторских работ, проводимых по заказам международных и иностранных организаций",blank=True,null=True)
+
+    name_scientific_programs=models.TextField(verbose_name="Наименование научных программ, разработка и реализация которых осуществляется  совместно с международными или иностранными организациями",blank=True,null=True)
+
+    status = models.CharField(max_length=20,choices=[("Р","Редактируется"),("З","Завершено")],default="Р",verbose_name="Статус")
+
+    def __str__(self):
+        return f'{self.name_scientific_research} '
+
+    class Meta:
+        verbose_name="Международное сотрудничество"
+        verbose_name_plural='Международное сотрудничество'
