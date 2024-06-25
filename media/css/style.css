@@ -1,8 +1,27 @@
+/* @font-face {
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: 900;
+    src: url('../webfonts/fa-solid-900.woff2') format('woff2'),
+         url('../webfonts/fa-solid-900.woff') format('woff');
+}
+*/
+.fa {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+.fa-edit:before {
+    content: "\f044"; /* Unicode символ для иконки "check"*/
+
+}
+
 .form-group {
     margin-bottom: 20px; /* Расстояние между полями */
     display: flex;
     flex-direction: column;
 }
+
 
 .form-group label {
     margin-bottom: 5px; /* Расстояние между меткой и полем ввода */
