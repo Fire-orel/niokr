@@ -4,6 +4,7 @@ $(document).ready(function() {
         $('#editEventForm').attr('id','EventForm');
         $('#error-message-event').hide().text('');
         $('#EventForm')[0].reset();
+        $('#id_full_name_author_event').val(null).trigger('change');
     });
 
 
@@ -80,10 +81,31 @@ $(document).ready(function() {
                 $('#editEventForm').attr('action',`/edit_event/${eventID}/`);
                 // Если успешный ответ от сервера, открываем модальное окно
                 var formData = JSON.parse(response.form_data)[0].fields;
-                console.log(formData)
+                var full_name_author_events = formData.full_name_author_event.split(',');
+
+                var filtered_full_name_author_event = full_name_author_events.filter(function(author) {
+                    return author.trim() !== ''; // Фильтруем пустые строки
+                });
+
+                filtered_full_name_author_event.forEach(function(full_name_author) {
+                    // Проверяем, есть ли уже такая опция в select2
+                    var optionExists = $("#id_full_name_author_event option").filter(function() {
+                        return $(this).text().trim() === full_name_author.trim();
+                    }).length > 0;
+
+                    if (!optionExists) {
+                        var newOption = new Option(full_name_author.trim(), full_name_author.trim(), true, true);
+                        $('#id_full_name_author_event').append(newOption).trigger('change');
+                    }
+                });
+
+                // Собираем список выбранных значений для проверки, если это необходимо
+                var full_name_author_event_check = filtered_full_name_author_event.map(function(full_name_author) {
+                    return full_name_author.trim();
+                });
 
                 $('#id_type_participation').val(formData.type_participation);
-                $('#id_full_name_author_event').val(formData.full_name_author_event);
+                $('#id_full_name_author_event').val(full_name_author_event_check).trigger('change');
                 $('#id_name_event_event').val(formData.name_event_event);
                 $('#id_level').val(formData.level);
                 $('#id_type_event').val(formData.type_event);
@@ -132,6 +154,25 @@ $(document).ready(function() {
                 $('#error-message-event').text("Ошибка").show();
             }
         });
+    });
+
+    $('#id_full_name_author_event').select2({
+        multiple: true,
+        tags: true,
+        tokenSeparators: [','],  // Разделители для тегов
+        placeholder: 'Выберите или введите авторов',
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            if (term === '') {
+                return null;
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true // add additional parameters
+            };
+        }
+
     });
 
 

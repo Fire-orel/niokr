@@ -37,7 +37,7 @@
                             <div class="col-sm-8"><span class="text-muted">{{ map.responsible }}</span></div>
                         </div>
                         {% if status == "True" %}
-                        <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="" id="">Завершить редактирование</button>
+                        <a href="{% url 'map_completed' map.id %}" class="btn btn-primary btn-sm">Завершить редактирование</a>
                         {% endif %}
 
                     </div>

@@ -59,6 +59,22 @@ class UserManager(models.Model):
     def __str__(self):
             return self.login
 
+class Faculty(models.Model):
+    name_faculty=models.CharField(max_length=500,verbose_name="Факультет",blank=True,null=True)
+
+    def __str__(self):
+            return self.name_faculty
+
+
+
+class Department(models.Model):
+    faculty=models.ForeignKey(Faculty,on_delete=models.SET_NULL,verbose_name="Факультет",null=True)
+    name_department=models.CharField(max_length=500,verbose_name="Кафедра",blank=True,null=True)
+
+    def __str__(self):
+            return self.name_department
+
+
 class FullNameАuthor(models.Model):
     full_name=models.CharField(max_length=500,verbose_name="Ф.И.О.",blank=True,null=True)
 
@@ -102,7 +118,7 @@ class Map(models.Model):
             return False
 
     def __str__(self):
-            return F"{self.year} год, {self.quarter} квартал, {self.department} кафедра"
+            return F"{self.year} год, {self.quarter} квартал, {self.department}"
 
     def get_map_id(id):
         try:
@@ -228,7 +244,7 @@ class Monographs(models.Model):
 
 
     def __str__(self):
-            return f"{self.name_works} {self.full_name_author_Monographs}"
+            return f"{self.name_works} {self.full_name_author_monographs}"
 
 
     class Meta:
@@ -259,7 +275,7 @@ class TypeEvent(models.Model):
 class Event (models.Model):
     id_map = models.ForeignKey(Map,on_delete=models.CASCADE,verbose_name="Карта")
 
-    type_participation=models.ForeignKey(TypeParticipation,on_delete=models.SET_NULL,verbose_name="Тип участия",blank=True,null=True)
+    type_participation=models.ForeignKey(TypeParticipation,on_delete=models.SET_NULL,verbose_name="Тип участия",null=True)
 
     full_name_author_event = models.TextField(verbose_name="ФИО (полностью) участников ЗабГУ",blank=True,null=True)
 
@@ -267,7 +283,7 @@ class Event (models.Model):
 
     level=models.CharField(max_length=100,verbose_name="Уровень (международное, всероссийское и др.)",blank=True,null=True)
 
-    type_event=models.ForeignKey(TypeEvent,on_delete=models.SET_NULL,verbose_name="Тип мероприятия",blank=True,null=True)
+    type_event=models.ForeignKey(TypeEvent,on_delete=models.SET_NULL,verbose_name="Тип мероприятия",null=True)
 
     title_report=models.TextField(verbose_name="Наименование Доклада на мероприятия (для конференций)",blank=True,null=True)
 
@@ -310,7 +326,7 @@ class TypeGrant(models.Model):
 class Grant(models.Model):
     id_map = models.ForeignKey(Map,on_delete=models.CASCADE,verbose_name="Карта")
 
-    type_grant=models.ForeignKey(TypeGrant,on_delete=models.SET_NULL,verbose_name="Тип гранта",blank=True,null=True)
+    type_grant=models.ForeignKey(TypeGrant,on_delete=models.SET_NULL,verbose_name="Тип гранта",null=True)
 
     name_fund=models.CharField(max_length=500,verbose_name="Наименование фонда",blank=True,null=True)
 
@@ -362,7 +378,7 @@ class NIRS (models.Model):
 
     name_event_nirs = models.CharField(max_length=500,verbose_name="Наименование мероприятия",blank=True,null=True)
 
-    full_name_scientific_supervisor=models.CharField(max_length=200,verbose_name="ФИО научного руководителя",blank=True,null=True)
+    full_name_scientific_supervisor=models.TextField(verbose_name="ФИО научного руководителя",blank=True,null=True)
 
     awards_diplomas = models.TextField(verbose_name="Награды/Дипломы",blank=True,null=True)
 

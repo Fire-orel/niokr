@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.views import View
 from ldap3 import Server, Connection, ALL, NTLM
 from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms,MonographsForms,EventForms,GrantForms,NIRSForms,PopularSciencePublicationsForms,ScientificDirectionsForms,InternationalCooperationForms
-from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation
+from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation,Faculty,Department
 from django.views.generic import ListView,DetailView,UpdateView
 from django.http import JsonResponse,HttpResponseRedirect,HttpResponse
 from openpyxl import Workbook
@@ -121,7 +121,9 @@ class HomeView(View):
             'user_posistion':UserManager.get_user_id(request.session.get("user_id")).position,
             'maps': maps,
             'mapform':MapForms(),
-            'type_publications':TypePublications.objects.all()
+            'type_publications':TypePublications.objects.all(),
+            'facultys':Faculty.objects.all(),
+            'departments':Department.objects.all()
 
         }
         return render(request, self.template_name, context)
@@ -137,14 +139,16 @@ class CheckMap(View):
     def post(self, request, *args, **kwargs):
         year = request.POST.get("year")
         quarter = request.POST.get("quarter")
-        department = request.POST.get("department")
+        department = request.POST.getlist("department")
+        if len(department)>1:
+            return JsonResponse({'message': 'Invalid request method'}, status=400)
         check=Map.check_data(year,quarter,department)
         # Обработка данных
         if not check:  # Замените на ваше условие
             map=Map.objects.create(
                 year=year,
                 quarter=quarter,
-                department=department,
+                department=department[0],
                 comment=request.POST.get("comment"),
                 responsible=UserManager.get_user_id(request.session.get("user_id"))
             )
@@ -156,12 +160,27 @@ class CheckMap(View):
     def get(self, request, *args, **kwargs):
         return JsonResponse({'message': 'Invalid request method'}, status=400)
 
+class deleteMap(View):
+    def post(self, request, pk):
+        try:
+            map = Map.objects.get(pk=pk)
+            map.delete()
+            return JsonResponse({'message': 'Map deleted successfully'}, status=200)
+        except Map.DoesNotExist:
+            return JsonResponse({'error': 'Map not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+
+
 
 class MapDetails(View):
     def get(self,request,pk):
         status="False"
 
         user_full_name = request.session.get('user_full_name')
+
+
 
         data = get_object_or_404(Map, pk=pk)
         request.session['map_id']=pk
@@ -246,16 +265,139 @@ class MapDetails(View):
             request.session.flush()
             return redirect('login')
 
+class mapСompleted(View):
+    def get(self, request,pk, *args, **kwargs):
+        map=get_object_or_404(Map,id=pk)
+        map.status="Завершено"
+        map.save()
+        return redirect('home')
+
+
 
 
 class otchet(View):
     def post(self,request):
-        faculty = request.POST.getlist('faculty')
+        # faculty = request.POST.getlist('faculty')
         department = request.POST.getlist('department')
         quarter = request.POST.getlist('quarter')
         tables=request.POST.getlist('table')
-        year = request.POST.get('year')
+        year = request.POST.getlist('year')
+        print(year)
         type_table_publication=request.POST.getlist('table_type')
         # print(quarter,table,type_table_publication)
         # print(UserManager.get_user_id(request.session.get("user_id")))
         user_id=UserManager.get_user_id(request.session.get("user_id"))
+        zip_buffer = io.BytesIO()
+
+        map_2=Map.objects.none()
+        map_1=Map.objects.none()
+        map=Map.objects.none()
+
+        if len(quarter)>0:
+            for i in quarter:
+                map=map|Map.objects.filter(quarter=i)
+        else :
+            map=Map.objects.all()
+
+        if len(department)>0:
+            for q in department:
+                map_1=map_1|map.filter(department=Department.objects.get(pk=q).name_department)
+        else:
+            map_1=map
+
+        if len(year)>0:
+            for q in year:
+                map_2=map_2|map_1.filter(year=year)
+                print(map_1.filter(year=year))
+            else:
+                map_2=map_1
+        with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
+            for id_map in map_1:
+                workbook = Workbook()
+                workbook.remove(workbook.active)
+                for table in tables:
+                    if table=='Publications':
+                        count=2
+                        sheet = workbook.create_sheet('Публикации')
+                        sheet['A1']="Тип публикации"
+                        sheet['B1']="ФИО автора"
+                        sheet['C1']="Наименование публикации"
+                        sheet['D1']="Выходные данные публикации (Название журнала, Номер, Том, страницы)"
+                        sheet['E1']="Год"
+                        sheet['F1']="Место опубликования"
+                        sheet['G1']="Объем публикации (п.л.)"
+                        sheet['H1']="eLIBRARY ID"
+                        sheet['I1']="DOI публикации"
+
+                        publicationss=Publications.objects.filter(id_map=id_map)
+                        for publications in publicationss:
+                            sheet[f"A{count}"]=publications.type_publication.name_type_publications
+                            sheet[f"B{count}"]=publications.full_name_author_publications
+                            sheet[f"C{count}"]=publications.name_publication_publications
+                            sheet[f"D{count}"]=publications.exit_data
+                            sheet[f"E{count}"]=publications.year
+                            sheet[f"F{count}"]=publications.place_publication_publications
+                            sheet[f"G{count}"]=publications.volume_publication
+                            sheet[f"H{count}"]=publications.eLIBRARY_ID
+                            sheet[f"I{count}"]=publications.doi_publication
+                            count+=1
+                    if table=='SecurityDocuments':
+                        count=2
+                        sheet = workbook.create_sheet('Охранные документы')
+                        sheet['A1']="Тип документа"
+                        sheet['B1']="Вид интеллектуальной собственности"
+                        sheet['C1']="ФИО автора (ов)"
+                        sheet['D1']="Наименование"
+                        sheet['E1']="Номер заявки / патента"
+
+                        securitydocumentss=SecurityDocuments.objects.filter(id_map=id_map)
+                        for securitydocuments in securitydocumentss:
+
+                            sheet[f"A{count}"]=str(securitydocuments.type_document)
+                            sheet[f"B{count}"]=str(securitydocuments.type_property)
+                            sheet[f"C{count}"]=securitydocuments.full_name_author_security_documents
+                            sheet[f"D{count}"]=securitydocuments.name_publication_security_documents
+                            sheet[f"E{count}"]=securitydocuments.application_number
+
+                            count+=1
+                    if table=='Monographs':
+                        count=2
+                        sheet = workbook.create_sheet('Охранные документы')
+                        sheet['A1']="Тип монографии (выпадающий список)"
+                        sheet['B1']="Автор(ы) ФИО (полностью)"
+                        sheet['C1']="Название работы"
+                        sheet['D1']="Тираж"
+                        sheet['E1']="Объем"
+                        sheet['F1']="Издательство(наименование)"
+                        sheet['G1']="Вид издательства"
+                        sheet['H1']="Год издания"
+
+                        monographss=Monographs.objects.filter(id_map=id_map)
+                        for monographs in monographss:
+
+                            sheet[f"A{count}"]=str(monographs.type_monographs)
+                            sheet[f"B{count}"]=monographs.full_name_author_monographs
+                            sheet[f"C{count}"]=monographs.name_works
+                            sheet[f"D{count}"]=monographs.circulation
+                            sheet[f"E{count}"]=monographs.volume_monographs
+                            sheet[f"F{count}"]=monographs.publishing_house
+                            sheet[f"G{count}"]=monographs.type_publishing_house
+                            sheet[f"H{count}"]=monographs.year_of_publication_monographs
+
+                            count+=1
+
+
+
+                file_buffer = io.BytesIO()
+                workbook.save(file_buffer)
+                file_buffer.seek(0)
+
+                # Добавляем файл в ZIP-архив
+                map_date= str(id_map.year)+" "+str(id_map.quarter)+" "+str(id_map.department)
+
+                zip_file.writestr(f'{map_date.__str__()}.xlsx', file_buffer.read())
+
+        response = HttpResponse(zip_buffer.getvalue(), content_type='application/zip')
+        response['Content-Disposition'] = 'attachment; filename=tables.zip'
+
+        return response

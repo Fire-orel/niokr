@@ -4,6 +4,7 @@ $(document).ready(function() {
         $('#editScientificDirectionsForm').attr('id','ScientificDirectionsForm');
         $('#error-message-scientific_directions').hide().text('');
         $('#ScientificDirectionsForm')[0].reset();
+        $('#id_leading_scientists').val(null).trigger('change');
     });
 
 
@@ -82,9 +83,33 @@ $(document).ready(function() {
                 var formData = JSON.parse(response.form_data)[0].fields;
                 console.log(formData)
 
+
+                var leading_scientistss = formData.leading_scientists.split(',');
+
+                var filtered_leading_scientists = leading_scientistss.filter(function(author) {
+                    return author.trim() !== ''; // Фильтруем пустые строки
+                });
+
+                filtered_leading_scientists.forEach(function(full_name_author) {
+                    // Проверяем, есть ли уже такая опция в select2
+                    var optionExists = $("#id_leading_scientists").filter(function() {
+                        return $(this).text().trim() === full_name_author.trim();
+                    }).length > 0;
+
+                    if (!optionExists) {
+                        var newOption = new Option(full_name_author.trim(), full_name_author.trim(), true, true);
+                        $('#id_leading_scientists').append(newOption).trigger('change');
+                    }
+                });
+
+                // Собираем список выбранных значений для проверки, если это необходимо
+                var leading_scientists_check = filtered_leading_scientists.map(function(full_name_author) {
+                    return full_name_author.trim();
+                });
+
                 $('#id_name_scientific_direction').val(formData.name_scientific_direction);
                 $('#id_name_scientific_school').val(formData.name_scientific_school);
-                $('#id_leading_scientists').val(formData.leading_scientists);
+                $('#id_leading_scientists').val(leading_scientists_check).trigger('change');
                 $('#id_number_defended_doctoral_dissertations').val(formData.number_defended_doctoral_dissertations);
                 $('#id_number_defended_PhD_theses').val(formData.number_defended_PhD_theses);
                 $('#id_number_monographs').val(formData.number_monographs);
@@ -133,6 +158,28 @@ $(document).ready(function() {
             }
         });
     });
+
+
+    $('#id_leading_scientists').select2({
+        multiple: true,
+        tags: true,
+        tokenSeparators: [','],  // Разделители для тегов
+        placeholder: 'Выберите или введите авторов',
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            if (term === '') {
+                return null;
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true // add additional parameters
+            };
+        }
+
+    });
+
+
 
 
 

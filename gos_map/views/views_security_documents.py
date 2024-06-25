@@ -2,15 +2,23 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.core import serializers
-from gos_map.models import SecurityDocuments,Map,TypeDocuments,TypeProperty,Publications
+from gos_map.models import SecurityDocuments,Map,TypeDocuments,TypeProperty,Publications,FullNameАuthor
 
 class addSecurityDocuments(View):
     def post(self, request, *args, **kwargs):
         type_document = request.POST.get("type_document")
         type_property = request.POST.get("type_property")
-        full_name_author_security_documents = request.POST.get("full_name_author_security_documents")
+        full_name_author_security_documents = request.POST.getlist("full_name_author_security_documents")
         name_publication_security_documents = request.POST.get("name_publication_security_documents")
         application_number = request.POST.get("application_number")
+
+        full_name_author_optim=""
+        for i in full_name_author_security_documents:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                full_name_author_optim=full_name_author_optim+name+','
+            else:
+                full_name_author_optim=full_name_author_optim+i+','
 
         status='Редактируется'
 
@@ -21,7 +29,7 @@ class addSecurityDocuments(View):
                 id_map = Map.get_map_id(request.session.get('map_id')),
                 type_document=TypeDocuments.objects.get(pk=type_document),
                 type_property=TypeProperty.objects.get(pk=type_property),
-                full_name_author_security_documents=full_name_author_security_documents,
+                full_name_author_security_documents=full_name_author_optim,
                 name_publication_security_documents=name_publication_security_documents,
                 application_number=application_number,
                 status=status
@@ -57,9 +65,17 @@ class editSecurityDocuments(View):
         securitydocuments = get_object_or_404(SecurityDocuments,id=pk)
         type_document = request.POST.get("type_document")
         type_property = request.POST.get("type_property")
-        full_name_author_security_documents = request.POST.get("full_name_author_security_documents")
+        full_name_author_security_documents = request.POST.getlist("full_name_author_security_documents")
         name_publication_security_documents = request.POST.get("name_publication_security_documents")
         application_number = request.POST.get("application_number")
+
+        full_name_author_optim=""
+        for i in full_name_author_security_documents:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                full_name_author_optim=full_name_author_optim+name+','
+            else:
+                full_name_author_optim=full_name_author_optim+i+','
 
         status='Редактируется'
 
@@ -69,7 +85,7 @@ class editSecurityDocuments(View):
 
         securitydocuments.type_document=TypeDocuments.objects.get(pk=type_document)
         securitydocuments.type_property=TypeProperty.objects.get(pk=type_property)
-        securitydocuments.full_name_author_security_documents=full_name_author_security_documents
+        securitydocuments.full_name_author_security_documents=full_name_author_optim
         securitydocuments.name_publication_security_documents=name_publication_security_documents
         securitydocuments.application_number=application_number
         securitydocuments.status=status

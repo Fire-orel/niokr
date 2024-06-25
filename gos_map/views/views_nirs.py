@@ -2,22 +2,38 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.core import serializers
-from gos_map.models import Map,FormParticipation,NIRS
+from gos_map.models import Map,FormParticipation,NIRS,FullNameАuthor
 from datetime import datetime
 
 class addNIRS(View):
     def post(self, request, *args, **kwargs):
         number_students = request.POST.get("number_students")
-        full_name_students = request.POST.get("full_name_students")
+        full_name_students = request.POST.getlist("full_name_students")
         form_participation = request.POST.get("form_participation")
         name_event_nirs = request.POST.get("name_event_nirs")
-        full_name_scientific_supervisor = request.POST.get("full_name_scientific_supervisor")
+        full_name_scientific_supervisor = request.POST.getlist("full_name_scientific_supervisor")
         awards_diplomas = request.POST.get("awards_diplomas")
         date_event_nirs = request.POST.get("date_event_nirs")
 
         status='Редактируется'
 
-        print(request.session.get('map_id'))
+        full_name_students_optim=""
+        for i in full_name_students:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                full_name_students_optim=full_name_students_optim+name+','
+            else:
+                full_name_students_optim=full_name_students_optim+i+','
+
+        full_name_scientific_supervisor_optim=""
+        for i in full_name_scientific_supervisor:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                full_name_scientific_supervisor_optim=full_name_scientific_supervisor_optim+name+','
+            else:
+                full_name_scientific_supervisor_optim=full_name_scientific_supervisor_optim+i+','
+
+
 
 
 
@@ -27,10 +43,10 @@ class addNIRS(View):
         nirs=NIRS.objects.create(
                 id_map = Map.get_map_id(request.session.get('map_id')),
                 number_students=number_students,
-                full_name_students=full_name_students,
+                full_name_students=full_name_students_optim,
                 form_participation=FormParticipation.objects.get(pk=form_participation),
                 name_event_nirs=name_event_nirs,
-                full_name_scientific_supervisor=full_name_scientific_supervisor,
+                full_name_scientific_supervisor=full_name_scientific_supervisor_optim,
                 awards_diplomas=awards_diplomas,
                 date_event_nirs=date_event_nirs,
                 status=status
@@ -65,12 +81,28 @@ class editNIRS(View):
     def post(self, request,pk, *args, **kwargs):
         nirs = get_object_or_404(NIRS,id=pk)
         number_students = request.POST.get("number_students")
-        full_name_students = request.POST.get("full_name_students")
+        full_name_students =request.POST.getlist("full_name_students")
         form_participation = request.POST.get("form_participation")
         name_event_nirs = request.POST.get("name_event_nirs")
-        full_name_scientific_supervisor = request.POST.get("full_name_scientific_supervisor")
+        full_name_scientific_supervisor = request.POST.getlist("full_name_scientific_supervisor")
         awards_diplomas = request.POST.get("awards_diplomas")
         date_event_nirs = request.POST.get("date_event_nirs")
+
+        full_name_students_optim=""
+        for i in full_name_students:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                full_name_students_optim=full_name_students_optim+name+','
+            else:
+                full_name_students_optim=full_name_students_optim+i+','
+
+        full_name_scientific_supervisor_optim=""
+        for i in full_name_scientific_supervisor:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                full_name_scientific_supervisor_optim=full_name_scientific_supervisor_optim+name+','
+            else:
+                full_name_scientific_supervisor_optim=full_name_scientific_supervisor_optim+i+','
 
         status='Редактируется'
 
@@ -81,10 +113,10 @@ class editNIRS(View):
 
 
         nirs.number_students=number_students
-        nirs.full_name_students=full_name_students
+        nirs.full_name_students=full_name_students_optim
         nirs.form_participation=FormParticipation.objects.get(pk=form_participation)
         nirs.name_event_nirs=name_event_nirs
-        nirs.full_name_scientific_supervisor=full_name_scientific_supervisor
+        nirs.full_name_scientific_supervisor=full_name_scientific_supervisor_optim
         nirs.awards_diplomas=awards_diplomas
         nirs.date_event_nirs=date_event_nirs
         nirs.status=status

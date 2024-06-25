@@ -2,13 +2,13 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.core import serializers
-from gos_map.models import Map,TypeParticipation,TypeEvent,Event
+from gos_map.models import Map,TypeParticipation,TypeEvent,Event,FullNameАuthor
 from datetime import datetime
 
 class addEvent(View):
     def post(self, request, *args, **kwargs):
         type_participation = request.POST.get("type_participation")
-        full_name_author_event = request.POST.get("full_name_author_event")
+        full_name_author_event = request.POST.getlist("full_name_author_event")
         name_event_event = request.POST.get("name_event_event")
         level = request.POST.get("level")
         type_event = request.POST.get("type_event")
@@ -22,6 +22,15 @@ class addEvent(View):
         awards = request.POST.get("awards")
         link = request.POST.get("link")
 
+        full_name_author_event_optim=""
+        for i in full_name_author_event:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                full_name_author_event_optim=full_name_author_event_optim+name+','
+            else:
+                full_name_author_event_optim=full_name_author_event_optim+i+','
+
+
 
         status='Редактируется'
 
@@ -33,7 +42,7 @@ class addEvent(View):
         event=Event.objects.create(
                 id_map = Map.get_map_id(request.session.get('map_id')),
                 type_participation=TypeParticipation.objects.get(pk=type_participation),
-                full_name_author_event=full_name_author_event,
+                full_name_author_event=full_name_author_event_optim,
                 name_event_event=name_event_event,
                 level=level,
                 type_event=TypeEvent.objects.get(pk=type_event),
@@ -78,7 +87,7 @@ class editEvent(View):
     def post(self, request,pk, *args, **kwargs):
         event = get_object_or_404(Event,id=pk)
         type_participation = request.POST.get("type_participation")
-        full_name_author_event = request.POST.get("full_name_author_event")
+        full_name_author_event = request.POST.getlist("full_name_author_event")
         name_event_event = request.POST.get("name_event_event")
         level = request.POST.get("level")
         type_event = request.POST.get("type_event")
@@ -92,6 +101,14 @@ class editEvent(View):
         awards = request.POST.get("awards")
         link = request.POST.get("link")
 
+        full_name_author_event_optim=""
+        for i in full_name_author_event:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                full_name_author_event_optim=full_name_author_event_optim+name+','
+            else:
+                full_name_author_event_optim=full_name_author_event_optim+i+','
+
 
         status='Редактируется'
 
@@ -101,7 +118,7 @@ class editEvent(View):
             status="Завершено"
 
         event.type_participation=TypeParticipation.objects.get(pk=type_participation)
-        event.full_name_author_event=full_name_author_event
+        event.full_name_author_event=full_name_author_event_optim
         event.name_event_event=name_event_event
         event.level=level
         event.type_event=TypeEvent.objects.get(pk=type_event)

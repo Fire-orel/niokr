@@ -5,6 +5,7 @@ $(document).ready(function() {
         $('#editPopularSciencePublicationsForm').attr('id','PopularSciencePublicationsForm');
         $('#error-message-PopularSciencePublications').hide().text('');
         $('#EventForm')[0].reset();
+        $('#id_full_name_author').val(null).trigger('change');
     });
 
 
@@ -81,9 +82,34 @@ $(document).ready(function() {
                 $('#editPopularSciencePublicationsForm').attr('action',`/edit_popular_science_publications/${popularsciencepublicationsID}/`);
                 // Если успешный ответ от сервера, открываем модальное окно
                 var formData = JSON.parse(response.form_data)[0].fields;
-                console.log(formData)
 
-                $('#id_full_name_author').val(formData.full_name_author);
+                var full_name_authors=formData.full_name_author.split(',')
+
+                var filtered_full_name_authors = full_name_authors.filter(function(author) {
+                    return author.trim() !== ''; // Фильтруем пустые строки
+                });
+
+                filtered_full_name_authors.forEach(function(full_name_author) {
+                    // Создаем новую опцию, если её нет в списке
+                    var optionExists = $("#id_full_name_author option").filter(function() {
+                        return $(this).text() === full_name_author;
+                    }).length > 0;
+
+                    if (!optionExists) {
+                        var newOption = new Option(full_name_author, full_name_author, true, true);
+                        $('#id_full_name_author').append(newOption).trigger('change');
+                    }
+                });
+
+                var full_name_author_check = full_name_authors.map(function(full_name_author) {
+
+                    return full_name_author;
+                });
+
+
+
+
+                $('#id_full_name_author').val(full_name_author_check).trigger('change');
                 $('#id_name_publication_popular_science_publications').val(formData.name_publication_popular_science_publications);
                 $('#id_place_publication_popular_science_publications').val(formData.place_publication_popular_science_publications);
                 $('#id_volume_popular_science_publications').val(formData.volume_popular_science_publications);
@@ -129,8 +155,19 @@ $(document).ready(function() {
     $('#id_full_name_author').select2({
         multiple: true,
         tags: true,
-        tokenSeparators: [',', ' '],  // Разделители для тегов
+        tokenSeparators: [','],  // Разделители для тегов
         placeholder: 'Выберите или введите авторов',
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            if (term === '') {
+                return null;
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true // add additional parameters
+            };
+        }
 
     });
 

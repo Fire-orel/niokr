@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Map,Publications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,FullNameАuthor,InternationalCooperation
+from .models import Map,Publications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,FullNameАuthor,InternationalCooperation,Department
 from datetime import datetime
 from django_select2.forms import Select2TagWidget
 
@@ -10,55 +10,147 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 class MapForms(forms.ModelForm):
+    department = forms.ModelMultipleChoiceField(
+        label='Кафедра',
+        queryset=Department.objects.all(),
+        widget=forms.SelectMultiple(attrs={
+            'class': 'select2',
+
+
+
+            }),
+        required=False,
+        to_field_name='name_department'
+    )
+
     def __init__(self, *args, **kwargs):
-        super(MapForms, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         now = datetime.now()
         current_year = now.year
         current_month = now.month
         current_quarter = (current_month - 1) // 3 + 1  # Вычисляем текущий квартал
         self.fields['year'].initial = current_year
         self.fields['quarter'].initial = current_quarter
+        # self.fields['department'].choices=[(department.name_department, department.name_department) for department in Department.objects.all()]
+        self.fields['department'].widget.attrs.update({
+            'style': 'width: 100%'
+        })
 
     class Meta:
         model = Map
         fields = ['year', 'quarter','department',"comment"]
 
 class PublicationForms(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(PublicationForms, self).__init__(*args, **kwargs)
-        now = datetime.now()
-        current_year = now.year
-        self.fields['year'].initial = current_year
-
+    full_name_author_publications = forms.ModelMultipleChoiceField(
+        label='ФИО автора',
+        queryset=FullNameАuthor.objects.all(),
+        widget=forms.SelectMultiple(attrs={
+            'class': 'select2',
+            'multiple': 'multiple',
+            'data-tags': 'true',
+            'value': 'full_name'
+            }),
+        required=False,
+        to_field_name='full_name'
+    )
 
     class Meta:
         model=Publications
         fields = ['type_publication', 'full_name_author_publications','name_publication_publications',"exit_data",'year','place_publication_publications','volume_publication','eLIBRARY_ID','doi_publication']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        now = datetime.now()
+        current_year = now.year
+        self.fields['year'].initial = current_year
+        self.fields['full_name_author_publications'].widget.attrs.update({
+            'data-tags': 'true',
+            'data-placeholder': 'Выберите автора или введите нового',
+            'style': 'width: 100%'  # Пример установки стиля для ширины поля
+        })
+
 class SecurityDocumentsForms(forms.ModelForm):
+    full_name_author_security_documents = forms.ModelMultipleChoiceField(
+        label='ФИО автора',
+        queryset=FullNameАuthor.objects.all(),
+        widget=forms.SelectMultiple(attrs={
+            'class': 'select2',
+            'multiple': 'multiple',
+            'data-tags': 'true',
+            'value': 'full_name'
+            }),
+        required=False,
+        to_field_name='full_name'
+    )
 
     class Meta:
         model = SecurityDocuments
         fields=['type_document','type_property','full_name_author_security_documents','name_publication_security_documents','application_number']
 
-class MonographsForms(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(MonographsForms, self).__init__(*args, **kwargs)
-        now = datetime.now()
-        current_year = now.year
-        self.fields['year_of_publication_monographs'].initial = current_year
+        super().__init__(*args, **kwargs)
+        self.fields['full_name_author_security_documents'].widget.attrs.update({
+            'data-tags': 'true',
+            'data-placeholder': 'Выберите автора или введите нового',
+            'style': 'width: 100%'  # Пример установки стиля для ширины поля
+        })
 
+
+class MonographsForms(forms.ModelForm):
+    full_name_author_monographs = forms.ModelMultipleChoiceField(
+        label='Автор(ы) ФИО (полностью)',
+        queryset=FullNameАuthor.objects.all(),
+        widget=forms.SelectMultiple(attrs={
+            'class': 'select2',
+            'multiple': 'multiple',
+            'data-tags': 'true',
+
+            }),
+        required=False,
+        to_field_name='full_name'
+    )
 
     class Meta:
         model=Monographs
         fields=['type_monographs','full_name_author_monographs','name_works','circulation','volume_monographs','publishing_house','type_publishing_house','year_of_publication_monographs']
 
+    def __init__(self, *args, **kwargs):
+        super(MonographsForms, self).__init__(*args, **kwargs)
+        now = datetime.now()
+        current_year = now.year
+        self.fields['year_of_publication_monographs'].initial = current_year
+        self.fields['full_name_author_monographs'].widget.attrs.update({
+            'data-tags': 'true',
+            'data-placeholder': 'Выберите автора или введите нового',
+            'style': 'width: 100%'  # Пример установки стиля для ширины поля
+        })
+
+
+
+
 
 class EventForms(forms.ModelForm):
+    full_name_author_event = forms.ModelMultipleChoiceField(
+        label='ФИО участников ЗабГУ',
+        queryset=FullNameАuthor.objects.all(),
+        widget=forms.SelectMultiple(attrs={
+            'class': 'select2',
+            'multiple': 'multiple',
+            'data-tags': 'true',
+
+            }),
+        required=False,
+        to_field_name='full_name'
+    )
     def __init__(self, *args, **kwargs):
         super(EventForms, self).__init__(*args, **kwargs)
         now = datetime.now()
         self.fields['date_event_event'].initial = now
+        self.fields['full_name_author_event'].widget.attrs.update({
+            'data-tags': 'true',
+            'data-placeholder': 'Выберите автора или введите нового',
+            'style': 'width: 100%'  # Пример установки стиля для ширины поля
+        })
 
     class Meta:
         model=Event
@@ -68,17 +160,88 @@ class EventForms(forms.ModelForm):
         }
 
 
+
 class GrantForms(forms.ModelForm):
+
+    project_manager = forms.ModelMultipleChoiceField(
+        label='Руководитель проекта (ФИО полностью)',
+        queryset=FullNameАuthor.objects.all(),
+        widget=forms.SelectMultiple(attrs={
+            'class': 'select2',
+            'multiple': 'multiple',
+            'data-tags': 'true',
+            }),
+        required=False,
+        to_field_name='full_name'
+    )
+    full_name_performer = forms.ModelMultipleChoiceField(
+        label='ФИО (полностью) исполнителей',
+        queryset=FullNameАuthor.objects.all(),
+        widget=forms.SelectMultiple(attrs={
+            'class': 'select2',
+            'multiple': 'multiple',
+            'data-tags': 'true',
+            }),
+        required=False,
+        to_field_name='full_name'
+    )
+
+
     class Meta:
         model=Grant
         fields=['type_grant','name_fund','name_competition','kod_competition','nomination','name_project_topic','project_manager','number_project_team','number_young_scientists','full_name_performer','winner']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['project_manager'].widget.attrs.update({
+            'data-tags': 'true',
+            'data-placeholder': 'Выберите автора или введите нового',
+            'style': 'width: 100%'  # Пример установки стиля для ширины поля
+        })
+        self.fields['full_name_performer'].widget.attrs.update({
+            'data-tags': 'true',
+            'data-placeholder': 'Выберите автора или введите нового',
+            'style': 'width: 100%'  # Пример установки стиля для ширины поля
+        })
+
 
 class NIRSForms(forms.ModelForm):
+    full_name_students = forms.ModelMultipleChoiceField(
+        label='ФИО студентов',
+        queryset=FullNameАuthor.objects.all(),
+        widget=forms.SelectMultiple(attrs={
+            'class': 'select2',
+            'multiple': 'multiple',
+            'data-tags': 'true',
+            }),
+        required=False,
+        to_field_name='full_name'
+    )
+    full_name_scientific_supervisor = forms.ModelMultipleChoiceField(
+        label='ФИО научного руководителя',
+        queryset=FullNameАuthor.objects.all(),
+        widget=forms.SelectMultiple(attrs={
+            'class': 'select2',
+            'multiple': 'multiple',
+            'data-tags': 'true',
+            }),
+        required=False,
+        to_field_name='full_name'
+    )
     def __init__(self, *args, **kwargs):
         super(NIRSForms, self).__init__(*args, **kwargs)
         now = datetime.now()
         self.fields['date_event_nirs'].initial = now
+        self.fields['full_name_students'].widget.attrs.update({
+            'data-tags': 'true',
+            'data-placeholder': 'Выберите автора или введите нового',
+            'style': 'width: 100%'  # Пример установки стиля для ширины поля
+        })
+        self.fields['full_name_scientific_supervisor'].widget.attrs.update({
+            'data-tags': 'true',
+            'data-placeholder': 'Выберите автора или введите нового',
+            'style': 'width: 100%'  # Пример установки стиля для ширины поля
+        })
 
     class Meta:
         model=NIRS
@@ -93,9 +256,16 @@ class PopularSciencePublicationsForms(forms.ModelForm):
     full_name_author = forms.ModelMultipleChoiceField(
         label='Ф.И.О. автора (полностью)',
         queryset=FullNameАuthor.objects.all(),
-        widget=forms.SelectMultiple(attrs={'class': 'select2', 'multiple': 'multiple'}),
-        required=False
+        widget=forms.SelectMultiple(attrs={
+            'class': 'select2',
+            'multiple': 'multiple',
+            'data-tags': 'true',
+            'value': 'full_name'
+            }),
+        required=False,
+        to_field_name='full_name'
     )
+
 
     class Meta:
         model=PopularSciencePublications
@@ -114,9 +284,30 @@ class PopularSciencePublicationsForms(forms.ModelForm):
 
 
 class ScientificDirectionsForms(forms.ModelForm):
+
+    leading_scientists = forms.ModelMultipleChoiceField(
+        label='Ведущие ученые в данной области (1-3 человека)',
+        queryset=FullNameАuthor.objects.all(),
+        widget=forms.SelectMultiple(attrs={
+            'class': 'select2',
+            'multiple': 'multiple',
+            'data-tags': 'true',
+            'value': 'full_name'
+            }),
+        required=False,
+        to_field_name='full_name'
+    )
     class Meta:
         model=ScientificDirections
         fields=['name_scientific_direction','name_scientific_school','leading_scientists','number_defended_doctoral_dissertations','number_defended_PhD_theses','number_monographs','number_articles_WoS_Scopus','number_articles_VAK','number_articles_RIHC','number_applications_inventions','number_security_documents_received','number_organized','amount_funding']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['leading_scientists'].widget.attrs.update({
+            'data-tags': 'true',
+            'data-placeholder': 'Выберите автора или введите нового',
+            'style': 'width: 100%'  # Пример установки стиля для ширины поля
+        })
 
 
 class InternationalCooperationForms(forms.ModelForm):

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load custom_filters %}
 {% block content %}
     <div class="container mt-4">
         {% comment %} <h1>Welcome to the Home Page</h1> {% endcomment %}
@@ -16,6 +17,7 @@
                     Добавить новую запись
                 </button>
 
+
                 <table id="mapTable" class="table mt-3">
                     <thead>
                         <tr>
@@ -26,6 +28,9 @@
                             <th>Комментарий</th>
                             <th>Ответсвенный</th>
                             <th>Статус</th>
+                            <th></th>
+                            <th></th>
+
 
                         </tr>
                     </thead>
@@ -40,7 +45,15 @@
                                 <td>{{ map.comment }}</td>
                                 <td>{{ map.responsible }}</td>
                                 <td>{{ map.get_status_display}}</td>
+
+                                {% if map.status == "Редактируется" or user_posistion == "НО" %}
                                 <td> <a href="{% url 'map_details' map.id %}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
+                                {% else %}
+                                <td>  </td>
+                                {% endif %}
+                                {% comment %} <td>
+                                    <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteMapModal" data-id="{{ map.id }}" id="deleteMap"> <i class="fas fa-trash-alt"></i></button>
+                                </td> {% endcomment %}
                             </tr>
 
                         {% endfor %}
@@ -53,21 +66,25 @@
                 <table id="anotherRecordsTable" class="table mt-3">
                     <form action="{% url 'otchet' %}" method="post">
                         {% csrf_token %}
-                        <div class="form-group">
+                        {% comment %} <div class="form-group">
                             <label for="faculty">Факультет:</label>
-                            <select name="faculty" id="faculty" multiple style="width: 200px;">
-                                <!-- Варианты выбора факультетов -->
+                            <select name="faculty" id="faculty" multiple style="width: 500px;">
+                                {% for faculty in facultys %}
+                                <option value={{faculty.id }}>{{faculty.name_faculty}}</option>
+                                {% endfor %}
                             </select>
-                        </div>
+                        </div> {% endcomment %}
                         <div class="form-group">
                             <label for="department">Кафедра:</label>
-                            <select name="department" id="department" multiple style="width: 200px;">
-                                <!-- Варианты выбора кафедр -->
+                            <select name="department" id="department" multiple style="width: 500px;">
+                                {% for department in departments %}
+                                <option value={{department.id }}>{{department.name_department}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="quarter">Квартал:</label>
-                            <select name="quarter" id="quarter" multiple style="width: 200px;">
+                            <select name="quarter" id="quarter" multiple style="width: 500px;">
                                 <option value="1">1 квартал</option>
                                 <option value="2">2 квартал</option>
                                 <option value="3">3 квартал</option>
@@ -76,13 +93,21 @@
                         </div>
                         <div class="form-group">
                             <label for="table">Таблицы:</label>
-                            <select name="table" id="table" multiple style="width: 200px;">
-                                <option value="publication">Публикации</option>
+                            <select name="table" id="table" multiple style="width: 500px;">
+                                <option value="Publications">Публикации</option>
+                                <option value="SecurityDocuments">Охранные документы</option>
+                                <option value="Monographs">Монографии, УП</option>
+                                <option value="Grant">Грант</option>
+                                <option value="Event">Мероприятия</option>
+                                <option value="NIRS">НИРС</option>
+                                <option value="PopularSciencePublications">Научно-популярные издания</option>
+                                <option value="ScientificDirections">Научные направления</option>
+                                <option value="InternationalCooperation">Международное сотрудничество </option>
                             </select>
                         </div>
                         <div class="form-group" id='table_type_div' style="display: none;">
                             <label for="table_type">Типы публикации:</label>
-                            <select name="table_type" id="table_type" multiple style="width: 200px; ">
+                            <select name="table_type" id="table_type" multiple style="width: 500px; ">
                                 {% for type_publication in type_publications %}
                                 <option value={{type_publication.id }}>{{type_publication.name_type_publications}}</option>
                                 {% endfor %}
@@ -90,9 +115,14 @@
                         </div>
                         <div class="form-group">
                             <label for="year">Год:</label>
-                            <input type="text" name="year" id="year">
+                            <select name="quarter" id="year" multiple style="width: 500px;">
+                                <option value="1">2023</option>
+                                <option value="2">2024</option>
+                                <option value="3">2025</option>
+
+                            </select>
                         </div>
-                        <button type="submit">Сформировать отчет</button>
+                        <button type="submit" class="btn btn-primary">Сформировать отчет</button>
                     </form>
                 </table>
             </div>
@@ -108,7 +138,13 @@
                 <div class="modal-body">
                     <form id="addMapForm" action="{% url 'chek_map' %}" method="post">
                         {% csrf_token %}
-                        {{ mapform.as_p }}
+
+                        {% for field in mapform.visible_fields %}
+                        <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        <br>
+                        {{ field | add_class:"fixed-width-input form-control"}}
+                        {% endfor %}
                         <div id="error-message" class="alert alert-danger" style="display:none;"></div>
                         <button type="submit" class="btn btn-primary">Сохранить</button>
                     </form>
@@ -116,5 +152,25 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap JS and dependencies -->
+
+    <div class="modal fade" id="deleteMapModal" tabindex="-1" aria-labelledby="deleteMapModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteMapModalLabel">Подтвердите удаление</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Х</button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите удалить эту запись?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteMapBtn" >Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     {% endblock  %}

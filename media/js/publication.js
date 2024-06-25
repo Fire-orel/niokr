@@ -74,9 +74,35 @@ $(document).ready(function() {
                 // Если успешный ответ от сервера, открываем модальное окно
                 var formData = JSON.parse(response.form_data)[0].fields;
 
+                var full_name_author_publicationss=formData.full_name_author_publications.split(',')
+
+                var filtered_full_name_author_publications= full_name_author_publicationss.filter(function(author) {
+                    return author.trim() !== ''; // Фильтруем пустые строки
+                });
+
+                filtered_full_name_author_publications.forEach(function(full_name_author) {
+                    // Создаем новую опцию, если её нет в списке
+                    var optionExists = $("#id_full_name_author_publications option").filter(function() {
+                        return $(this).text() === full_name_author;
+                    }).length > 0;
+
+                    if (!optionExists) {
+                        var newOption = new Option(full_name_author, full_name_author, true, true);
+                        $('#id_full_name_author_publications').append(newOption).trigger('change');
+                    }
+                });
+
+                var full_name_author_publications_check = full_name_author_publicationss.map(function(full_name_author) {
+                    return full_name_author;
+                });
+
+
+
+
+
                 $('#PublicationModal').modal('show');
                 $('#id_type_publication').val(formData.type_publication);
-                $('#id_full_name_author_publications').val(formData.full_name_author_publications);
+                $('#id_full_name_author_publications').val(full_name_author_publications_check).trigger('change');
                 $('#id_name_publication_publications').val(formData.name_publication_publications);
                 $('#id_exit_data').val(formData.exit_data);
                 $('#id_year').val(formData.year);
@@ -127,8 +153,45 @@ $(document).ready(function() {
         $('#editPublicationForm').attr('id','PublicationForm');
         $('#error-message-publication').hide().text('');
         $('#PublicationForm')[0].reset();
+        $('#id_full_name_author_publications').val(null).trigger('change');
     });
 
+    $('#id_full_name_author').select2({
+        multiple: true,
+        tags: true,
+        tokenSeparators: [','],  // Разделители для тегов
+        placeholder: 'Выберите или введите авторов',
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            if (term === '') {
+                return null;
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true // add additional parameters
+            };
+        }
+
+    });
+    $('#id_full_name_author_publications').select2({
+        multiple: true,
+        tags: true,
+        tokenSeparators: [','],  // Разделители для тегов
+        placeholder: 'Выберите или введите авторов',
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            if (term === '') {
+                return null;
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true // add additional parameters
+            };
+        }
+
+    });
 
 
 

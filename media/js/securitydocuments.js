@@ -4,6 +4,7 @@ $(document).ready(function() {
         $('#editSecurityDocumentsForm').attr('id','SecurityDocumentsForm');
         $('#error-message-security-documents').hide().text('');
         $('#SecurityDocumentsForm')[0].reset();
+        $('#id_full_name_author_security_documents').val(null).trigger('change');
     });
 
 
@@ -83,12 +84,35 @@ $(document).ready(function() {
                 $('#editSecurityDocumentsForm').attr('action',`/edit_security_documents/${securitydocumentId}/`);
                 // Если успешный ответ от сервера, открываем модальное окно
                 var formData = JSON.parse(response.form_data)[0].fields;
-                console.log(formData)
+
+                var full_name_author_security_documentss=formData.full_name_author_security_documents.split(',')
+
+                var filtered_full_name_author_security_documents = full_name_author_security_documentss.filter(function(author) {
+                    return author.trim() !== ''; // Фильтруем пустые строки
+                });
+
+                filtered_full_name_author_security_documents.forEach(function(full_name_author) {
+                    // Создаем новую опцию, если её нет в списке
+                    var optionExists = $("#id_full_name_author_security_documents option").filter(function() {
+                        return $(this).text() === full_name_author;
+                    }).length > 0;
+
+                    if (!optionExists) {
+                        var newOption = new Option(full_name_author, full_name_author, true, true);
+                        $('#id_full_name_author_security_documents').append(newOption).trigger('change');
+                    }
+                });
+
+                var full_name_author_security_documents_check = full_name_author_security_documentss.map(function(full_name_author) {
+
+                    return full_name_author;
+                });
+
 
 
                 $('#id_type_document').val(formData.type_document);
                 $('#id_type_property').val(formData.type_property);
-                $('#id_full_name_author_security_documents').val(formData.full_name_author_security_documents);
+                $('#id_full_name_author_security_documents').val(full_name_author_security_documents_check).trigger('change');
                 $('#id_name_publication_security_documents').val(formData.name_publication_security_documents);
                 $('#id_application_number').val(formData.application_number);
                 $('#SecurityDocumentsModal').modal('show');
@@ -126,6 +150,26 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('#id_full_name_author_security_documents').select2({
+        multiple: true,
+        tags: true,
+        tokenSeparators: [','],  // Разделители для тегов
+        placeholder: 'Выберите или введите авторов',
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            if (term === '') {
+                return null;
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true // add additional parameters
+            };
+        }
+
+    });
+
 
 
 

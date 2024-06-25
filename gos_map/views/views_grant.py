@@ -2,7 +2,7 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.core import serializers
-from gos_map.models import Map,Grant,TypeGrant
+from gos_map.models import Map,Grant,TypeGrant,FullNameАuthor
 from datetime import datetime
 
 class addGrant(View):
@@ -13,11 +13,27 @@ class addGrant(View):
         kod_competition = request.POST.get("kod_competition")
         nomination = request.POST.get("nomination")
         name_project_topic = request.POST.get("name_project_topic")
-        project_manager = request.POST.get("project_manager")
+        project_manager = request.POST.getlist("project_manager")
         number_project_team = request.POST.get("number_project_team")
         number_young_scientists = request.POST.get("number_young_scientists")
-        full_name_performer = request.POST.get("full_name_performer")
+        full_name_performer = request.POST.getlist("full_name_performer")
         winner = request.POST.get("winner")
+
+        project_manager_optim=""
+        for i in project_manager:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                project_manager_optim=project_manager_optim+name+','
+            else:
+                project_manager_optim=project_manager_optim+i+','
+
+        full_name_performer_optim=""
+        for i in full_name_performer:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                full_name_performer_optim=full_name_performer_optim+name+','
+            else:
+                full_name_performer_optim=full_name_performer_optim+i+','
 
 
         status='Редактируется'
@@ -35,10 +51,10 @@ class addGrant(View):
                 kod_competition=kod_competition,
                 nomination=nomination,
                 name_project_topic=name_project_topic,
-                project_manager=project_manager,
+                project_manager=project_manager_optim,
                 number_project_team=number_project_team,
                 number_young_scientists=number_young_scientists,
-                full_name_performer=full_name_performer,
+                full_name_performer=full_name_performer_optim,
                 winner=winner,
                 status=status
             )
@@ -77,11 +93,27 @@ class editGrant(View):
         kod_competition = request.POST.get("kod_competition")
         nomination = request.POST.get("nomination")
         name_project_topic = request.POST.get("name_project_topic")
-        project_manager = request.POST.get("project_manager")
+        project_manager = request.POST.getlist("project_manager")
         number_project_team = request.POST.get("number_project_team")
         number_young_scientists = request.POST.get("number_young_scientists")
-        full_name_performer = request.POST.get("full_name_performer")
+        full_name_performer = request.POST.getlist("full_name_performer")
         winner = request.POST.get("winner")
+
+        project_manager_optim=""
+        for i in project_manager:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                project_manager_optim=project_manager_optim+name+','
+            else:
+                project_manager_optim=project_manager_optim+i+','
+
+        full_name_performer_optim=""
+        for i in full_name_performer:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                full_name_performer_optim=full_name_performer_optim+name+','
+            else:
+                full_name_performer_optim=full_name_performer_optim+i+','
 
 
         status='Редактируется'
@@ -97,10 +129,10 @@ class editGrant(View):
         grant.kod_competition=kod_competition
         grant.nomination=nomination
         grant.name_project_topic=name_project_topic
-        grant.project_manager=project_manager
+        grant.project_manager=project_manager_optim
         grant.number_project_team=number_project_team
         grant.number_young_scientists=number_young_scientists
-        grant.full_name_performer=full_name_performer
+        grant.full_name_performer=full_name_performer_optim
         grant.winner=winner
         grant.status=status
 

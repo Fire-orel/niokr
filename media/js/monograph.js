@@ -5,8 +5,9 @@ $(document).ready(function() {
     $("#MonographModal").on('hidden.bs.modal',function() {
         $('#addMonographForm').attr('id','MonographForm');
         $('#editMonographForm').attr('id','MonographForm');
-        $('#error-message-publication').hide().text('');
+        $('#error-message-monograph').hide().text('');
         $('#MonographForm')[0].reset();
+        $('#id_full_name_author_monographs').val(null).trigger('change');
     });
 
     $(document).on('submit','#addMonographForm', function(event) {
@@ -20,7 +21,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.message === 'Success') {
                     // Обрабатываем успешный ответ
-                    $('#PublicationModal').modal('hide').on('hidden.bs.modal', function() {
+                    $('#MonographModal').modal('hide').on('hidden.bs.modal', function() {
                         location.reload();
                     });
                 };
@@ -82,9 +83,32 @@ $(document).ready(function() {
                 // Если успешный ответ от сервера, открываем модальное окно
                 var formData = JSON.parse(response.form_data)[0].fields;
 
+                var full_name_author_monographss=formData.full_name_author_monographs.split(',')
+
+                var filtered_full_name_author_monographs = full_name_author_monographss.filter(function(author) {
+                    return author.trim() !== ''; // Фильтруем пустые строки
+                });
+
+                filtered_full_name_author_monographs.forEach(function(full_name_author) {
+                    // Создаем новую опцию, если её нет в списке
+                    var optionExists = $("#id_full_name_author_monographs").filter(function() {
+                        return $(this).text() === full_name_author;
+                    }).length > 0;
+
+                    if (!optionExists) {
+                        var newOption = new Option(full_name_author, full_name_author, true, true);
+                        $('#id_full_name_author').append(newOption).trigger('change');
+                    }
+                });
+
+                var full_name_author_monographs_check = filtered_full_name_author_monographs.map(function(full_name_author) {
+
+                    return full_name_author;
+                });
+
                 $('#MonographModal').modal('show');
                 $('#id_type_monographs').val(formData.type_monographs);
-                $('#id_full_name_author_monographs').val(formData. full_name_author_monographs);
+                $('#id_full_name_author_monographs').val(full_name_author_monographs_check).trigger('change');
                 $('#id_name_works').val(formData.name_works);
                 $('#id_circulation').val(formData.circulation);
                 $('#id_volume_monographs').val(formData.volume_monographs);
@@ -127,6 +151,24 @@ $(document).ready(function() {
         });
     });
 
+    $('#id_full_name_author_monographs').select2({
+        multiple: true,
+        tags: true,
+        tokenSeparators: [','],  // Разделители для тегов
+        placeholder: 'Выберите или введите авторов',
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            if (term === '') {
+                return null;
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true // add additional parameters
+            };
+        }
+
+    });
 
 
 

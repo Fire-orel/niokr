@@ -2,14 +2,14 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.core import serializers
-from gos_map.models import Map,ScientificDirections
+from gos_map.models import Map,ScientificDirections,FullNameАuthor
 from datetime import datetime
 
 class addScientificDirections(View):
     def post(self, request, *args, **kwargs):
         name_scientific_direction = request.POST.get("name_scientific_direction")
         name_scientific_school = request.POST.get("name_scientific_school")
-        leading_scientists = request.POST.get("leading_scientists")
+        leading_scientists = request.POST.getlist("leading_scientists")
         number_defended_doctoral_dissertations = request.POST.get("number_defended_doctoral_dissertations")
         number_defended_PhD_theses = request.POST.get("number_defended_PhD_theses")
         number_monographs = request.POST.get("number_monographs")
@@ -20,6 +20,14 @@ class addScientificDirections(View):
         number_security_documents_received = request.POST.get("number_security_documents_received")
         number_organized = request.POST.get("number_organized")
         amount_funding = request.POST.get("amount_funding")
+
+        leading_scientists_optim=""
+        for i in leading_scientists:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                leading_scientists_optim=leading_scientists_optim+name+','
+            else:
+                leading_scientists_optim=leading_scientists_optim+i+','
 
 
 
@@ -34,7 +42,7 @@ class addScientificDirections(View):
                 id_map = Map.get_map_id(request.session.get('map_id')),
                 name_scientific_direction=name_scientific_direction,
                 name_scientific_school=name_scientific_school,
-                leading_scientists=leading_scientists,
+                leading_scientists=leading_scientists_optim,
                 number_defended_doctoral_dissertations=number_defended_doctoral_dissertations,
                 number_defended_PhD_theses=number_defended_PhD_theses,
                 number_monographs=number_monographs,
@@ -80,7 +88,7 @@ class editScientificDirections(View):
 
         name_scientific_direction = request.POST.get("name_scientific_direction")
         name_scientific_school = request.POST.get("name_scientific_school")
-        leading_scientists = request.POST.get("leading_scientists")
+        leading_scientists = request.POST.getlist("leading_scientists")
         number_defended_doctoral_dissertations = request.POST.get("number_defended_doctoral_dissertations")
         number_defended_PhD_theses = request.POST.get("number_defended_PhD_theses")
         number_monographs = request.POST.get("number_monographs")
@@ -91,6 +99,14 @@ class editScientificDirections(View):
         number_security_documents_received = request.POST.get("number_security_documents_received")
         number_organized = request.POST.get("number_organized")
         amount_funding = request.POST.get("amount_funding")
+
+        leading_scientists_optim=""
+        for i in leading_scientists:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                leading_scientists_optim=leading_scientists_optim+name+','
+            else:
+                leading_scientists_optim=leading_scientists_optim+i+','
 
 
 
@@ -104,7 +120,7 @@ class editScientificDirections(View):
 
         scientificdirections.name_scientific_direction=name_scientific_direction
         scientificdirections.name_scientific_school=name_scientific_school
-        scientificdirections.leading_scientists=leading_scientists
+        scientificdirections.leading_scientists=leading_scientists_optim
         scientificdirections.number_defended_doctoral_dissertations=number_defended_doctoral_dissertations
         scientificdirections.number_defended_PhD_theses=number_defended_PhD_theses
         scientificdirections.number_monographs=number_monographs

@@ -1,5 +1,5 @@
 from django.views import View
-from gos_map.models import Publications,TypePublications,Map
+from gos_map.models import Publications,TypePublications,Map,FullNameАuthor
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.core import serializers
@@ -7,7 +7,7 @@ from django.core import serializers
 class addPublication(View):
     def post(self, request, *args, **kwargs):
         type_publication = request.POST.get("type_publication")
-        full_name_author_publications = request.POST.get("full_name_author_publications")
+        full_name_author_publications = request.POST.getlist("full_name_author_publications")
         name_publication_publications = request.POST.get("name_publication_publications")
         exit_data = request.POST.get("exit_data")
         year = request.POST.get("year")
@@ -15,16 +15,25 @@ class addPublication(View):
         volume_publication = request.POST.get("volume_publication")
         eLIBRARY_ID = request.POST.get("eLIBRARY_ID")
         doi_publication = request.POST.get("doi_publication")
-        print(exit_data)
+
+
+        full_name_author_optim=""
+        for i in full_name_author_publications:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                full_name_author_optim=full_name_author_optim+name+','
+            else:
+                full_name_author_optim=full_name_author_optim+i+','
         status='Редактируется'
 
 
         if type_publication!="" and full_name_author_publications!="" and name_publication_publications!="" and exit_data!="" and place_publication_publications!="" and eLIBRARY_ID!="" and doi_publication!="":
             status="Завершено"
+
         publication=Publications.objects.create(
                 id_map = Map.get_map_id(request.session.get('map_id')),
                 type_publication=TypePublications.get_type_publications_id(type_publication),
-                full_name_author_publications=full_name_author_publications,
+                full_name_author_publications=full_name_author_optim,
                 name_publication_publications=name_publication_publications,
                 exit_data=exit_data,
                 year=year,
@@ -54,7 +63,7 @@ class editPublication(View):
     def post(self, request,pk, *args, **kwargs):
         publications = get_object_or_404(Publications,id=pk)
         type_publication = request.POST.get("type_publication")
-        full_name_author_publications = request.POST.get("full_name_author_publications")
+        full_name_author_publications = request.POST.getlist("full_name_author_publications")
         name_publication_publications = request.POST.get("name_publication_publications")
         exit_data = request.POST.get("exit_data")
         year = request.POST.get("year")
@@ -62,6 +71,14 @@ class editPublication(View):
         volume_publication = request.POST.get("volume_publication")
         eLIBRARY_ID = request.POST.get("eLIBRARY_ID")
         doi_publication = request.POST.get("doi_publication")
+
+        full_name_author_optim=""
+        for i in full_name_author_publications:
+            if i.isdigit():
+                name=FullNameАuthor.objects.get(pk=i).full_name
+                full_name_author_optim=full_name_author_optim+name+','
+            else:
+                full_name_author_optim=full_name_author_optim+i+','
 
         status='Редактируется'
 
@@ -71,7 +88,7 @@ class editPublication(View):
 
 
         publications.type_publication=TypePublications.objects.get(pk=type_publication)
-        publications.full_name_author_publications=full_name_author_publications
+        publications.full_name_author_publications=full_name_author_optim
         publications.name_publication_publications=name_publication_publications
         publications.exit_data=exit_data
         publications.year=year

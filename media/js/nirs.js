@@ -4,6 +4,8 @@ $(document).ready(function() {
         $('#editNIRSForm').attr('id','NIRSForm');
         $('#error-message-nirs').hide().text('');
         $('#NIRSForm')[0].reset();
+        $('#id_full_name_students').val(null).trigger('change');
+        $('#id_full_name_scientific_supervisor').val(null).trigger('change');
     });
 
 
@@ -81,13 +83,61 @@ $(document).ready(function() {
                 // Если успешный ответ от сервера, открываем модальное окно
                 var formData = JSON.parse(response.form_data)[0].fields;
                 console.log(formData)
-                
+
+                var full_name_studentss = formData.full_name_students.split(',');
+
+                var filtered_full_name_students = full_name_studentss.filter(function(author) {
+                    return author.trim() !== ''; // Фильтруем пустые строки
+                });
+
+                filtered_full_name_students.forEach(function(full_name_author) {
+                    // Проверяем, есть ли уже такая опция в select2
+                    var optionExists = $("#id_full_name_students").filter(function() {
+                        return $(this).text().trim() === full_name_author.trim();
+                    }).length > 0;
+
+                    if (!optionExists) {
+                        var newOption = new Option(full_name_author.trim(), full_name_author.trim(), true, true);
+                        $('#id_full_name_students').append(newOption).trigger('change');
+                    }
+                });
+
+                // Собираем список выбранных значений для проверки, если это необходимо
+                var full_name_students_check = filtered_full_name_students.map(function(full_name_author) {
+                    return full_name_author.trim();
+                });
+
+
+
+                var full_name_scientific_supervisors = formData.full_name_scientific_supervisor.split(',');
+
+                var filtered_full_name_scientific_supervisors = full_name_scientific_supervisors.filter(function(author) {
+                    return author.trim() !== ''; // Фильтруем пустые строки
+                });
+
+                filtered_full_name_scientific_supervisors.forEach(function(full_name_author) {
+                    // Проверяем, есть ли уже такая опция в select2
+                    var optionExists = $("#id_full_name_scientific_supervisor").filter(function() {
+                        return $(this).text().trim() === full_name_author.trim();
+                    }).length > 0;
+
+                    if (!optionExists) {
+                        var newOption = new Option(full_name_author.trim(), full_name_author.trim(), true, true);
+                        $('#id_full_name_scientific_supervisor').append(newOption).trigger('change');
+                    }
+                });
+
+                // Собираем список выбранных значений для проверки, если это необходимо
+                var full_name_scientific_supervisor_check = filtered_full_name_scientific_supervisors.map(function(full_name_author) {
+                    return full_name_author.trim();
+                });
+
 
                 $('#id_number_students').val(formData.number_students);
-                $('#id_full_name_students').val(formData.full_name_students);
+                $('#id_full_name_students').val(full_name_students_check).trigger('change');
                 $('#id_form_participation').val(formData.form_participation);
                 $('#id_name_event_nirs').val(formData.name_event_nirs);
-                $('#id_full_name_scientific_supervisor').val(formData.full_name_scientific_supervisor);
+                $('#id_full_name_scientific_supervisor').val(full_name_scientific_supervisor_check).trigger('change');
                 $('#id_awards_diplomas').val(formData.awards_diplomas);
                 $('#id_date_event_nirs').val(formData.date_event_nirs);
 
@@ -125,6 +175,44 @@ $(document).ready(function() {
                 $('#error-message-NIRS').text("Ошибка").show();
             }
         });
+    });
+
+    $('#id_full_name_students').select2({
+        multiple: true,
+        tags: true,
+        tokenSeparators: [','],  // Разделители для тегов
+        placeholder: 'Выберите или введите авторов',
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            if (term === '') {
+                return null;
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true // add additional parameters
+            };
+        }
+
+    });
+
+    $('#id_full_name_scientific_supervisor').select2({
+        multiple: true,
+        tags: true,
+        tokenSeparators: [','],  // Разделители для тегов
+        placeholder: 'Выберите или введите авторов',
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            if (term === '') {
+                return null;
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true // add additional parameters
+            };
+        }
+
     });
 
 
