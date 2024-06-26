@@ -12,7 +12,7 @@ class LoginForm(forms.Form):
 class MapForms(forms.ModelForm):
     department = forms.ModelMultipleChoiceField(
         label='Кафедра',
-        queryset=Department.objects.all(),
+        queryset=Department.objects.none(),
         widget=forms.SelectMultiple(attrs={
             'class': 'select2',
 
@@ -24,6 +24,8 @@ class MapForms(forms.ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
+        user=kwargs.pop("user",None)
+
         super().__init__(*args, **kwargs)
         now = datetime.now()
         current_year = now.year
@@ -35,6 +37,14 @@ class MapForms(forms.ModelForm):
         self.fields['department'].widget.attrs.update({
             'style': 'width: 100%'
         })
+        if user.position=="НО":
+            self.fields['department'].queryset=Department.objects.all()
+        elif user.position=="ЗД":
+            self.fields['department'].queryset=Department.objects.filter(faculty=user.faculty)
+        elif user.position=="ЗК":
+            self.fields['department'].queryset=Department.objects.filter(name_department=user.department)
+        else:
+            self.fields['department'].queryset=Department.objects.all()
 
     class Meta:
         model = Map

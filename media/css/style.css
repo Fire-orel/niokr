@@ -50,3 +50,16 @@ th, td {
     overflow: hidden;
     text-overflow: ellipsis;
 } */
+
+.table-container {
+    max-height: auto; /* Установите максимальную высоту */
+    overflow-y: auto; /* Включите вертикальную прокрутку */
+}
+
+/* Стили для закрепления заголовка таблицы */
+.table-container thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #fff; /* Белый фон для заголовка */
+}

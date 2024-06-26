@@ -157,15 +157,24 @@ class HomeView(View):
         user_id=request.session.get("user_id")
         faculty=UserManager.objects.get(pk=user_id).faculty
         maps=Map.objects.none()
+        faculty_list=Faculty.objects.none()
+        department_list=Department.objects.none()
 
         if  position =="НО":
             maps= Map.objects.all ()
+            departments_list=Department.objects.all()
+            faculty_list=Faculty.objects.all()
         elif  position =="ЗД":
             departments=Department.objects.filter(faculty=faculty)
+            departments_list=Department.objects.filter(faculty=faculty)
             for department in departments:
                 maps=maps|Map.objects.filter(department=department)
         elif position =="ЗК":
+            departmentss=UserManager.objects.get(pk=user_id).department
+            departments_list=Department.objects.filter(name_department=departmentss)
+
             maps = Map.objects.filter(responsible=UserManager.get_user_id(request.session.get("user_id")))
+
 
 
         context = {
@@ -173,10 +182,10 @@ class HomeView(View):
             'user_id':UserManager.get_user_id(request.session.get("user_id")),
             'user_posistion':UserManager.get_user_id(request.session.get("user_id")).position,
             'maps': maps,
-            'mapform':MapForms(),
+            'mapform':MapForms(user=UserManager.objects.get(pk=user_id)),
             'type_publications':TypePublications.objects.all(),
-            'facultys':Faculty.objects.all(),
-            'departments':Department.objects.all()
+            'facultys':faculty_list,
+            'departments':departments_list
 
         }
         return render(request, self.template_name, context)
@@ -193,15 +202,21 @@ class CheckMap(View):
         year = request.POST.get("year")
         quarter = request.POST.get("quarter")
         department = request.POST.getlist("department")
+
         if len(department)>1:
             return JsonResponse({'message': 'Invalid request method'}, status=400)
+
+        department=department[0]
+
         check=Map.check_data(year,quarter,department)
+        
+
         # Обработка данных
         if not check:  # Замените на ваше условие
             map=Map.objects.create(
                 year=year,
                 quarter=quarter,
-                department=department[0],
+                department=department,
                 comment=request.POST.get("comment"),
                 responsible=UserManager.get_user_id(request.session.get("user_id"))
             )
@@ -347,7 +362,6 @@ class otchet(View):
         if len(tables)==0:
             tables=value
 
-        print(request.POST)
         # print(quarter,table,type_table_publication)
         # print(UserManager.get_user_id(request.session.get("user_id")))
         user_id=UserManager.get_user_id(request.session.get("user_id"))
@@ -363,11 +377,13 @@ class otchet(View):
         else :
             map=Map.objects.all()
 
+
         if len(department)>0:
             for q in department:
                 map_1=map_1|map.filter(department=Department.objects.get(pk=q).name_department)
         else:
             map_1=map
+
 
         if len(year)>0:
             for q in year:
@@ -377,7 +393,9 @@ class otchet(View):
             map_2=map_1
 
         with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
+
             for id_map in map_2:
+
                 workbook = Workbook()
                 workbook.remove(workbook.active)
                 for table in tables:

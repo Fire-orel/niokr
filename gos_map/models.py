@@ -22,7 +22,7 @@ class UserManager(models.Model):
 
     full_name = models.CharField(max_length=100,verbose_name="ФИО",blank = True)
 
-    position = models.CharField(max_length=100,choices=[("НО","Научный отдел"),("ЗДпоНР","Заместитель декана по научной работе"),("ЗК","Заведующий кафедрой")],verbose_name="Должность",blank = True)
+    position = models.CharField(max_length=100,choices=[("НО","Научный отдел"),("ЗД","Заместитель декана по научной работе"),("ЗК","Заведующий кафедрой")],verbose_name="Должность",blank = True)
 
     faculty = models.CharField(max_length=100,verbose_name="Факультет",blank = True)
 
@@ -306,7 +306,7 @@ class Event (models.Model):
     status = models.CharField(max_length=20,choices=[("E","Редактируется"),("с","Завершено")],default="Редактируется",verbose_name="Статус")
 
     def __str__(self):
-        return f'{self.name_event}'
+        return f'{self.name_event_event}'
 
     class Meta:
         verbose_name="Мероприятия"
