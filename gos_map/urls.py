@@ -20,7 +20,7 @@ from gos_map.views.views_scientific_directions import addScientificDirections,ed
 from gos_map.views.views_international_cooperation import addInternationalCooperation,editInternationalCooperation,deleteInternationalCooperation
 
 urlpatterns = [
-    path('login/', LoginView.as_view(), name='login'),
+    path('', LoginView.as_view(), name='login'),
     path('home/', HomeView.as_view(), name='home'),
     path('user_detail/', UserDetail.as_view(), name='user_detail'),
 
