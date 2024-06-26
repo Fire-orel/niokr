@@ -39,6 +39,9 @@
                         {% if status == "True" %}
                         <a href="{% url 'map_completed' map.id %}" class="btn btn-primary btn-sm">Завершить редактирование</a>
                         {% endif %}
+                        {% if map.status == "Завершено" %}
+                        <a href="{% url 'map_return' map.id %}" class="btn btn-primary btn-sm">Вернуть в работу</a>
+                        {% endif %}
 
                     </div>
 

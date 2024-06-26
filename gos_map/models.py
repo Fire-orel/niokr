@@ -109,7 +109,7 @@ class Map(models.Model):
 
     responsible = models.ForeignKey(UserManager,on_delete=models.SET_NULL,verbose_name="Ответсвенный",null=True)
 
-    status = models.CharField(max_length=20,choices=[("E","Редактируется"),("с","Завершено")],default="Редактируется",verbose_name="Статус")
+    status = models.CharField(max_length=20,choices=[("Редактируется","Редактируется"),("Завершено","Завершено")],default="Редактируется",verbose_name="Статус")
 
     def check_data(year,quarter, department):
         try:

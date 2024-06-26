@@ -1,5 +1,5 @@
 from django.urls import path
-from .views.views import LoginView,HomeView,CheckMap,MapDetails,otchet,mapСompleted,deleteMap
+from .views.views import LoginView,HomeView,CheckMap,MapDetails,otchet,mapСompleted,deleteMap,UserDetail,mapReturn
 
 from gos_map.views.views_publication import addPublication,deletePublication,editPublication
 
@@ -22,8 +22,10 @@ from gos_map.views.views_international_cooperation import addInternationalCooper
 urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('home/', HomeView.as_view(), name='home'),
+    path('user_detail/', UserDetail.as_view(), name='user_detail'),
 
     path('map_completed/<int:pk>', mapСompleted.as_view(), name='map_completed'),
+    path('map_return/<int:pk>', mapReturn.as_view(), name='map_return'),
 
     path('chek_map/',CheckMap.as_view(),name='chek_map'),
     path('map_details/<int:pk>',MapDetails.as_view(),name='map_details'),

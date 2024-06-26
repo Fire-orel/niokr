@@ -110,6 +110,8 @@ $(document).ready(function() {
     $('#table').select2();
     $('#table_type').select2();
     $('#year').select2();
+    $('#position').select2();
+
 
     $('#table').on('change', function() {
         // Получаем выбранное значение
@@ -121,6 +123,73 @@ $(document).ready(function() {
         // } else {
         //     $('#table_type_div').hide();
         // }
+    });
+
+
+    $('#position').on('change', function() {
+        // Получаем выбранное значение
+        var selectedValue = $(this).val();
+        // Если выбрано значение 1, показываем второй select, иначе скрываем
+
+        if($('#position').val()== 'НО') {
+            $('#faculty_div').hide();
+            $('#department_div').hide();
+        } else if ($('#position').val()== 'ЗД'){
+            $('#faculty_div').show();
+            $('#department_div').hide();
+        }else if ($('#position').val()== 'ЗК'){
+            $('#faculty_div').hide();
+            $('#department_div').show();
+        }
+    });
+
+
+    // $('#table').on('change', function() {
+    //     // Получаем выбранное значение
+    //     var selectedValue = $(this).val();
+    //     // Если выбрано значение 1, показываем второй select, иначе скрываем
+
+    //     if($('#table').val()== 'All') {
+    //         $(this).prop('disabled', true);
+    //     }
+    // });
+
+    // Слушатель событий select2
+    $('#table').on('select2:select', function(e) {
+        var selectedElement = e.params.data;
+        var selectedValue = selectedElement.id;
+
+        // Если выбранный элемент удовлетворяет условию, блокируем остальные
+        if (selectedValue === 'All') { // Замените SPECIFIC_VALUE на ваше значение
+            $('#table option').each(function() {
+                if ($(this).val() !== 'SPECIFIC_VALUE') {
+                    $(this).prop('disabled', true);
+                }
+            });
+        }else {
+            // Если выбран какой-либо другой элемент, блокируем элемент 'All'
+            $('#table option[value="All"]').prop('disabled', true);
+        }
+        $('#table').select2(); // Обновляем select2
+    });
+
+    // Слушатель событий select2:unselect
+    $('#table').on('select2:unselect', function(e) {
+        var selectedElement = e.params.data;
+        var selectedValue = selectedElement.id;
+
+        // Если удалённый элемент удовлетворяет условию, разблокируем остальные
+        if (selectedValue === 'All') { // Замените SPECIFIC_VALUE на ваше значение
+            $('#table option').each(function() {
+                $(this).prop('disabled', false);
+            });
+        }else {
+            // Если нет выбранных элементов, разблокируем элемент 'All'
+            if ($('#table').val().length === 0) {
+                $('#table option[value="All"]').prop('disabled', false); // Замените 'All' на ваше значение
+            }
+        }
+        $('#table').select2(); // Обновляем select2
     });
 
 

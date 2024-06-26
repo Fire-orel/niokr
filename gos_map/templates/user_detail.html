@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+{% block content %}
+    <div class="container mt-4">
+        <div class="tab-content">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="position">Должность:</label>
+                            <select name="position" id="position"  style="width: 500px;">
+                                <option value="НО">Научный отдел</option>
+                                <option value="ЗД">Заместитель декана по науной работе</option>
+                                <option value="ЗК">Заведующая кафедрой</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="faculty_div" style="display: none;">
+                            <label for="faculty">Факультет:</label>
+                            <select name="faculty" id="faculty"  style="width: 500px;">
+                                {% for faculty in facultys %}
+                                <option value={{faculty.id }}>{{faculty.name_faculty}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group" id="department_div" style="display: none;">
+                            <label for="department">Кафедра:</label>
+                            <select name="department" id="department"  style="width: 500px;">
+                                {% for department in departments %}
+                                <option value={{department.id }}>{{department.name_department}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div id="error-message-popularsciencepublications" class="alert alert-danger" style="display:none;"></div>
+
+
+                        <button type="submit" class="btn btn-primary">Сохранить данные</button>
+                    </form>
+
+
+        </div>
+    </div>
+
+
+
+
+
+    {% endblock  %}
