@@ -107,13 +107,13 @@ $(document).ready(function() {
     });
     $('#department').select2();
     $('#quarter').select2();
-    $('#table').select2();
+    $('#table_name').select2();
     $('#table_type').select2();
     $('#year').select2();
     $('#position').select2();
 
 
-    $('#table').on('change', function() {
+    $('#table_name').on('change', function() {
         // Получаем выбранное значение
         var selectedValue = $(this).val();
         // Если выбрано значение 1, показываем второй select, иначе скрываем
@@ -155,42 +155,56 @@ $(document).ready(function() {
     // });
 
     // Слушатель событий select2
-    $('#table').on('select2:select', function(e) {
+    $('#table_name').select2();
+
+    // Функция для обновления скрытого поля
+    function updateHiddenField() {
+        var selectedValues = $('#table_name').val();
+        $('#hidden_selected_value').val(selectedValues);
+    }
+
+    // Слушатель событий select2:select
+    $('#table_name').on('select2:select', function(e) {
         var selectedElement = e.params.data;
         var selectedValue = selectedElement.id;
 
         // Если выбранный элемент удовлетворяет условию, блокируем остальные
         if (selectedValue === 'All') { // Замените SPECIFIC_VALUE на ваше значение
-            $('#table option').each(function() {
-                if ($(this).val() !== 'SPECIFIC_VALUE') {
+            $('#table_name option').each(function() {
+                if ($(this).val() !== 'All') {
                     $(this).prop('disabled', true);
                 }
             });
-        }else {
+        } else {
             // Если выбран какой-либо другой элемент, блокируем элемент 'All'
-            $('#table option[value="All"]').prop('disabled', true);
+            $('#table_name option[value="All"]').prop('disabled', true);
         }
-        $('#table').select2(); // Обновляем select2
+        $('#table_name').select2(); // Обновляем select2
+        updateHiddenField(); // Обновляем скрытое поле
     });
 
     // Слушатель событий select2:unselect
-    $('#table').on('select2:unselect', function(e) {
+    $('#table_name').on('select2:unselect', function(e) {
         var selectedElement = e.params.data;
         var selectedValue = selectedElement.id;
 
         // Если удалённый элемент удовлетворяет условию, разблокируем остальные
         if (selectedValue === 'All') { // Замените SPECIFIC_VALUE на ваше значение
-            $('#table option').each(function() {
+            $('#table_name option').each(function() {
                 $(this).prop('disabled', false);
             });
-        }else {
+        } else {
             // Если нет выбранных элементов, разблокируем элемент 'All'
-            if ($('#table').val().length === 0) {
-                $('#table option[value="All"]').prop('disabled', false); // Замените 'All' на ваше значение
+            if ($('#table_name').val().length === 0) {
+                $('#table_name option[value="All"]').prop('disabled', false); // Замените 'All' на ваше значение
             }
         }
-        $('#table').select2(); // Обновляем select2
+        $('#table_name').select2(); // Обновляем select2
+        updateHiddenField(); // Обновляем скрытое поле
     });
+
+    // Обновляем скрытое поле при загрузке страницы
+    updateHiddenField();
 
 
 

@@ -340,8 +340,12 @@ class otchet(View):
         # faculty = request.POST.getlist('faculty')
         department = request.POST.getlist('department')
         quarter = request.POST.getlist('quarter')
-        tables=request.POST.getlist('table')
+        value=request.POST.getlist('hidden_selected_value')
+        tables=request.POST.getlist('table_name')
         year = request.POST.getlist('year')
+
+        if len(tables)==0:
+            tables=value
 
         print(request.POST)
         # print(quarter,table,type_table_publication)
@@ -371,6 +375,7 @@ class otchet(View):
 
         else:
             map_2=map_1
+
         with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
             for id_map in map_2:
                 workbook = Workbook()
