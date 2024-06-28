@@ -1,0 +1,32 @@
+<div class="tab-pane fade show active table-container" id="type_publications" role="tabpanel" aria-labelledby="type_publications-tab">
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#TypePublicationsModal" id='addtypepublications'>Добавить новую запись</button>
+
+                <table id="typepublicationsTable" class="table mt-3  mx-auto">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Тип публикации</th>
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for type_publication in type_publications %}
+                        <tr>
+                            <td>{{ type_publication.id }}</td>
+                            <td>{{ type_publication.name_type_publications}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="edit" data-id="{{ type_publication.id }}"><i class="fas fa-edit"></i></button>
+                            </td>
+
+                            <td>
+                                <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ type_publication.id }}" id="deleteModal"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+        </div>

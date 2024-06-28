@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.views import View
 from ldap3 import Server, Connection, ALL, NTLM
 from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms,MonographsForms,EventForms,GrantForms,NIRSForms,PopularSciencePublicationsForms,ScientificDirectionsForms,InternationalCooperationForms
-from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation,Faculty,Department
+from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation,Faculty,Department,TypeDocuments,TypeProperty
 from django.views.generic import ListView,DetailView,UpdateView
 from django.http import JsonResponse,HttpResponseRedirect,HttpResponse
 from openpyxl import Workbook
@@ -112,7 +112,8 @@ class UserDetail(View):
             'user_id':UserManager.get_user_id(request.session.get("user_id")),
             'user_posistion':UserManager.get_user_id(request.session.get("user_id")).position,
             'facultys':Faculty.objects.all(),
-            'departments':Department.objects.all()
+            'departments':Department.objects.all(),
+
 
         }
         return render(request, self.template_name, context)
@@ -185,7 +186,10 @@ class HomeView(View):
             'mapform':MapForms(user=UserManager.objects.get(pk=user_id)),
             'type_publications':TypePublications.objects.all(),
             'facultys':faculty_list,
-            'departments':departments_list
+            'departments':departments_list,
+            'type_publications':TypePublications.objects.all(),
+            'type_documents':TypeDocuments.objects.all(),
+            'type_propertys':TypeProperty.objects.all()
 
         }
         return render(request, self.template_name, context)
@@ -209,7 +213,7 @@ class CheckMap(View):
         department=department[0]
 
         check=Map.check_data(year,quarter,department)
-        
+
 
         # Обработка данных
         if not check:  # Замените на ваше условие

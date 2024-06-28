@@ -10,6 +10,11 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#otchet" type="button" role="tab" aria-controls="another-records" aria-selected="false">Отчёты</button>
             </li>
+            {% if user_posistion == 'НО'%}
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#const" type="button" role="tab" aria-controls="another-records" aria-selected="false">Константы</button>
+            </li>
+            {% endif%}
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
@@ -128,6 +133,27 @@
                         <button type="submit" class="btn btn-primary">Сформировать отчет</button>
                     </form>
                 </table>
+            </div>
+            <div class="tab-pane fade" id="const" role="tabpanel" aria-labelledby="another-records-tab">
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="records-tab" data-bs-toggle="tab" data-bs-target="#type_publications" type="button" role="tab" aria-controls="records" aria-selected="true">Тип публикации</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_document" type="button" role="tab" aria-controls="another-records" aria-selected="false">Тип документа</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_property" type="button" role="tab" aria-controls="another-records" aria-selected="false">Вид интеллектуальной собственности</button>
+                    </li>
+
+                </ul>
+                <div class="tab-content">
+                    {% include "table/table_type_publications.html" %}
+                    {% include "table/table_type_documents.html" %}
+                    {% include "table/table_type_property.html" %}
+                </div>
             </div>
         </div>
     </div>
