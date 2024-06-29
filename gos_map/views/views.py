@@ -4,8 +4,8 @@ from django.contrib.auth import login,logout
 from django.shortcuts import render, redirect,get_object_or_404
 from django.views import View
 from ldap3 import Server, Connection, ALL, NTLM
-from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms,MonographsForms,EventForms,GrantForms,NIRSForms,PopularSciencePublicationsForms,ScientificDirectionsForms,InternationalCooperationForms
-from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation,Faculty,Department,TypeDocuments,TypeProperty
+from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms,MonographsForms,EventForms,GrantForms,NIRSForms,PopularSciencePublicationsForms,ScientificDirectionsForms,InternationalCooperationForms,TypePublicationsForms,TypeDocumentsForms,TypePropertyForms,TypeMonographsForms
+from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation,Faculty,Department,TypeDocuments,TypeProperty,TypeMonographs
 from django.views.generic import ListView,DetailView,UpdateView
 from django.http import JsonResponse,HttpResponseRedirect,HttpResponse
 from openpyxl import Workbook
@@ -188,8 +188,16 @@ class HomeView(View):
             'facultys':faculty_list,
             'departments':departments_list,
             'type_publications':TypePublications.objects.all(),
+            'typepublicationsforms':TypePublicationsForms(),
             'type_documents':TypeDocuments.objects.all(),
-            'type_propertys':TypeProperty.objects.all()
+            'typedocumentsforms':TypeDocumentsForms(),
+            'type_propertys':TypeProperty.objects.all(),
+            'typepropertyforms':TypePropertyForms(),
+            'typemonographs':TypeMonographs.objects.all(),
+            'typemonographsforms':TypeMonographsForms()
+
+
+
 
         }
         return render(request, self.template_name, context)

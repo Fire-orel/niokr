@@ -21,6 +21,62 @@ $(document).ready(function() {
     if (window.location.pathname === '/home/') {
         localStorage.removeItem('activeTab');
     }
+    var urlPath = window.location.pathname;
+    var mapDetailsPattern = /^\/map_details\/\d+$/;
+
+    if (mapDetailsPattern.test(urlPath)) {
+        localStorage.removeItem('activeTabGlav');
+        localStorage.removeItem('activeTabType');
+    }
+
+
+
+    $('#myTabGlav button[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+        console.log($(e.target).attr('href'))
+
+        localStorage.setItem('activeTabGlav', $(e.target).attr('href'));
+    });
+
+    // Восстановление активной вкладки из локального хранилища
+    var activeTabGlav = localStorage.getItem('activeTabGlav');
+    if (activeTabGlav) {
+        $('#myTabGlav button[href="' + activeTabGlav + '"]').tab('show');
+    } else {
+        $('#myTabGlav button[data-bs-toggle="tab"]:first').tab('show'); // Установка первой вкладки активной по умолчанию
+    }
+
+
+
+    $('#myTab button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+
+        localStorage.setItem('activeTab', $(e.target).attr('href'));
+    });
+
+    // Восстановление активной вкладки из локального хранилища
+    var activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+        $('#myTab button[href="' + activeTab + '"]').tab('show');
+    } else {
+        $('#myTab button[data-toggle="tab"]:first').tab('show'); // Установка первой вкладки активной по умолчанию
+    }
+
+
+    $('#myTabType button[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+        localStorage.setItem('activeTabType', $(e.target).attr('href'));
+    });
+
+    // Восстановление активной вкладки из локального хранилища
+    var activeTabType = localStorage.getItem('activeTabType');
+    if (activeTabType) {
+        $('#myTabType button[href="' + activeTabType + '"]').tab('show');
+    } else {
+        $('#myTabType button[data-bs-toggle="tab"]:first').tab('show'); // Установка первой вкладки активной по умолчанию
+    }
+
+
+
+
     $(document).on('submit','#addMapForm', function(event) {
 
         event.preventDefault(); // Предотвращаем отправку формы
@@ -49,18 +105,9 @@ $(document).ready(function() {
         });
     });
 
-    $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
-        localStorage.setItem('activeTab', $(e.target).attr('href'));
-    });
 
-    // Восстановление активной вкладки из локального хранилища
-    var activeTab = localStorage.getItem('activeTab');
-    if (activeTab) {
-        $('#myTab button[href="' + activeTab + '"]').tab('show');
-    } else {
-        $('#myTab button[data-toggle="tab"]:first').tab('show'); // Установка первой вкладки активной по умолчанию
-    }
+
 
 
 
@@ -77,7 +124,7 @@ $(document).ready(function() {
 
 
         var mapID = $(this).data('id');// Получаем ID публикации
-        console.log(eventID)
+        
 
         // Отправляем запрос на удаление публикации
         $.ajax({
@@ -144,15 +191,6 @@ $(document).ready(function() {
     });
 
 
-    // $('#table').on('change', function() {
-    //     // Получаем выбранное значение
-    //     var selectedValue = $(this).val();
-    //     // Если выбрано значение 1, показываем второй select, иначе скрываем
-
-    //     if($('#table').val()== 'All') {
-    //         $(this).prop('disabled', true);
-    //     }
-    // });
 
     // Слушатель событий select2
     $('#table_name').select2();
@@ -205,6 +243,7 @@ $(document).ready(function() {
 
     // Обновляем скрытое поле при загрузке страницы
     updateHiddenField();
+
 
 
 

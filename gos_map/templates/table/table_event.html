@@ -40,7 +40,7 @@
                     <td>{{ event.number_participants }} / {{ event.number_foreign_participants }}</td>
                     {% comment %} <td>{{ event.number_foreign_participants }}</td> {% endcomment %}
                     <td>{{ event.number_exhibits }}</td>
-                    <td>{{ event.publication_collection }}</td>
+                    <td>{{ event.get_publication_collection_display }}</td>
                     <td>{{ event.awards }}</td>
                     <td>{{ event.link }}</td>
                     <td>{{ event.get_status_display }}</td>

@@ -1,205 +1,184 @@
 {% extends "base.html" %}
 {% load custom_filters %}
 {% block content %}
-    <div class="container mt-4">
+<div class="container mt-4">
         {% comment %} <h1>Welcome to the Home Page</h1> {% endcomment %}
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="records-tab" data-bs-toggle="tab" data-bs-target="#records" type="button" role="tab" aria-controls="records" aria-selected="true">Карта</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#otchet" type="button" role="tab" aria-controls="another-records" aria-selected="false">Отчёты</button>
-            </li>
-            {% if user_posistion == 'НО'%}
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#const" type="button" role="tab" aria-controls="another-records" aria-selected="false">Константы</button>
-            </li>
-            {% endif%}
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
-                <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addMapModal">
-                    Добавить новую запись
-                </button>
+    <ul class="nav nav-tabs" id="myTabGlav" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="records-tab" data-bs-toggle="tab" data-bs-target="#records" type="button" role="tab" aria-controls="records" aria-selected="true" href="#tab1">Карта</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#otchet" type="button" role="tab" aria-controls="another-records" aria-selected="false" href="#tab2">Отчёты</button>
+        </li>
+        {% if user_posistion == 'НО'%}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="type" data-bs-toggle="tab" data-bs-target="#const" type="button" role="tab" aria-controls="another-records" aria-selected="false" href="#tab3">Константы</button>
+        </li>
+        {% endif%}
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
+            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addMapModal">
+                Добавить новую запись
+            </button>
 
 
-                <table id="mapTable" class="table mt-3">
-                    <thead>
+            <table id="mapTable" class="table mt-3">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Год</th>
+                        <th>Квартал</th>
+                        <th>Кафедра</th>
+                        <th>Комментарий</th>
+                        <th>Ответсвенный</th>
+                        <th>Статус</th>
+                        <th></th>
+                        <th></th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for map in maps %}
+
                         <tr>
-                            <th>#</th>
-                            <th>Год</th>
-                            <th>Квартал</th>
-                            <th>Кафедра</th>
-                            <th>Комментарий</th>
-                            <th>Ответсвенный</th>
-                            <th>Статус</th>
-                            <th></th>
-                            <th></th>
+                            <td>{{ map.id }}</td>
+                            <td>{{ map.year }}</td>
+                            <td>{{ map.quarter }}</td>
+                            <td>{{ map.department }}</td>
+                            <td>{{ map.comment }}</td>
+                            <td>{{ map.responsible }}</td>
+                            <td>{{ map.get_status_display}}</td>
 
 
+                            {% if map.status == "Редактируется" or user_posistion == "НО" %}
+                            <td> <a href="{% url 'map_details' map.id %}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
+                            {% else %}
+                            <td>  </td>
+                            {% endif %}
+                            <td>
+                                <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteMapModal" data-id="{{ map.id }}" id="deleteMap"> <i class="fas fa-trash-alt"></i></button>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for map in maps %}
 
-                            <tr>
-                                <td>{{ map.id }}</td>
-                                <td>{{ map.year }}</td>
-                                <td>{{ map.quarter }}</td>
-                                <td>{{ map.department }}</td>
-                                <td>{{ map.comment }}</td>
-                                <td>{{ map.responsible }}</td>
-                                <td>{{ map.get_status_display}}</td>
-
-
-                                {% if map.status == "Редактируется" or user_posistion == "НО" %}
-                                <td> <a href="{% url 'map_details' map.id %}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
-                                {% else %}
-                                <td>  </td>
-                                {% endif %}
-                                {% comment %} <td>
-                                    <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteMapModal" data-id="{{ map.id }}" id="deleteMap"> <i class="fas fa-trash-alt"></i></button>
-                                </td> {% endcomment %}
-                            </tr>
-
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="tab-pane fade" id="otchet" role="tabpanel" aria-labelledby="another-records-tab">
-
-                <table id="anotherRecordsTable" class="table mt-3">
-                    <form action="{% url 'otchet' %}" method="post">
-                        {% csrf_token %}
-                        {% comment %} <div class="form-group">
-                            <label for="faculty">Факультет:</label>
-                            <select name="faculty" id="faculty" multiple style="width: 500px;">
-                                {% for faculty in facultys %}
-                                <option value={{faculty.id }}>{{faculty.name_faculty}}</option>
-                                {% endfor %}
-                            </select>
-                        </div> {% endcomment %}
-                        <div class="form-group">
-                            <label for="department">Кафедра:</label>
-                            <select name="department" id="department" multiple style="width: 500px;">
-                                {% for department in departments %}
-                                <option value={{department.id }}>{{department.name_department}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="quarter">Квартал:</label>
-                            <select name="quarter" id="quarter" multiple style="width: 500px;">
-                                <option value="1">1 квартал</option>
-                                <option value="2">2 квартал</option>
-                                <option value="3">3 квартал</option>
-                                <option value="4">4 квартал</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" id="hidden_selected_value" name="hidden_selected_value" value="">
-                            <label for="table_name">Таблицы:</label>
-                            <select name="table_name" id="table_name" multiple style="width: 500px;">
-                                <option value="All">Все</option>
-                                <option value="Publications">Публикации</option>
-                                <option value="SecurityDocuments">Охранные документы</option>
-                                <option value="Monographs">Монографии, УП</option>
-                                <option value="Grant">Грант</option>
-                                <option value="Event">Мероприятия</option>
-                                <option value="NIRS">НИРС</option>
-                                <option value="PopularSciencePublications">Научно-популярные издания</option>
-                                <option value="ScientificDirections">Научные направления</option>
-                                <option value="InternationalCooperation">Международное сотрудничество </option>
-                            </select>
-                        </div>
-                        <div class="form-group" id='table_type_div' style="display: none;">
-                            <label for="table_type">Типы публикации:</label>
-                            <select name="table_type" id="table_type" multiple style="width: 500px; ">
-                                {% for type_publication in type_publications %}
-                                <option value={{type_publication.id }}>{{type_publication.name_type_publications}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="year">Год:</label>
-                            <select name="year" id="year" multiple style="width: 500px;">
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Сформировать отчет</button>
-                    </form>
-                </table>
-            </div>
-            <div class="tab-pane fade" id="const" role="tabpanel" aria-labelledby="another-records-tab">
-
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="records-tab" data-bs-toggle="tab" data-bs-target="#type_publications" type="button" role="tab" aria-controls="records" aria-selected="true">Тип публикации</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_document" type="button" role="tab" aria-controls="another-records" aria-selected="false">Тип документа</button>
-                    </li>
-
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_property" type="button" role="tab" aria-controls="another-records" aria-selected="false">Вид интеллектуальной собственности</button>
-                    </li>
-
-                </ul>
-                <div class="tab-content">
-                    {% include "table/table_type_publications.html" %}
-                    {% include "table/table_type_documents.html" %}
-                    {% include "table/table_type_property.html" %}
-                </div>
-            </div>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-    </div>
-    <div class="modal fade" id="addMapModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Добавить</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-                </div>
-                <div class="modal-body">
-                    <form id="addMapForm" action="{% url 'chek_map' %}" method="post">
-                        {% csrf_token %}
 
-                        {% for field in mapform.visible_fields %}
-                        <div class="mb-3">
-                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                        <br>
-                        {{ field | add_class:"fixed-width-input form-control"}}
-                        {% endfor %}
-                        <div id="error-message" class="alert alert-danger" style="display:none;"></div>
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </form>
-                </div>
-            </div>
+        <div class="tab-pane fade" id="otchet" role="tabpanel" aria-labelledby="another-records-tab">
+
+            <table id="anotherRecordsTable" class="table mt-3">
+                <form action="{% url 'otchet' %}" method="post">
+                    {% csrf_token %}
+                    {% comment %} <div class="form-group">
+                        <label for="faculty">Факультет:</label>
+                        <select name="faculty" id="faculty" multiple style="width: 500px;">
+                            {% for faculty in facultys %}
+                            <option value={{faculty.id }}>{{faculty.name_faculty}}</option>
+                            {% endfor %}
+                        </select>
+                    </div> {% endcomment %}
+                    <div class="form-group">
+                        <label for="department">Кафедра:</label>
+                        <select name="department" id="department" multiple style="width: 500px;">
+                            {% for department in departments %}
+                            <option value={{department.id }}>{{department.name_department}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quarter">Квартал:</label>
+                        <select name="quarter" id="quarter" multiple style="width: 500px;">
+                            <option value="1">1 квартал</option>
+                            <option value="2">2 квартал</option>
+                            <option value="3">3 квартал</option>
+                            <option value="4">4 квартал</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" id="hidden_selected_value" name="hidden_selected_value" value="">
+                        <label for="table_name">Таблицы:</label>
+                        <select name="table_name" id="table_name" multiple style="width: 500px;">
+                            <option value="All">Все</option>
+                            <option value="Publications">Публикации</option>
+                            <option value="SecurityDocuments">Охранные документы</option>
+                            <option value="Monographs">Монографии, УП</option>
+                            <option value="Grant">Грант</option>
+                            <option value="Event">Мероприятия</option>
+                            <option value="NIRS">НИРС</option>
+                            <option value="PopularSciencePublications">Научно-популярные издания</option>
+                            <option value="ScientificDirections">Научные направления</option>
+                            <option value="InternationalCooperation">Международное сотрудничество </option>
+                        </select>
+                    </div>
+                    <div class="form-group" id='table_type_div' style="display: none;">
+                        <label for="table_type">Типы публикации:</label>
+                        <select name="table_type" id="table_type" multiple style="width: 500px; ">
+                            {% for type_publication in type_publications %}
+                            <option value={{type_publication.id }}>{{type_publication.name_type_publications}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Год:</label>
+                        <select name="year" id="year" multiple style="width: 500px;">
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сформировать отчет</button>
+                </form>
+            </table>
         </div>
-    </div>
+        <div class="tab-pane fade" id="const" role="tabpanel" aria-labelledby="another-records-tab">
 
-    <div class="modal fade" id="deleteMapModal" tabindex="-1" aria-labelledby="deleteMapModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteMapModalLabel">Подтвердите удаление</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Х</button>
-                </div>
-                <div class="modal-body">
-                    Вы уверены, что хотите удалить эту запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteMapBtn" >Удалить</button>
-                </div>
+            <ul class="nav nav-tabs" id="myTabType" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="records-tab" data-bs-toggle="tab" data-bs-target="#type_publications" type="button" role="tab" aria-controls="records" aria-selected="true" href="#tab1">Тип публикации</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_document" type="button" role="tab" aria-controls="another-records" aria-selected="false" href="#tab2">Тип документа</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_property" type="button" role="tab" aria-controls="another-records" aria-selected="false" href="#tab3">Вид интеллектуальной собственности</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_monographs" type="button" role="tab" aria-controls="another-records" aria-selected="false" href="#tab4">Тип монографии</button>
+                </li>
+
+            </ul>
+            <div class="tab-content">
+                {% include "table/table_type_publications.html" %}
+                {% include "table/table_type_documents.html" %}
+                {% include "table/table_type_property.html" %}
+                {% include "table/table_type_monographs.html" %}
             </div>
         </div>
     </div>
 
 
+    {% include "modal/modal_add_map.html" %}
+    {% include "modal_delete/delete_map.html"%}
 
-    {% endblock  %}
+
+
+    {% include "modal/modal_type_publications.html" %}
+    {% include "modal/modal_type_documents.html" %}
+    {% include "modal/modal_type_property.html" %}
+    {% include "modal/modal_type_monographs.html" %}
+
+
+
+    {% include "modal_delete/delete_type_publications.html"%}
+    {% include "modal_delete/delete_type_documents.html"%}
+    {% include "modal_delete/delete_type_property.html"%}
+    {% include "modal_delete/delete_type_monographs.html"%}
+
+
+</div>
+{% endblock  %}

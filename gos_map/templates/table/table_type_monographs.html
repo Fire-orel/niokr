@@ -1,0 +1,32 @@
+<div class="tab-pane fade table-container" id="type_monographs" role="tabpanel" aria-labelledby="type_monographs-tab">
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#TypeMonographsModal" id='addtypemonographs'>Добавить новую запись</button>
+
+                <table id="typemonographsTable" class="table mt-3  mx-auto">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Тип монографии</th>
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for type_monograph in typemonographs %}
+                        <tr>
+                            <td>{{ type_monograph.id }}</td>
+                            <td>{{ type_monograph.name_type_monographs}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="edittypemonographs" data-id="{{ type_monograph.id }}"><i class="fas fa-edit"></i></button>
+                            </td>
+
+                            <td>
+                                <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteTypeMonographsModal" data-id="{{ type_monograph.id }}" id="deleteTypeMonographs"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+        </div>

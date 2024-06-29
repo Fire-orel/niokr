@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Map,Publications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,FullNameАuthor,InternationalCooperation,Department
+from .models import Map,Publications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,FullNameАuthor,InternationalCooperation,Department,TypePublications,TypeDocuments,TypeProperty,TypeMonographs
 from datetime import datetime
 from django_select2.forms import Select2TagWidget
 
@@ -324,3 +324,24 @@ class InternationalCooperationForms(forms.ModelForm):
     class Meta:
         model=InternationalCooperation
         fields=['name_scientific_research','name_scientific_centers','name_topics','name_research_topics','name_scientific_programs']
+
+
+class TypePublicationsForms(forms.ModelForm):
+    class Meta:
+        model=TypePublications
+        fields=['name_type_publications']
+
+class TypeDocumentsForms(forms.ModelForm):
+    class Meta:
+        model=TypeDocuments
+        fields=['name_type_documents']
+
+class TypePropertyForms(forms.ModelForm):
+    class Meta:
+        model=TypeProperty
+        fields=['name_type_property']
+
+class TypeMonographsForms(forms.ModelForm):
+    class Meta:
+        model=TypeMonographs
+        fields=['name_type_monographs']

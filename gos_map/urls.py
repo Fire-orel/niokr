@@ -19,6 +19,14 @@ from gos_map.views.views_scientific_directions import addScientificDirections,ed
 
 from gos_map.views.views_international_cooperation import addInternationalCooperation,editInternationalCooperation,deleteInternationalCooperation
 
+from gos_map.views.views_type_publications import addTypePublications,editTypePublications,deleteTypePublications
+
+from gos_map.views.views_type_documents import addTypeDocuments,editTypeDocuments,deleteTypeDocuments
+
+from gos_map.views.views_type_property import addTypeProperty,editTypeProperty,deleteTypeProperty
+
+from gos_map.views.views_type_monographs import addTypeMonographs,editTypeMonographs,deleteTypeMonographs
+
 urlpatterns = [
     path('', LoginView.as_view(), name='login'),
     path('home/', HomeView.as_view(), name='home'),
@@ -67,6 +75,26 @@ urlpatterns = [
     path('add_international_cooperation/',addInternationalCooperation.as_view(),name='add_international_cooperation'),
     path('edit_international_cooperation/<int:pk>/',editInternationalCooperation.as_view(),name='edit_international_cooperation'),
     path('delete_international_cooperation/<int:pk>/',deleteInternationalCooperation.as_view(),name='delete_international_cooperation'),
+
+
+    path('add_type_publications/',addTypePublications.as_view(),name='add_type_publications'),
+    path('edit_type_publications/<int:pk>/',editTypePublications.as_view(),name='edit_type_publications'),
+    path('delete_type_publications/<int:pk>/',deleteTypePublications.as_view(),name='delete_type_publications'),
+
+
+    path('add_type_documents/',addTypeDocuments.as_view(),name='add_type_documents'),
+    path('edit_type_documents/<int:pk>/',editTypeDocuments.as_view(),name='edit_type_documents'),
+    path('delete_type_documents/<int:pk>/',deleteTypeDocuments.as_view(),name='delete_type_documents'),
+
+
+
+    path('add_type_property/',addTypeProperty.as_view(),name='add_type_property'),
+    path('edit_type_property/<int:pk>/',editTypeProperty.as_view(),name='edit_type_property'),
+    path('delete_type_property/<int:pk>/',deleteTypeProperty.as_view(),name='delete_type_property'),
+
+    path('add_type_monographs/',addTypeMonographs.as_view(),name='add_type_monographs'),
+    path('edit_type_monographs/<int:pk>/',editTypeMonographs.as_view(),name='edit_type_monographs'),
+    path('delete_type_monographs/<int:pk>/',deleteTypeMonographs.as_view(),name='delete_type_monographs'),
 
 
     path("otchet/", otchet.as_view(), name="otchet")

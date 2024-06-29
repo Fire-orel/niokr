@@ -297,7 +297,7 @@ class Event (models.Model):
 
     number_exhibits=models.IntegerField(verbose_name="Кол-во экспонатов (для выставки)",blank=True,null=True,default=1,validators=[MinValueValidator(0)])
 
-    publication_collection=models.CharField(max_length=100,verbose_name="С изданием сборника (для конференций)",blank=True,null=True)
+    publication_collection=models.CharField(max_length=100,choices=[("Yes","Да"),("No","Нет")],verbose_name="С изданием сборника (для конференций)",blank=True,null=True,default="No")
 
     awards=models.TextField(verbose_name="Полученные награды НПР и студентами ЗабГУ (медали, дипломы, грамоты)",blank=True,null=True)
 
