@@ -5,7 +5,7 @@ $(document).ready(function() {
     // Функция для обновления скрытого поля
     function updateTypePublicationSelect() {
         var selectedValues = $('#type_publication').val();
-        console.log(selectedValues);
+
         $('#type_publication_select').val(selectedValues);
     }
 
@@ -14,8 +14,7 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Selected element: ", selectedElement);
-            console.log("Selected value: ", selectedValue);
+
 
             // Блокируем все остальные элементы
             $('#type_publication option').each(function() {
@@ -36,8 +35,6 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Unselected element: ", selectedElement);
-            console.log("Unselected value: ", selectedValue);
 
             // Разблокируем все элементы
             $('#type_publication option').each(function() {
@@ -60,7 +57,7 @@ $(document).ready(function() {
     // Функция для обновления скрытого поля
     function updateTypeDocumentsSelect() {
         var selectedValues = $('#type_documents').val();
-        console.log(selectedValues);
+
         $('#type_documents_select').val(selectedValues);
     }
 
@@ -69,8 +66,7 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Selected element: ", selectedElement);
-            console.log("Selected value: ", selectedValue);
+
 
             // Блокируем все остальные элементы
             $('#type_documents option').each(function() {
@@ -91,8 +87,6 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Unselected element: ", selectedElement);
-            console.log("Unselected value: ", selectedValue);
 
             // Разблокируем все элементы
             $('#type_documents option').each(function() {
@@ -114,7 +108,7 @@ $(document).ready(function() {
     // Функция для обновления скрытого поля
     function updateTypePropertySelect() {
         var selectedValues = $('#type_property').val();
-        console.log(selectedValues);
+
         $('#type_property_select').val(selectedValues);
     }
 
@@ -123,8 +117,7 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Selected element: ", selectedElement);
-            console.log("Selected value: ", selectedValue);
+
 
             // Блокируем все остальные элементы
             $('#type_property option').each(function() {
@@ -145,8 +138,7 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Unselected element: ", selectedElement);
-            console.log("Unselected value: ", selectedValue);
+
 
             // Разблокируем все элементы
             $('#type_property option').each(function() {
@@ -169,7 +161,7 @@ $(document).ready(function() {
     // Функция для обновления скрытого поля
     function updateTypeMonographsSelect() {
         var selectedValues = $('#type_monographs').val();
-        console.log(selectedValues);
+
         $('#type_monographs_select').val(selectedValues);
     }
 
@@ -178,8 +170,7 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Selected element: ", selectedElement);
-            console.log("Selected value: ", selectedValue);
+
 
             // Блокируем все остальные элементы
             $('#type_monographs option').each(function() {
@@ -200,8 +191,7 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Unselected element: ", selectedElement);
-            console.log("Unselected value: ", selectedValue);
+
 
             // Разблокируем все элементы
             $('#type_monographs option').each(function() {
@@ -224,7 +214,7 @@ $(document).ready(function() {
     // Функция для обновления скрытого поля
     function updateTypeGrantSelect() {
         var selectedValues = $('#type_grants').val();
-        console.log(selectedValues);
+
         $('#type_grants_select').val(selectedValues);
     }
 
@@ -233,8 +223,6 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Selected element: ", selectedElement);
-            console.log("Selected value: ", selectedValue);
 
             // Блокируем все остальные элементы
             $('#type_grants option').each(function() {
@@ -255,8 +243,6 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Unselected element: ", selectedElement);
-            console.log("Unselected value: ", selectedValue);
 
             // Разблокируем все элементы
             $('#type_grants option').each(function() {
@@ -281,7 +267,7 @@ $(document).ready(function() {
     // Функция для обновления скрытого поля
     function updateTypeParticipationSelect() {
         var selectedValues = $('#type_participations').val();
-        console.log(selectedValues);
+
         $('#type_participations_select').val(selectedValues);
     }
 
@@ -290,8 +276,7 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Selected element: ", selectedElement);
-            console.log("Selected value: ", selectedValue);
+
 
             // Блокируем все остальные элементы
             $('#type_participations option').each(function() {
@@ -312,8 +297,7 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Unselected element: ", selectedElement);
-            console.log("Unselected value: ", selectedValue);
+
 
             // Разблокируем все элементы
             $('#type_participations option').each(function() {
@@ -336,7 +320,7 @@ $(document).ready(function() {
     // Функция для обновления скрытого поля
     function updateTypeEventSelect() {
         var selectedValues = $('#type_events').val();
-        console.log(selectedValues);
+
         $('#type_events_select').val(selectedValues);
     }
 
@@ -345,8 +329,7 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Selected element: ", selectedElement);
-            console.log("Selected value: ", selectedValue);
+
 
             // Блокируем все остальные элементы
             $('#type_events option').each(function() {
@@ -367,8 +350,7 @@ $(document).ready(function() {
         if (e.params && e.params.data) {
             var selectedElement = e.params.data;
             var selectedValue = selectedElement.id;
-            console.log("Unselected element: ", selectedElement);
-            console.log("Unselected value: ", selectedValue);
+            
 
             // Разблокируем все элементы
             $('#type_events option').each(function() {
