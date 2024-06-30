@@ -1,0 +1,32 @@
+<div class="tab-pane fade table-container" id="form_participation" role="tabpanel" aria-labelledby="form_participation-tab">
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#FormParticipationModal" id='addformparticipation'>Добавить новую запись</button>
+
+                <table id="formparticipationTable" class="table mt-3  mx-auto">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Форма участия</th>
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for form_participation in formparticipations %}
+                        <tr>
+                            <td>{{ form_participation.id }}</td>
+                            <td>{{ form_participation.name_form_participation}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="editformparticipation" data-id="{{ form_participation.id }}"><i class="fas fa-edit"></i></button>
+                            </td>
+
+                            <td>
+                                <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteFormParticipationModal" data-id="{{ form_participation.id }}" id="deleteFormParticipation"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+        </div>

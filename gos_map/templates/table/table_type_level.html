@@ -1,0 +1,32 @@
+<div class="tab-pane fade table-container" id="type_level" role="tabpanel" aria-labelledby="type_level-tab">
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#TypeLevelModal" id='addtypelevel'>Добавить новую запись</button>
+
+                <table id="typelevelTable" class="table mt-3  mx-auto">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Уровень</th>
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for type_level in typelevels %}
+                        <tr>
+                            <td>{{ type_level.id }}</td>
+                            <td>{{ type_level.name_type_level}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="edittypelevel" data-id="{{ type_level.id }}"><i class="fas fa-edit"></i></button>
+                            </td>
+
+                            <td>
+                                <button class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#deleteTypeLevelModal" data-id="{{ type_level.id }}" id="deleteTypeLevel"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+        </div>

@@ -1,5 +1,5 @@
 {% load custom_filters %}
-<div class="modal fade" id="TypeEventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="FormParticipationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,17 +7,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Х</button>
             </div>
             <div class="modal-body">
-                <form id="TypeEventForm" method="post">
+                <form id="FormParticipationForm" method="post">
                     {% csrf_token %}
                     <div class="row">
-                        {% for field in typeeventforms.visible_fields %}
+                        {% for field in formparticipationforms.visible_fields %}
                         <div class="col-md-6 mb-3">
                             <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
                             {{ field | add_class:"fixed-width-input form-control" }}
                         </div>
                         {% endfor %}
                     </div>
-                    <div id="error-message-type-events" class="alert alert-danger" style="display:none;"></div>
+                    <div id="error-message-form-participation" class="alert alert-danger" style="display:none;"></div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
             </div>

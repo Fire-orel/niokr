@@ -264,7 +264,7 @@ class TypeParticipation(models.Model):
 class TypeEvent(models.Model):
     name_type_events=models.CharField(max_length=100,verbose_name="Тип мероприятия")
     def __str__(self):
-        return f'{self.name_type_events}, {self.pk}'
+        return f'{self.name_type_events}'
 
     class Meta:
         verbose_name="Тип мероприятия"

@@ -2,7 +2,7 @@ from django.views import View
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.core import serializers
-from gos_map.models import Map,TypeParticipation,TypeEvent,Event,FullNameАuthor
+from gos_map.models import Map,TypeParticipation,TypeEvent,Event,FullNameАuthor,TypeLevel
 from datetime import datetime
 
 class addEvent(View):
@@ -44,7 +44,7 @@ class addEvent(View):
                 type_participation=TypeParticipation.objects.get(pk=type_participation),
                 full_name_author_event=full_name_author_event_optim,
                 name_event_event=name_event_event,
-                level=level,
+                level=TypeLevel.objects.get(pk=level),
                 type_event=TypeEvent.objects.get(pk=type_event),
                 title_report=title_report,
                 date_event_event=date_event_event,
@@ -120,7 +120,7 @@ class editEvent(View):
         event.type_participation=TypeParticipation.objects.get(pk=type_participation)
         event.full_name_author_event=full_name_author_event_optim
         event.name_event_event=name_event_event
-        event.level=level
+        event.level=TypeLevel.objects.get(pk=level)
         event.type_event=TypeEvent.objects.get(pk=type_event)
         event.title_report=title_report
         event.date_event_event=date_event_event

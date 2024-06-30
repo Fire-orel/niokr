@@ -163,6 +163,14 @@
                     <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_level" type="button" role="tab" aria-controls="another-records" aria-selected="false" href="#tab7">Уровень</button>
                 </li>
 
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_grant" type="button" role="tab" aria-controls="another-records" aria-selected="false" href="#tab7">Тип гранта</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#form_participation" type="button" role="tab" aria-controls="another-records" aria-selected="false" href="#tab7">Форма участия</button>
+                </li>
+
             </ul>
             <div class="tab-content">
                 {% include "table/table_type_publications.html" %}
@@ -171,6 +179,9 @@
                 {% include "table/table_type_monographs.html" %}
                 {% include "table/table_type_participation.html" %}
                 {% include "table/table_type_events.html" %}
+                {% include "table/table_type_level.html" %}
+                {% include "table/table_type_grant.html" %}
+                {% include "table/table_form_participation.html" %}
             </div>
         </div>
     </div>
@@ -187,6 +198,9 @@
     {% include "modal/modal_type_monographs.html" %}
     {% include "modal/modal_type_participation.html" %}
     {% include "modal/modal_type_events.html" %}
+    {% include "modal/modal_type_level.html" %}
+    {% include "modal/modal_type_grant.html" %}
+    {% include "modal/modal_form_participation.html" %}
 
 
 
@@ -196,6 +210,9 @@
     {% include "modal_delete/delete_type_monographs.html"%}
     {% include "modal_delete/delete_type_participation.html"%}
     {% include "modal_delete/delete_type_events.html"%}
+    {% include "modal_delete/delete_type_level.html"%}
+    {% include "modal_delete/delete_type_grant.html"%}
+    {% include "modal_delete/delete_form_participation.html"%}
 
 
 </div>

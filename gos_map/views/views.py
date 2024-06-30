@@ -4,8 +4,8 @@ from django.contrib.auth import login,logout
 from django.shortcuts import render, redirect,get_object_or_404
 from django.views import View
 from ldap3 import Server, Connection, ALL, NTLM
-from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms,MonographsForms,EventForms,GrantForms,NIRSForms,PopularSciencePublicationsForms,ScientificDirectionsForms,InternationalCooperationForms,TypePublicationsForms,TypeDocumentsForms,TypePropertyForms,TypeMonographsForms,TypeParticipationForms,TypeEventForms
-from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation,Faculty,Department,TypeDocuments,TypeProperty,TypeMonographs,TypeParticipation,TypeEvent
+from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms,MonographsForms,EventForms,GrantForms,NIRSForms,PopularSciencePublicationsForms,ScientificDirectionsForms,InternationalCooperationForms,TypePublicationsForms,TypeDocumentsForms,TypePropertyForms,TypeMonographsForms,TypeParticipationForms,TypeEventForms,TypeLevelForms,TypeGrantForms,FormParticipationForms
+from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation,Faculty,Department,TypeDocuments,TypeProperty,TypeMonographs,TypeParticipation,TypeEvent,TypeLevel,TypeGrant,FormParticipation
 from django.views.generic import ListView,DetailView,UpdateView
 from django.http import JsonResponse,HttpResponseRedirect,HttpResponse
 from openpyxl import Workbook
@@ -199,6 +199,13 @@ class HomeView(View):
             'typeparticipationforms':TypeParticipationForms(),
             'typeevents':TypeEvent.objects.all(),
             'typeeventforms':TypeEventForms(),
+            'typelevels':TypeLevel.objects.all(),
+            'typelevelforms':TypeLevelForms(),
+            'typegrants':TypeGrant.objects.all(),
+            'typegrantforms':TypeGrantForms(),
+            'formparticipations':FormParticipation.objects.all(),
+            'formparticipationforms':FormParticipationForms()
+
 
 
 

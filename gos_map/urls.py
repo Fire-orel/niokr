@@ -31,6 +31,12 @@ from gos_map.views.views_type_participation import addTypeParticipation,editType
 
 from gos_map.views.views_type_events import addTypeEvent,editTypeEvent,deleteTypeEvent
 
+from gos_map.views.views_type_level import addTypeLevel,editTypeLevel,deleteTypeLevel
+
+from gos_map.views.views_type_grant import addTypeGrant,editTypeGrant,deleteTypeGrant
+
+from gos_map.views.views_form_participation import addFormParticipation,editFormParticipation,deleteFormParticipation
+
 urlpatterns = [
     path('', LoginView.as_view(), name='login'),
     path('home/', HomeView.as_view(), name='home'),
@@ -110,6 +116,19 @@ urlpatterns = [
     path('add_type_events/',addTypeEvent.as_view(),name='add_type_events'),
     path('edit_type_events/<int:pk>/',editTypeEvent.as_view(),name='edit_type_events'),
     path('delete_type_events/<int:pk>/',deleteTypeEvent.as_view(),name='delete_type_events'),
+
+    path('add_type_level/',addTypeLevel.as_view(),name='add_type_level'),
+    path('edit_type_level/<int:pk>/',editTypeLevel.as_view(),name='edit_type_level'),
+    path('delete_type_level/<int:pk>/',deleteTypeLevel.as_view(),name='delete_type_level'),
+
+    path('add_type_grant/',addTypeGrant.as_view(),name='add_type_grant'),
+    path('edit_type_grant/<int:pk>/',editTypeGrant.as_view(),name='edit_type_grant'),
+    path('delete_type_grant/<int:pk>/',deleteTypeGrant.as_view(),name='delete_type_grant'),
+
+
+    path('add_form_participation/',addFormParticipation.as_view(),name='add_form_participation'),
+    path('edit_form_participation/<int:pk>/',editFormParticipation.as_view(),name='edit_form_participation'),
+    path('delete_form_participation/<int:pk>/',deleteFormParticipation.as_view(),name='delete_form_participation'),
 
 
     path("otchet/", otchet.as_view(), name="otchet")
