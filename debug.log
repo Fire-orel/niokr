@@ -1,243 +1,187 @@
-"GET /home/ HTTP/1.1" 200 105548
-"GET /static/css/bootstrap.min.css HTTP/1.1" 200 160308
-"GET /static/css/select2.min.css HTTP/1.1" 200 14967
-"GET /static/css/bootstrap.min%20(1).css HTTP/1.1" 200 160308
-"GET /static/css/all.min.css HTTP/1.1" 200 59309
-"GET /static/css/bootstrap.min%20(3).css HTTP/1.1" 200 160409
-"GET /static/css/bootstrap.min%20(2).css HTTP/1.1" 200 220785
-"GET /static/css/style.css HTTP/1.1" 200 1621
-"GET /static/js/bootstrap/popper.min%20(3).js HTTP/1.1" 200 18459
-"GET /static/js/bootstrap/jquery-3.6.0.min.js HTTP/1.1" 200 89503
-"GET /static/js/bootstrap/popper.min%20(2).js HTTP/1.1" 200 21009
-"GET /static/js/bootstrap/bootstrap.bundle.min%20(1).js HTTP/1.1" 200 80427
-"GET /static/js/bootstrap/bootstrap.bundle.min.js HTTP/1.1" 200 80605
-"GET /static/js/bootstrap/bootstrap.min%20(2).js HTTP/1.1" 200 58078
-"GET /static/js/bootstrap/popper.min%20(1).js HTTP/1.1" 200 18315
-"GET /static/js/bootstrap/select2.min.js HTTP/1.1" 200 70852
-"GET /static/js/bootstrap/popper.min.js HTTP/1.1" 200 18368
-"GET /static/js/base.js HTTP/1.1" 200 9911
-"GET /static/js/bootstrap/bootstrap.min%20(1).js HTTP/1.1" 200 60180
-"GET /static/js/bootstrap/bootstrap.min.js HTTP/1.1" 200 48950
-"GET /static/js/select.js HTTP/1.1" 200 4504
-"GET /static/js/publication.js HTTP/1.1" 200 8219
-"GET /static/js/monograph.js HTTP/1.1" 200 7472
-"GET /static/js/securitydocuments.js HTTP/1.1" 200 7700
-"GET /static/js/grant.js HTTP/1.1" 200 9527
-"GET /static/js/event.js HTTP/1.1" 200 7855
-"GET /static/js/nirs.js HTTP/1.1" 200 9461
-"GET /static/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 78268
-"GET /static/js/popular_science_publications.js HTTP/1.1" 200 7892
-"GET /static/js/international_cooperation.js HTTP/1.1" 200 5956
-"GET /static/js/scientific_directions.js HTTP/1.1" 200 8550
-"GET /static/js/type_property.js HTTP/1.1" 200 5137
-"GET /static/js/type_documents.js HTTP/1.1" 200 5171
-"GET /static/js/type_publications.js HTTP/1.1" 200 5289
-"GET /static/js/type_monographs.js HTTP/1.1" 200 5209
-"GET /static/js/type_level.js HTTP/1.1" 200 5025
-"GET /static/js/type_events.js HTTP/1.1" 200 5040
-"GET /static/js/type_participation.js HTTP/1.1" 200 5327
-"GET /static/js/form_participation.js HTTP/1.1" 200 5320
-"GET /static/js/type_grant.js HTTP/1.1" 200 5033
 Not Found: /favicon.ico
 "GET /favicon.ico HTTP/1.1" 404 15075
-"POST /chek_map/ HTTP/1.1" 200 22
-"GET /home/ HTTP/1.1" 200 106543
-Bad Request: /chek_map/
-"POST /chek_map/ HTTP/1.1" 400 20
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-"GET /map_details/1 HTTP/1.1" 200 93214
-"GET /static/js/select.js HTTP/1.1" 304 0
-"GET /static/js/base.js HTTP/1.1" 304 0
-"GET /home/ HTTP/1.1" 200 106543
-"POST /otchet/ HTTP/1.1" 200 5469
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-"GET /map_details/1 HTTP/1.1" 200 93214
-"POST /add_security_documents/ HTTP/1.1" 200 22
-"GET /map_details/1 HTTP/1.1" 200 94150
-"GET /home/ HTTP/1.1" 200 106543
-"POST /otchet/ HTTP/1.1" 200 5469
-"GET /home/ HTTP/1.1" 200 106544
-"GET /static/css/select2.min.css HTTP/1.1" 200 14967
-"GET /static/css/all.min.css HTTP/1.1" 200 59309
-"GET /static/css/bootstrap.min.css HTTP/1.1" 200 160308
-"GET /static/css/bootstrap.min%20(1).css HTTP/1.1" 200 160308
-"GET /static/css/bootstrap.min%20(3).css HTTP/1.1" 200 160409
-"GET /static/css/bootstrap.min%20(2).css HTTP/1.1" 200 220785
-"GET /static/css/style.css HTTP/1.1" 200 1621
-"GET /static/js/bootstrap/popper.min%20(3).js HTTP/1.1" 200 18459
-"GET /static/js/bootstrap/bootstrap.bundle.min%20(1).js HTTP/1.1" 200 80427
-"GET /static/js/bootstrap/jquery-3.6.0.min.js HTTP/1.1" 200 89503
-"GET /static/js/bootstrap/popper.min%20(2).js HTTP/1.1" 200 21009
-"GET /static/js/bootstrap/bootstrap.bundle.min.js HTTP/1.1" 200 80605
-"GET /static/js/bootstrap/bootstrap.min%20(2).js HTTP/1.1" 200 58078
-"GET /static/js/bootstrap/popper.min.js HTTP/1.1" 200 18368
-"GET /static/js/bootstrap/popper.min%20(1).js HTTP/1.1" 200 18315
-"GET /static/js/bootstrap/bootstrap.min%20(1).js HTTP/1.1" 200 60180
-"GET /static/js/bootstrap/select2.min.js HTTP/1.1" 200 70852
-"GET /static/js/bootstrap/bootstrap.min.js HTTP/1.1" 200 48950
-"GET /static/js/base.js HTTP/1.1" 200 9911
-"GET /static/js/publication.js HTTP/1.1" 200 8219
-"GET /static/js/select.js HTTP/1.1" 200 4504
-"GET /static/js/securitydocuments.js HTTP/1.1" 200 7700
-"GET /static/js/event.js HTTP/1.1" 200 7855
-"GET /static/js/monograph.js HTTP/1.1" 200 7472
-"GET /static/js/grant.js HTTP/1.1" 200 9527
-"GET /static/js/popular_science_publications.js HTTP/1.1" 200 7892
-"GET /static/js/international_cooperation.js HTTP/1.1" 200 5956
-"GET /static/js/nirs.js HTTP/1.1" 200 9461
-"GET /static/js/scientific_directions.js HTTP/1.1" 200 8550
-"GET /static/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 78268
-"GET /static/js/type_publications.js HTTP/1.1" 200 5289
-"GET /static/js/type_documents.js HTTP/1.1" 200 5171
-"GET /static/js/type_property.js HTTP/1.1" 200 5137
-"GET /static/js/type_events.js HTTP/1.1" 200 5040
-"GET /static/js/type_participation.js HTTP/1.1" 200 5327
-"GET /static/js/type_monographs.js HTTP/1.1" 200 5209
-"GET /static/js/type_level.js HTTP/1.1" 200 5025
-"GET /static/js/type_grant.js HTTP/1.1" 200 5033
-"GET /static/js/form_participation.js HTTP/1.1" 200 5320
 Not Found: /favicon.ico
 "GET /favicon.ico HTTP/1.1" 404 15075
-"POST /otchet/ HTTP/1.1" 200 5469
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-"GET /home/ HTTP/1.1" 200 107233
-"GET /static/css/select2.min.css HTTP/1.1" 200 14967
-"GET /static/css/all.min.css HTTP/1.1" 200 59309
-"GET /static/css/bootstrap.min.css HTTP/1.1" 200 160308
-"GET /static/css/bootstrap.min%20(1).css HTTP/1.1" 200 160308
-"GET /static/css/bootstrap.min%20(2).css HTTP/1.1" 200 220785
-"GET /static/css/bootstrap.min%20(3).css HTTP/1.1" 200 160409
-"GET /static/css/style.css HTTP/1.1" 200 1621
-"GET /static/js/bootstrap/popper.min%20(3).js HTTP/1.1" 200 18459
-"GET /static/js/bootstrap/bootstrap.bundle.min%20(1).js HTTP/1.1" 200 80427
-"GET /static/js/bootstrap/bootstrap.bundle.min.js HTTP/1.1" 200 80605
-"GET /static/js/bootstrap/popper.min%20(2).js HTTP/1.1" 200 21009
-"GET /static/js/bootstrap/jquery-3.6.0.min.js HTTP/1.1" 200 89503
-"GET /static/js/bootstrap/popper.min%20(1).js HTTP/1.1" 200 18315
-"GET /static/js/bootstrap/bootstrap.min%20(2).js HTTP/1.1" 200 58078
-"GET /static/js/bootstrap/popper.min.js HTTP/1.1" 200 18368
-"GET /static/js/bootstrap/bootstrap.min.js HTTP/1.1" 200 48950
-"GET /static/js/bootstrap/select2.min.js HTTP/1.1" 200 70852
-"GET /static/js/bootstrap/bootstrap.min%20(1).js HTTP/1.1" 200 60180
-"GET /static/js/select.js HTTP/1.1" 200 6681
-"GET /static/js/base.js HTTP/1.1" 200 9911
-"GET /static/js/publication.js HTTP/1.1" 200 8219
-"GET /static/js/securitydocuments.js HTTP/1.1" 200 7700
-"GET /static/js/monograph.js HTTP/1.1" 200 7472
-"GET /static/js/event.js HTTP/1.1" 200 7855
-"GET /static/js/popular_science_publications.js HTTP/1.1" 200 7892
-"GET /static/js/grant.js HTTP/1.1" 200 9527
-"GET /static/js/nirs.js HTTP/1.1" 200 9461
-"GET /static/js/type_publications.js HTTP/1.1" 200 5289
-"GET /static/js/international_cooperation.js HTTP/1.1" 200 5956
-"GET /static/js/scientific_directions.js HTTP/1.1" 200 8550
-"GET /static/js/type_monographs.js HTTP/1.1" 200 5209
-"GET /static/js/type_property.js HTTP/1.1" 200 5137
-"GET /static/js/type_documents.js HTTP/1.1" 200 5171
-"GET /static/js/type_events.js HTTP/1.1" 200 5040
-"GET /static/js/type_participation.js HTTP/1.1" 200 5327
-"GET /static/js/type_level.js HTTP/1.1" 200 5025
-"GET /static/js/type_grant.js HTTP/1.1" 200 5033
-"GET /static/js/form_participation.js HTTP/1.1" 200 5320
-"GET /static/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 78268
 Not Found: /favicon.ico
 "GET /favicon.ico HTTP/1.1" 404 15075
-"GET /home/ HTTP/1.1" 200 107233
-"GET /static/css/select2.min.css HTTP/1.1" 200 14967
-"GET /static/css/all.min.css HTTP/1.1" 200 59309
-"GET /static/css/bootstrap.min%20(1).css HTTP/1.1" 200 160308
-"GET /static/css/bootstrap.min.css HTTP/1.1" 200 160308
-"GET /static/css/bootstrap.min%20(3).css HTTP/1.1" 200 160409
-"GET /static/css/bootstrap.min%20(2).css HTTP/1.1" 200 220785
-"GET /static/css/style.css HTTP/1.1" 200 1621
-"GET /static/js/bootstrap/popper.min%20(3).js HTTP/1.1" 200 18459
-"GET /static/js/bootstrap/jquery-3.6.0.min.js HTTP/1.1" 200 89503
-"GET /static/js/bootstrap/bootstrap.bundle.min.js HTTP/1.1" 200 80605
-"GET /static/js/bootstrap/bootstrap.bundle.min%20(1).js HTTP/1.1" 200 80427
-"GET /static/js/bootstrap/popper.min%20(2).js HTTP/1.1" 200 21009
-"GET /static/js/bootstrap/bootstrap.min%20(2).js HTTP/1.1" 200 58078
-"GET /static/js/bootstrap/popper.min%20(1).js HTTP/1.1" 200 18315
-"GET /static/js/bootstrap/popper.min.js HTTP/1.1" 200 18368
-"GET /static/js/bootstrap/bootstrap.min%20(1).js HTTP/1.1" 200 60180
-"GET /static/js/bootstrap/select2.min.js HTTP/1.1" 200 70852
-"GET /static/js/bootstrap/bootstrap.min.js HTTP/1.1" 200 48950
-"GET /static/js/select.js HTTP/1.1" 200 6681
-"GET /static/js/base.js HTTP/1.1" 200 10041
-"GET /static/js/securitydocuments.js HTTP/1.1" 200 7700
-"GET /static/js/publication.js HTTP/1.1" 200 8219
-"GET /static/js/monograph.js HTTP/1.1" 200 7472
-"GET /static/js/event.js HTTP/1.1" 200 7855
-"GET /static/js/grant.js HTTP/1.1" 200 9527
-"GET /static/js/scientific_directions.js HTTP/1.1" 200 8550
-"GET /static/js/nirs.js HTTP/1.1" 200 9461
-"GET /static/js/popular_science_publications.js HTTP/1.1" 200 7892
-"GET /static/js/international_cooperation.js HTTP/1.1" 200 5956
-"GET /static/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 78268
-"GET /static/js/type_publications.js HTTP/1.1" 200 5289
-"GET /static/js/type_property.js HTTP/1.1" 200 5137
-"GET /static/js/type_documents.js HTTP/1.1" 200 5171
-"GET /static/js/type_monographs.js HTTP/1.1" 200 5209
-"GET /static/js/type_participation.js HTTP/1.1" 200 5327
-"GET /static/js/type_events.js HTTP/1.1" 200 5040
-"GET /static/js/type_grant.js HTTP/1.1" 200 5033
-"GET /static/js/type_level.js HTTP/1.1" 200 5025
-"GET /static/js/form_participation.js HTTP/1.1" 200 5320
+Internal Server Error: /otchet/
+Traceback (most recent call last):
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\gos_map\views\views.py", line 392, in post
+    type_monographs=request.POST.grt('type_monographs_select')
+                    ^^^^^^^^^^^^^^^^
+AttributeError: 'QueryDict' object has no attribute 'grt'. Did you mean: 'get'?
+"POST /otchet/ HTTP/1.1" 500 85036
 Not Found: /favicon.ico
 "GET /favicon.ico HTTP/1.1" 404 15075
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
-Watching for file changes with StatReloader
-"GET /map_details/1 HTTP/1.1" 200 94150
-"GET /static/js/base.js HTTP/1.1" 304 0
-"GET /static/js/select.js HTTP/1.1" 304 0
-"GET /edit_security_documents/14/ HTTP/1.1" 200 366
-"POST /edit_security_documents/14/ HTTP/1.1" 200 22
-"GET /map_details/1 HTTP/1.1" 200 94170
+Internal Server Error: /otchet/
+Traceback (most recent call last):
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\gos_map\views\views.py", line 392, in post
+    type_monographs=request.POST.gêt('type_monographs_select')
+                    ^^^^^^^^^^^^^^^
+AttributeError: 'QueryDict' object has no attribute 'gt'
+"POST /otchet/ HTTP/1.1" 500 85032
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+Internal Server Error: /otchet/
+Traceback (most recent call last):
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\fields\__init__.py", line 2117, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\gos_map\views\views.py", line 534, in post
+    grants=grants.filter(type_grant=type_grant)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\sql\query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\sql\query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\sql\query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\sql\query.py", line 1389, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\fields\related_lookups.py", line 156, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\fields\__init__.py", line 2119, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'id' expected a number but got ''.
+"POST /otchet/ HTTP/1.1" 500 142431
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+Internal Server Error: /otchet/
+Traceback (most recent call last):
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\fields\__init__.py", line 2117, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\gos_map\views\views.py", line 504, in post
+    monographss=monographss.filter(type_monographs=TypeMonographs.objects.get(pk=type_monographs))
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\sql\query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\sql\query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\sql\query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\sql\query.py", line 1389, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\lookups.py", line 364, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\lookups.py", line 88, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ó÷¸áà\niokr\venv\Lib\site-packages\django\db\models\fields\__init__.py", line 2119, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'id' expected a number but got ''.
+"POST /otchet/ HTTP/1.1" 500 155799
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075

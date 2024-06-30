@@ -389,6 +389,11 @@ class otchet(View):
         type_publication= request.POST.get('type_publication_select')
         type_documents=request.POST.get('type_documents_select')
         type_property=request.POST.get('type_property_select')
+        type_monographs=request.POST.get('type_monographs_select')
+        type_grant=request.POST.get('type_grants_select')
+        type_participation=request.POST.get('type_participations_select')
+        type_event=request.POST.get('type_events_select')
+        type_level=request.POST.get('type_levels_select')
 
 
         if len(tables)==0:
@@ -444,10 +449,11 @@ class otchet(View):
                         sheet['H1']="eLIBRARY ID"
                         sheet['I1']="DOI публикации"
 
+                        publicationss=Publications.objects.filter(id_map=id_map)
+
                         if type_publication!='':
-                            publicationss=Publications.objects.filter(id_map=id_map,type_publication=TypePublications.objects.get(pk=type_publication))
-                        else:
-                            publicationss=Publications.objects.filter(id_map=id_map)
+                            publicationss=publicationss.filter(id_map=id_map,type_publication=TypePublications.objects.get(pk=type_publication))
+
                         for publications in publicationss:
                             sheet[f"A{count}"]=publications.type_publication.name_type_publications
                             sheet[f"B{count}"]=publications.full_name_author_publications
@@ -469,11 +475,11 @@ class otchet(View):
                         sheet['E1']="Номер заявки / патента"
 
                         securitydocumentss=SecurityDocuments.objects.filter(id_map=id_map)
-                        if type_documents!=' ':
-                            securitydocumentss=securitydocumentss.filter(type_document=type_documents)
+                        if type_documents!='':
+                            securitydocumentss=securitydocumentss.filter(type_document=TypeDocuments.objects.get(pk=type_documents))
 
-                        if type_property!=" ":
-                            securitydocumentss=securitydocumentss.filter(type_property=type_property)
+                        if type_property!="":
+                            securitydocumentss=securitydocumentss.filter(type_property=TypeProperty.objects.get(pk=type_property))
                         for securitydocuments in securitydocumentss:
 
                             sheet[f"A{count}"]=str(securitydocuments.type_document)
@@ -496,6 +502,9 @@ class otchet(View):
                         sheet['H1']="Год издания"
 
                         monographss=Monographs.objects.filter(id_map=id_map)
+
+                        if type_monographs!="":
+                            monographss=monographss.filter(type_monographs=TypeMonographs.objects.get(pk=type_monographs))
                         for monographs in monographss:
 
                             sheet[f"A{count}"]=str(monographs.type_monographs)
@@ -524,6 +533,9 @@ class otchet(View):
                         sheet['K1']="Выиграно (Да, Нет)"
 
                         grants=Grant.objects.filter(id_map=id_map)
+
+                        if type_grant!="":
+                            grants=grants.filter(type_grant=TypeGrant.objects.get(pk=type_grant))
                         for grant in grants:
 
                             sheet[f"A{count}"]=str(grant.type_grant)
@@ -559,6 +571,12 @@ class otchet(View):
                         sheet['N1']="Ссылка на программу мероприятия"
 
                         events=Event.objects.filter(id_map=id_map)
+                        if type_participation!="":
+                            events=events.filter(type_participation=TypeParticipation.objects.get(pk=type_participation))
+                        if type_event!='':
+                            events=events.filter(type_event=TypeEvent.objects.get(pk=type_event))
+                        if type_level!='':
+                            events=events.filter(type_level=TypeLevel.objects.get(pk=type_level))
                         for event in events:
 
                             sheet[f"A{count}"]=str(event.type_participation)

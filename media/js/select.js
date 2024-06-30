@@ -161,4 +161,226 @@ $(document).ready(function() {
 
     // Обновляем скрытое поле при загрузке страницы
     updateTypePropertySelect();
+
+
+
+    $('#type_monographs').select2();
+
+    // Функция для обновления скрытого поля
+    function updateTypeMonographsSelect() {
+        var selectedValues = $('#type_monographs').val();
+        console.log(selectedValues);
+        $('#type_monographs_select').val(selectedValues);
+    }
+
+    // Слушатель событий select2:select
+    $('#type_monographs').on('select2:select', function(e) {
+        if (e.params && e.params.data) {
+            var selectedElement = e.params.data;
+            var selectedValue = selectedElement.id;
+            console.log("Selected element: ", selectedElement);
+            console.log("Selected value: ", selectedValue);
+
+            // Блокируем все остальные элементы
+            $('#type_monographs option').each(function() {
+                $(this).prop('disabled', true);
+            });
+
+            // Снимаем блокировку с выбранного элемента
+            $('#type_monographs option[value="' + selectedValue + '"]').prop('disabled', false);
+
+            // Обновляем select2 и скрытое поле
+            $('#type_monographs').select2();
+            updateTypeMonographsSelect();
+        }
+    });
+
+    // Слушатель событий select2:unselect
+    $('#type_monographs').on('select2:unselect', function(e) {
+        if (e.params && e.params.data) {
+            var selectedElement = e.params.data;
+            var selectedValue = selectedElement.id;
+            console.log("Unselected element: ", selectedElement);
+            console.log("Unselected value: ", selectedValue);
+
+            // Разблокируем все элементы
+            $('#type_monographs option').each(function() {
+                $(this).prop('disabled', false);
+            });
+
+            // Обновляем select2 и скрытое поле
+            $('#type_monographs').select2();
+            updateTypeMonographsSelect();
+        }
+    });
+
+    // Обновляем скрытое поле при загрузке страницы
+    updateTypeMonographsSelect();
+
+
+
+    $('#type_grants').select2();
+
+    // Функция для обновления скрытого поля
+    function updateTypeGrantSelect() {
+        var selectedValues = $('#type_grants').val();
+        console.log(selectedValues);
+        $('#type_grants_select').val(selectedValues);
+    }
+
+    // Слушатель событий select2:select
+    $('#type_grants').on('select2:select', function(e) {
+        if (e.params && e.params.data) {
+            var selectedElement = e.params.data;
+            var selectedValue = selectedElement.id;
+            console.log("Selected element: ", selectedElement);
+            console.log("Selected value: ", selectedValue);
+
+            // Блокируем все остальные элементы
+            $('#type_grants option').each(function() {
+                $(this).prop('disabled', true);
+            });
+
+            // Снимаем блокировку с выбранного элемента
+            $('#type_grants option[value="' + selectedValue + '"]').prop('disabled', false);
+
+            // Обновляем select2 и скрытое поле
+            $('#type_grants').select2();
+            updateTypeGrantSelect();
+        }
+    });
+
+    // Слушатель событий select2:unselect
+    $('#type_grants').on('select2:unselect', function(e) {
+        if (e.params && e.params.data) {
+            var selectedElement = e.params.data;
+            var selectedValue = selectedElement.id;
+            console.log("Unselected element: ", selectedElement);
+            console.log("Unselected value: ", selectedValue);
+
+            // Разблокируем все элементы
+            $('#type_grants option').each(function() {
+                $(this).prop('disabled', false);
+            });
+
+            // Обновляем select2 и скрытое поле
+            $('#type_grants').select2();
+            updateTypeGrantSelect();
+        }
+    });
+
+    // Обновляем скрытое поле при загрузке страницы
+    updateTypeGrantSelect();
+
+
+
+
+
+    $('#type_participations').select2();
+
+    // Функция для обновления скрытого поля
+    function updateTypeParticipationSelect() {
+        var selectedValues = $('#type_participations').val();
+        console.log(selectedValues);
+        $('#type_participations_select').val(selectedValues);
+    }
+
+    // Слушатель событий select2:select
+    $('#type_participations').on('select2:select', function(e) {
+        if (e.params && e.params.data) {
+            var selectedElement = e.params.data;
+            var selectedValue = selectedElement.id;
+            console.log("Selected element: ", selectedElement);
+            console.log("Selected value: ", selectedValue);
+
+            // Блокируем все остальные элементы
+            $('#type_participations option').each(function() {
+                $(this).prop('disabled', true);
+            });
+
+            // Снимаем блокировку с выбранного элемента
+            $('#type_participations option[value="' + selectedValue + '"]').prop('disabled', false);
+
+            // Обновляем select2 и скрытое поле
+            $('#type_participations').select2();
+            updateTypeParticipationSelect();
+        }
+    });
+
+    // Слушатель событий select2:unselect
+    $('#type_participations').on('select2:unselect', function(e) {
+        if (e.params && e.params.data) {
+            var selectedElement = e.params.data;
+            var selectedValue = selectedElement.id;
+            console.log("Unselected element: ", selectedElement);
+            console.log("Unselected value: ", selectedValue);
+
+            // Разблокируем все элементы
+            $('#type_participations option').each(function() {
+                $(this).prop('disabled', false);
+            });
+
+            // Обновляем select2 и скрытое поле
+            $('#type_participations').select2();
+            updateTypeParticipationSelect();
+        }
+    });
+
+    // Обновляем скрытое поле при загрузке страницы
+    updateTypeParticipationSelect();
+
+
+
+    $('#type_events').select2();
+
+    // Функция для обновления скрытого поля
+    function updateTypeEventSelect() {
+        var selectedValues = $('#type_events').val();
+        console.log(selectedValues);
+        $('#type_events_select').val(selectedValues);
+    }
+
+    // Слушатель событий select2:select
+    $('#type_events').on('select2:select', function(e) {
+        if (e.params && e.params.data) {
+            var selectedElement = e.params.data;
+            var selectedValue = selectedElement.id;
+            console.log("Selected element: ", selectedElement);
+            console.log("Selected value: ", selectedValue);
+
+            // Блокируем все остальные элементы
+            $('#type_events option').each(function() {
+                $(this).prop('disabled', true);
+            });
+
+            // Снимаем блокировку с выбранного элемента
+            $('#type_events option[value="' + selectedValue + '"]').prop('disabled', false);
+
+            // Обновляем select2 и скрытое поле
+            $('#type_events').select2();
+            updateTypeEventSelect();
+        }
+    });
+
+    // Слушатель событий select2:unselect
+    $('#type_events').on('select2:unselect', function(e) {
+        if (e.params && e.params.data) {
+            var selectedElement = e.params.data;
+            var selectedValue = selectedElement.id;
+            console.log("Unselected element: ", selectedElement);
+            console.log("Unselected value: ", selectedValue);
+
+            // Разблокируем все элементы
+            $('#type_events option').each(function() {
+                $(this).prop('disabled', false);
+            });
+
+            // Обновляем select2 и скрытое поле
+            $('#type_events').select2();
+            updateTypeEventSelect();
+        }
+    });
+
+    // Обновляем скрытое поле при загрузке страницы
+    updateTypeEventSelect();
 });

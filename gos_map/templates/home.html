@@ -109,7 +109,7 @@
                     <div class="form-group">
                         <input type="hidden" id="hidden_selected_value" name="hidden_selected_value" value="">
                         <label for="table_name">Таблицы:</label>
-                        <select name="table_name" id="table_name" multiple style="width: 500px;">
+                        <select name="table_name" id="table_name" multiple style="width: 500px;" required>
                             <option value="All">Все</option>
                             <option value="Publications">Публикации</option>
                             <option value="SecurityDocuments">Охранные документы</option>
@@ -122,6 +122,7 @@
                             <option value="InternationalCooperation">Международное сотрудничество </option>
                         </select>
                     </div>
+
                     <div class="form-group" id='type_publication_div' style="display: none;">
                         <input type="hidden" id="type_publication_select" name="type_publication_select" >
                         <label for="type_publication">Типы публикации  (не обязательно):</label>
@@ -153,6 +154,62 @@
                             {% endfor %}
                         </select>
                     </div>
+
+
+                    <div class="form-group" id='type_monographs_div' style="display: none;">
+                        <input type="hidden" id="type_monographs_select" name="type_monographs_select" >
+                        <label for="type_monographs">Тип монографии (не обязательно):</label>
+                        <select name="type_monographs" id="type_monographs" multiple style="width: 500px; ">
+                            {% for type_monograph in typemonographs%}
+                            <option value={{type_monograph.id }}>{{type_monograph.name_type_monographs}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <div class="form-group" id='type_grants_div' style="display: none;">
+                        <input type="hidden" id="type_grants_select" name="type_grants_select" >
+                        <label for="type_grants">Тип гранта (не обязательно):</label>
+                        <select name="type_grants" id="type_grants" multiple style="width: 500px; ">
+                            {% for type_grant in typegrants%}
+                            <option value={{type_grant.id }}>{{type_grant.name_type_grant}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group" id='type_participations_div' style="display: none;">
+                        <input type="hidden" id="type_participations_select" name="type_participations_select" >
+                        <label for="type_participations">Тип участия (не обязательно):</label>
+                        <select name="type_participations" id="type_participations" multiple style="width: 500px; ">
+                            {% for type_participation in typeparticipations%}
+                            <option value={{type_participation.id }}>{{type_participation.name_type_participation}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <div class="form-group" id='type_events_div' style="display: none;">
+                        <input type="hidden" id="type_events_select" name="type_events_select" >
+                        <label for="type_events">Тип мероприятия (не обязательно):</label>
+                        <select name="type_events" id="type_events" multiple style="width: 500px; ">
+                            {% for type_event in typeevents%}
+                            <option value={{type_event.id }}>{{type_event.name_type_events}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <div class="form-group" id='type_levels_div' style="display: none;">
+                        <input type="hidden" id="type_levels_select" name="type_levels_select" >
+                        <label for="type_levels">Уровень (не обязательно):</label>
+                        <select name="type_levels" id="type_levels" multiple style="width: 500px; ">
+                            {% for type_level in typelevels%}
+                            <option value={{type_level.id }}>{{type_level.name_type_level}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
 
 
 

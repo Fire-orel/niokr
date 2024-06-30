@@ -221,10 +221,27 @@ $(document).ready(function() {
             $('#type_documents_div').show();
             $('#type_property_div').show();
         }
+        if( selectedValue == 'Monographs') {
+            $('#type_monographs_div').show();
+        }
+        if( selectedValue == 'Grant') {
+            $('#type_grants_div').show();
+        }
+        if(selectedValue == 'Event') {
+            $('#type_participations_div').show();
+            $('#type_events_div').show();
+            $('#type_levels_div').show();
+        }
 
         $('#table_name').select2();
         $('#type_publication').select2()
-        $('#type_documents').select2();// Обновляем select2
+        $('#type_documents').select2();
+        $('#type_property').select2();
+        $('#type_monographs').select2();
+        $('#type_grants').select2();
+        $('#type_participations').select2();
+        $('#type_events').select2();
+        $('#type_levels').select2();// Обновляем select2
         updateHiddenField(); // Обновляем скрытое поле
     });
 
@@ -252,15 +269,34 @@ $(document).ready(function() {
             $('#type_documents_div').hide();
             $('#type_property_div').hide();
         }
+        if(selectedValue == 'Monographs') {
+            $('#type_monographs_div').hide();
+        }
+        if(selectedValue == 'Grant') {
+            $('#type_grants_div').hide();
+        }
+        if(selectedValue == 'Event') {
+            $('#type_participations_div').hide();
+            $('#type_events_div').hide();
+            $('#type_levels_div').hide();
+        }
         $('#table_name').select2();
         $('#type_publication').select2();
         $('#type_documents').select2();
         $('#type_property').select2();
+        $('#type_monographs').select2();
+        $('#type_grants').select2();
+        $('#type_participations').select2();
+        $('#type_events').select2();
+        $('#type_levels').select2();
+
         updateHiddenField(); // Обновляем скрытое поле
+
     });
 
     // Обновляем скрытое поле при загрузке страницы
     updateHiddenField();
+
 
 
 
