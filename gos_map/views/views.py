@@ -4,8 +4,8 @@ from django.contrib.auth import login,logout
 from django.shortcuts import render, redirect,get_object_or_404
 from django.views import View
 from ldap3 import Server, Connection, ALL, NTLM
-from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms,MonographsForms,EventForms,GrantForms,NIRSForms,PopularSciencePublicationsForms,ScientificDirectionsForms,InternationalCooperationForms,TypePublicationsForms,TypeDocumentsForms,TypePropertyForms,TypeMonographsForms
-from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation,Faculty,Department,TypeDocuments,TypeProperty,TypeMonographs
+from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms,MonographsForms,EventForms,GrantForms,NIRSForms,PopularSciencePublicationsForms,ScientificDirectionsForms,InternationalCooperationForms,TypePublicationsForms,TypeDocumentsForms,TypePropertyForms,TypeMonographsForms,TypeParticipationForms,TypeEventForms
+from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation,Faculty,Department,TypeDocuments,TypeProperty,TypeMonographs,TypeParticipation,TypeEvent
 from django.views.generic import ListView,DetailView,UpdateView
 from django.http import JsonResponse,HttpResponseRedirect,HttpResponse
 from openpyxl import Workbook
@@ -194,7 +194,11 @@ class HomeView(View):
             'type_propertys':TypeProperty.objects.all(),
             'typepropertyforms':TypePropertyForms(),
             'typemonographs':TypeMonographs.objects.all(),
-            'typemonographsforms':TypeMonographsForms()
+            'typemonographsforms':TypeMonographsForms(),
+            'typeparticipations':TypeParticipation.objects.all(),
+            'typeparticipationforms':TypeParticipationForms(),
+            'typeevents':TypeEvent.objects.all(),
+            'typeeventforms':TypeEventForms(),
 
 
 
@@ -330,8 +334,12 @@ class MapDetails(View):
             'popularsciencepublicationsforms':PopularSciencePublicationsForms(),
             'scientificdirectionss':scientificdirections,
             'scientificdirectionsforms':ScientificDirectionsForms(),
+
             'internationalcooperations':internationalcooperation,
             "internationalcooperationforms":InternationalCooperationForms(),
+
+
+
 
 
 

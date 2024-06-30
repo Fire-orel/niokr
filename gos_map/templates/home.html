@@ -151,12 +151,26 @@
                     <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_monographs" type="button" role="tab" aria-controls="another-records" aria-selected="false" href="#tab4">Тип монографии</button>
                 </li>
 
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_participation" type="button" role="tab" aria-controls="another-records" aria-selected="false" href="#tab5">Тип участия</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_events" type="button" role="tab" aria-controls="another-records" aria-selected="false" href="#tab6">Тип мероприятия</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="another-records-tab" data-bs-toggle="tab" data-bs-target="#type_level" type="button" role="tab" aria-controls="another-records" aria-selected="false" href="#tab7">Уровень</button>
+                </li>
+
             </ul>
             <div class="tab-content">
                 {% include "table/table_type_publications.html" %}
                 {% include "table/table_type_documents.html" %}
                 {% include "table/table_type_property.html" %}
                 {% include "table/table_type_monographs.html" %}
+                {% include "table/table_type_participation.html" %}
+                {% include "table/table_type_events.html" %}
             </div>
         </div>
     </div>
@@ -171,6 +185,8 @@
     {% include "modal/modal_type_documents.html" %}
     {% include "modal/modal_type_property.html" %}
     {% include "modal/modal_type_monographs.html" %}
+    {% include "modal/modal_type_participation.html" %}
+    {% include "modal/modal_type_events.html" %}
 
 
 
@@ -178,6 +194,8 @@
     {% include "modal_delete/delete_type_documents.html"%}
     {% include "modal_delete/delete_type_property.html"%}
     {% include "modal_delete/delete_type_monographs.html"%}
+    {% include "modal_delete/delete_type_participation.html"%}
+    {% include "modal_delete/delete_type_events.html"%}
 
 
 </div>

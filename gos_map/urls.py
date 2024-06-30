@@ -27,6 +27,10 @@ from gos_map.views.views_type_property import addTypeProperty,editTypeProperty,d
 
 from gos_map.views.views_type_monographs import addTypeMonographs,editTypeMonographs,deleteTypeMonographs
 
+from gos_map.views.views_type_participation import addTypeParticipation,editTypeParticipation,deleteTypeParticipation
+
+from gos_map.views.views_type_events import addTypeEvent,editTypeEvent,deleteTypeEvent
+
 urlpatterns = [
     path('', LoginView.as_view(), name='login'),
     path('home/', HomeView.as_view(), name='home'),
@@ -92,9 +96,20 @@ urlpatterns = [
     path('edit_type_property/<int:pk>/',editTypeProperty.as_view(),name='edit_type_property'),
     path('delete_type_property/<int:pk>/',deleteTypeProperty.as_view(),name='delete_type_property'),
 
+
     path('add_type_monographs/',addTypeMonographs.as_view(),name='add_type_monographs'),
     path('edit_type_monographs/<int:pk>/',editTypeMonographs.as_view(),name='edit_type_monographs'),
     path('delete_type_monographs/<int:pk>/',deleteTypeMonographs.as_view(),name='delete_type_monographs'),
+
+
+    path('add_type_participation/',addTypeParticipation.as_view(),name='add_type_participation'),
+    path('edit_type_participation/<int:pk>/',editTypeParticipation.as_view(),name='edit_type_participation'),
+    path('delete_type_participation/<int:pk>/',deleteTypeParticipation.as_view(),name='delete_type_participation'),
+
+
+    path('add_type_events/',addTypeEvent.as_view(),name='add_type_events'),
+    path('edit_type_events/<int:pk>/',editTypeEvent.as_view(),name='edit_type_events'),
+    path('delete_type_events/<int:pk>/',deleteTypeEvent.as_view(),name='delete_type_events'),
 
 
     path("otchet/", otchet.as_view(), name="otchet")

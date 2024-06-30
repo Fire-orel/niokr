@@ -264,13 +264,21 @@ class TypeParticipation(models.Model):
 class TypeEvent(models.Model):
     name_type_events=models.CharField(max_length=100,verbose_name="Тип мероприятия")
     def __str__(self):
-        return f'{self.name_type_events}'
+        return f'{self.name_type_events}, {self.pk}'
 
     class Meta:
         verbose_name="Тип мероприятия"
         verbose_name_plural='Тип мероприятия'
 
 
+class TypeLevel(models.Model):
+    name_type_level=models.CharField(max_length=100,verbose_name="Уровень")
+    def __str__(self):
+        return f'{self.name_type_level}'
+
+    class Meta:
+        verbose_name="Уровень"
+        verbose_name_plural='Уровень'
 
 class Event (models.Model):
     id_map = models.ForeignKey(Map,on_delete=models.CASCADE,verbose_name="Карта")
@@ -281,7 +289,7 @@ class Event (models.Model):
 
     name_event_event=models.TextField(verbose_name="Название мероприятия",blank=True,null=True)
 
-    level=models.CharField(max_length=100,verbose_name="Уровень (международное, всероссийское и др.)",blank=True,null=True)
+    level=models.ForeignKey(TypeLevel,on_delete=models.CASCADE,verbose_name="Уровень",null=True)
 
     type_event=models.ForeignKey(TypeEvent,on_delete=models.SET_NULL,verbose_name="Тип мероприятия",null=True)
 

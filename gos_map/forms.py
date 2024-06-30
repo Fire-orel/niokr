@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Map,Publications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,FullNameАuthor,InternationalCooperation,Department,TypePublications,TypeDocuments,TypeProperty,TypeMonographs
+from .models import Map,Publications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,FullNameАuthor,InternationalCooperation,Department,TypePublications,TypeDocuments,TypeProperty,TypeMonographs,TypeParticipation,TypeEvent,TypeLevel
 from datetime import datetime
 from django_select2.forms import Select2TagWidget
 
@@ -345,3 +345,21 @@ class TypeMonographsForms(forms.ModelForm):
     class Meta:
         model=TypeMonographs
         fields=['name_type_monographs']
+
+
+class TypeParticipationForms(forms.ModelForm):
+    class Meta:
+        model=TypeParticipation
+        fields=['name_type_participation']
+
+
+class TypeEventForms(forms.ModelForm):
+    class Meta:
+        model=TypeEvent
+        fields=['name_type_events']
+
+
+class TypeLevelForms(forms.ModelForm):
+    class Meta:
+        model=TypeLevel
+        fields=['name_type_level']
