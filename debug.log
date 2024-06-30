@@ -1,0 +1,243 @@
+"GET /home/ HTTP/1.1" 200 105548
+"GET /static/css/bootstrap.min.css HTTP/1.1" 200 160308
+"GET /static/css/select2.min.css HTTP/1.1" 200 14967
+"GET /static/css/bootstrap.min%20(1).css HTTP/1.1" 200 160308
+"GET /static/css/all.min.css HTTP/1.1" 200 59309
+"GET /static/css/bootstrap.min%20(3).css HTTP/1.1" 200 160409
+"GET /static/css/bootstrap.min%20(2).css HTTP/1.1" 200 220785
+"GET /static/css/style.css HTTP/1.1" 200 1621
+"GET /static/js/bootstrap/popper.min%20(3).js HTTP/1.1" 200 18459
+"GET /static/js/bootstrap/jquery-3.6.0.min.js HTTP/1.1" 200 89503
+"GET /static/js/bootstrap/popper.min%20(2).js HTTP/1.1" 200 21009
+"GET /static/js/bootstrap/bootstrap.bundle.min%20(1).js HTTP/1.1" 200 80427
+"GET /static/js/bootstrap/bootstrap.bundle.min.js HTTP/1.1" 200 80605
+"GET /static/js/bootstrap/bootstrap.min%20(2).js HTTP/1.1" 200 58078
+"GET /static/js/bootstrap/popper.min%20(1).js HTTP/1.1" 200 18315
+"GET /static/js/bootstrap/select2.min.js HTTP/1.1" 200 70852
+"GET /static/js/bootstrap/popper.min.js HTTP/1.1" 200 18368
+"GET /static/js/base.js HTTP/1.1" 200 9911
+"GET /static/js/bootstrap/bootstrap.min%20(1).js HTTP/1.1" 200 60180
+"GET /static/js/bootstrap/bootstrap.min.js HTTP/1.1" 200 48950
+"GET /static/js/select.js HTTP/1.1" 200 4504
+"GET /static/js/publication.js HTTP/1.1" 200 8219
+"GET /static/js/monograph.js HTTP/1.1" 200 7472
+"GET /static/js/securitydocuments.js HTTP/1.1" 200 7700
+"GET /static/js/grant.js HTTP/1.1" 200 9527
+"GET /static/js/event.js HTTP/1.1" 200 7855
+"GET /static/js/nirs.js HTTP/1.1" 200 9461
+"GET /static/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 78268
+"GET /static/js/popular_science_publications.js HTTP/1.1" 200 7892
+"GET /static/js/international_cooperation.js HTTP/1.1" 200 5956
+"GET /static/js/scientific_directions.js HTTP/1.1" 200 8550
+"GET /static/js/type_property.js HTTP/1.1" 200 5137
+"GET /static/js/type_documents.js HTTP/1.1" 200 5171
+"GET /static/js/type_publications.js HTTP/1.1" 200 5289
+"GET /static/js/type_monographs.js HTTP/1.1" 200 5209
+"GET /static/js/type_level.js HTTP/1.1" 200 5025
+"GET /static/js/type_events.js HTTP/1.1" 200 5040
+"GET /static/js/type_participation.js HTTP/1.1" 200 5327
+"GET /static/js/form_participation.js HTTP/1.1" 200 5320
+"GET /static/js/type_grant.js HTTP/1.1" 200 5033
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+"POST /chek_map/ HTTP/1.1" 200 22
+"GET /home/ HTTP/1.1" 200 106543
+Bad Request: /chek_map/
+"POST /chek_map/ HTTP/1.1" 400 20
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /map_details/1 HTTP/1.1" 200 93214
+"GET /static/js/select.js HTTP/1.1" 304 0
+"GET /static/js/base.js HTTP/1.1" 304 0
+"GET /home/ HTTP/1.1" 200 106543
+"POST /otchet/ HTTP/1.1" 200 5469
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /map_details/1 HTTP/1.1" 200 93214
+"POST /add_security_documents/ HTTP/1.1" 200 22
+"GET /map_details/1 HTTP/1.1" 200 94150
+"GET /home/ HTTP/1.1" 200 106543
+"POST /otchet/ HTTP/1.1" 200 5469
+"GET /home/ HTTP/1.1" 200 106544
+"GET /static/css/select2.min.css HTTP/1.1" 200 14967
+"GET /static/css/all.min.css HTTP/1.1" 200 59309
+"GET /static/css/bootstrap.min.css HTTP/1.1" 200 160308
+"GET /static/css/bootstrap.min%20(1).css HTTP/1.1" 200 160308
+"GET /static/css/bootstrap.min%20(3).css HTTP/1.1" 200 160409
+"GET /static/css/bootstrap.min%20(2).css HTTP/1.1" 200 220785
+"GET /static/css/style.css HTTP/1.1" 200 1621
+"GET /static/js/bootstrap/popper.min%20(3).js HTTP/1.1" 200 18459
+"GET /static/js/bootstrap/bootstrap.bundle.min%20(1).js HTTP/1.1" 200 80427
+"GET /static/js/bootstrap/jquery-3.6.0.min.js HTTP/1.1" 200 89503
+"GET /static/js/bootstrap/popper.min%20(2).js HTTP/1.1" 200 21009
+"GET /static/js/bootstrap/bootstrap.bundle.min.js HTTP/1.1" 200 80605
+"GET /static/js/bootstrap/bootstrap.min%20(2).js HTTP/1.1" 200 58078
+"GET /static/js/bootstrap/popper.min.js HTTP/1.1" 200 18368
+"GET /static/js/bootstrap/popper.min%20(1).js HTTP/1.1" 200 18315
+"GET /static/js/bootstrap/bootstrap.min%20(1).js HTTP/1.1" 200 60180
+"GET /static/js/bootstrap/select2.min.js HTTP/1.1" 200 70852
+"GET /static/js/bootstrap/bootstrap.min.js HTTP/1.1" 200 48950
+"GET /static/js/base.js HTTP/1.1" 200 9911
+"GET /static/js/publication.js HTTP/1.1" 200 8219
+"GET /static/js/select.js HTTP/1.1" 200 4504
+"GET /static/js/securitydocuments.js HTTP/1.1" 200 7700
+"GET /static/js/event.js HTTP/1.1" 200 7855
+"GET /static/js/monograph.js HTTP/1.1" 200 7472
+"GET /static/js/grant.js HTTP/1.1" 200 9527
+"GET /static/js/popular_science_publications.js HTTP/1.1" 200 7892
+"GET /static/js/international_cooperation.js HTTP/1.1" 200 5956
+"GET /static/js/nirs.js HTTP/1.1" 200 9461
+"GET /static/js/scientific_directions.js HTTP/1.1" 200 8550
+"GET /static/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 78268
+"GET /static/js/type_publications.js HTTP/1.1" 200 5289
+"GET /static/js/type_documents.js HTTP/1.1" 200 5171
+"GET /static/js/type_property.js HTTP/1.1" 200 5137
+"GET /static/js/type_events.js HTTP/1.1" 200 5040
+"GET /static/js/type_participation.js HTTP/1.1" 200 5327
+"GET /static/js/type_monographs.js HTTP/1.1" 200 5209
+"GET /static/js/type_level.js HTTP/1.1" 200 5025
+"GET /static/js/type_grant.js HTTP/1.1" 200 5033
+"GET /static/js/form_participation.js HTTP/1.1" 200 5320
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+"POST /otchet/ HTTP/1.1" 200 5469
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /home/ HTTP/1.1" 200 107233
+"GET /static/css/select2.min.css HTTP/1.1" 200 14967
+"GET /static/css/all.min.css HTTP/1.1" 200 59309
+"GET /static/css/bootstrap.min.css HTTP/1.1" 200 160308
+"GET /static/css/bootstrap.min%20(1).css HTTP/1.1" 200 160308
+"GET /static/css/bootstrap.min%20(2).css HTTP/1.1" 200 220785
+"GET /static/css/bootstrap.min%20(3).css HTTP/1.1" 200 160409
+"GET /static/css/style.css HTTP/1.1" 200 1621
+"GET /static/js/bootstrap/popper.min%20(3).js HTTP/1.1" 200 18459
+"GET /static/js/bootstrap/bootstrap.bundle.min%20(1).js HTTP/1.1" 200 80427
+"GET /static/js/bootstrap/bootstrap.bundle.min.js HTTP/1.1" 200 80605
+"GET /static/js/bootstrap/popper.min%20(2).js HTTP/1.1" 200 21009
+"GET /static/js/bootstrap/jquery-3.6.0.min.js HTTP/1.1" 200 89503
+"GET /static/js/bootstrap/popper.min%20(1).js HTTP/1.1" 200 18315
+"GET /static/js/bootstrap/bootstrap.min%20(2).js HTTP/1.1" 200 58078
+"GET /static/js/bootstrap/popper.min.js HTTP/1.1" 200 18368
+"GET /static/js/bootstrap/bootstrap.min.js HTTP/1.1" 200 48950
+"GET /static/js/bootstrap/select2.min.js HTTP/1.1" 200 70852
+"GET /static/js/bootstrap/bootstrap.min%20(1).js HTTP/1.1" 200 60180
+"GET /static/js/select.js HTTP/1.1" 200 6681
+"GET /static/js/base.js HTTP/1.1" 200 9911
+"GET /static/js/publication.js HTTP/1.1" 200 8219
+"GET /static/js/securitydocuments.js HTTP/1.1" 200 7700
+"GET /static/js/monograph.js HTTP/1.1" 200 7472
+"GET /static/js/event.js HTTP/1.1" 200 7855
+"GET /static/js/popular_science_publications.js HTTP/1.1" 200 7892
+"GET /static/js/grant.js HTTP/1.1" 200 9527
+"GET /static/js/nirs.js HTTP/1.1" 200 9461
+"GET /static/js/type_publications.js HTTP/1.1" 200 5289
+"GET /static/js/international_cooperation.js HTTP/1.1" 200 5956
+"GET /static/js/scientific_directions.js HTTP/1.1" 200 8550
+"GET /static/js/type_monographs.js HTTP/1.1" 200 5209
+"GET /static/js/type_property.js HTTP/1.1" 200 5137
+"GET /static/js/type_documents.js HTTP/1.1" 200 5171
+"GET /static/js/type_events.js HTTP/1.1" 200 5040
+"GET /static/js/type_participation.js HTTP/1.1" 200 5327
+"GET /static/js/type_level.js HTTP/1.1" 200 5025
+"GET /static/js/type_grant.js HTTP/1.1" 200 5033
+"GET /static/js/form_participation.js HTTP/1.1" 200 5320
+"GET /static/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 78268
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+"GET /home/ HTTP/1.1" 200 107233
+"GET /static/css/select2.min.css HTTP/1.1" 200 14967
+"GET /static/css/all.min.css HTTP/1.1" 200 59309
+"GET /static/css/bootstrap.min%20(1).css HTTP/1.1" 200 160308
+"GET /static/css/bootstrap.min.css HTTP/1.1" 200 160308
+"GET /static/css/bootstrap.min%20(3).css HTTP/1.1" 200 160409
+"GET /static/css/bootstrap.min%20(2).css HTTP/1.1" 200 220785
+"GET /static/css/style.css HTTP/1.1" 200 1621
+"GET /static/js/bootstrap/popper.min%20(3).js HTTP/1.1" 200 18459
+"GET /static/js/bootstrap/jquery-3.6.0.min.js HTTP/1.1" 200 89503
+"GET /static/js/bootstrap/bootstrap.bundle.min.js HTTP/1.1" 200 80605
+"GET /static/js/bootstrap/bootstrap.bundle.min%20(1).js HTTP/1.1" 200 80427
+"GET /static/js/bootstrap/popper.min%20(2).js HTTP/1.1" 200 21009
+"GET /static/js/bootstrap/bootstrap.min%20(2).js HTTP/1.1" 200 58078
+"GET /static/js/bootstrap/popper.min%20(1).js HTTP/1.1" 200 18315
+"GET /static/js/bootstrap/popper.min.js HTTP/1.1" 200 18368
+"GET /static/js/bootstrap/bootstrap.min%20(1).js HTTP/1.1" 200 60180
+"GET /static/js/bootstrap/select2.min.js HTTP/1.1" 200 70852
+"GET /static/js/bootstrap/bootstrap.min.js HTTP/1.1" 200 48950
+"GET /static/js/select.js HTTP/1.1" 200 6681
+"GET /static/js/base.js HTTP/1.1" 200 10041
+"GET /static/js/securitydocuments.js HTTP/1.1" 200 7700
+"GET /static/js/publication.js HTTP/1.1" 200 8219
+"GET /static/js/monograph.js HTTP/1.1" 200 7472
+"GET /static/js/event.js HTTP/1.1" 200 7855
+"GET /static/js/grant.js HTTP/1.1" 200 9527
+"GET /static/js/scientific_directions.js HTTP/1.1" 200 8550
+"GET /static/js/nirs.js HTTP/1.1" 200 9461
+"GET /static/js/popular_science_publications.js HTTP/1.1" 200 7892
+"GET /static/js/international_cooperation.js HTTP/1.1" 200 5956
+"GET /static/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 78268
+"GET /static/js/type_publications.js HTTP/1.1" 200 5289
+"GET /static/js/type_property.js HTTP/1.1" 200 5137
+"GET /static/js/type_documents.js HTTP/1.1" 200 5171
+"GET /static/js/type_monographs.js HTTP/1.1" 200 5209
+"GET /static/js/type_participation.js HTTP/1.1" 200 5327
+"GET /static/js/type_events.js HTTP/1.1" 200 5040
+"GET /static/js/type_grant.js HTTP/1.1" 200 5033
+"GET /static/js/type_level.js HTTP/1.1" 200 5025
+"GET /static/js/form_participation.js HTTP/1.1" 200 5320
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15075
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ó÷¸áà\niokr\gos_map\views\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /map_details/1 HTTP/1.1" 200 94150
+"GET /static/js/base.js HTTP/1.1" 304 0
+"GET /static/js/select.js HTTP/1.1" 304 0
+"GET /edit_security_documents/14/ HTTP/1.1" 200 366
+"POST /edit_security_documents/14/ HTTP/1.1" 200 22
+"GET /map_details/1 HTTP/1.1" 200 94170

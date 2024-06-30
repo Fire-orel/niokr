@@ -89,6 +89,15 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="year">Год:</label>
+                        <select name="year" id="year" multiple style="width: 500px;">
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="quarter">Квартал:</label>
                         <select name="quarter" id="quarter" multiple style="width: 500px;">
                             <option value="1">1 квартал</option>
@@ -113,23 +122,42 @@
                             <option value="InternationalCooperation">Международное сотрудничество </option>
                         </select>
                     </div>
-                    <div class="form-group" id='table_type_div' style="display: none;">
-                        <label for="table_type">Типы публикации:</label>
-                        <select name="table_type" id="table_type" multiple style="width: 500px; ">
+                    <div class="form-group" id='type_publication_div' style="display: none;">
+                        <input type="hidden" id="type_publication_select" name="type_publication_select" >
+                        <label for="type_publication">Типы публикации  (не обязательно):</label>
+                        <select name="type_publication" id="type_publication" multiple style="width: 500px; ">
                             {% for type_publication in type_publications %}
                             <option value={{type_publication.id }}>{{type_publication.name_type_publications}}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="year">Год:</label>
-                        <select name="year" id="year" multiple style="width: 500px;">
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
 
+
+                    <div class="form-group" id='type_documents_div' style="display: none;">
+                        <input type="hidden" id="type_documents_select" name="type_documents_select" >
+                        <label for="type_documents">Типы документов  (не обязательно):</label>
+                        <select name="type_documents" id="type_documents" multiple style="width: 500px; ">
+                            {% for type_document in type_documents %}
+                            <option value={{type_document.id }}>{{type_document.name_type_documents}}</option>
+                            {% endfor %}
                         </select>
                     </div>
+
+
+                    <div class="form-group" id='type_property_div' style="display: none;">
+                        <input type="hidden" id="type_property_select" name="type_property_select" >
+                        <label for="type_property">Типы документов (не обязательно):</label>
+                        <select name="type_property" id="type_property" multiple style="width: 500px; ">
+                            {% for type_property in type_propertys %}
+                            <option value={{type_property.id }}>{{type_property.name_type_property}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+
+
+
                     <button type="submit" class="btn btn-primary">Сформировать отчет</button>
                 </form>
             </table>

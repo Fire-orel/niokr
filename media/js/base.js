@@ -32,7 +32,7 @@ $(document).ready(function() {
 
 
     $('#myTabGlav button[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
-        console.log($(e.target).attr('href'))
+
 
         localStorage.setItem('activeTabGlav', $(e.target).attr('href'));
     });
@@ -124,7 +124,7 @@ $(document).ready(function() {
 
 
         var mapID = $(this).data('id');// Получаем ID публикации
-        
+
 
         // Отправляем запрос на удаление публикации
         $.ajax({
@@ -165,11 +165,7 @@ $(document).ready(function() {
         var selectedValue = $(this).val();
         // Если выбрано значение 1, показываем второй select, иначе скрываем
 
-        // if($('#table').val()== 'publication') {
-        //     $('#table_type_div').show();
-        // } else {
-        //     $('#table_type_div').hide();
-        // }
+
     });
 
 
@@ -217,7 +213,18 @@ $(document).ready(function() {
             // Если выбран какой-либо другой элемент, блокируем элемент 'All'
             $('#table_name option[value="All"]').prop('disabled', true);
         }
-        $('#table_name').select2(); // Обновляем select2
+
+        if( selectedValue == 'Publications') {
+            $('#type_publication_div').show();
+        }
+        if( selectedValue == 'SecurityDocuments') {
+            $('#type_documents_div').show();
+            $('#type_property_div').show();
+        }
+
+        $('#table_name').select2();
+        $('#type_publication').select2()
+        $('#type_documents').select2();// Обновляем select2
         updateHiddenField(); // Обновляем скрытое поле
     });
 
@@ -237,7 +244,18 @@ $(document).ready(function() {
                 $('#table_name option[value="All"]').prop('disabled', false); // Замените 'All' на ваше значение
             }
         }
-        $('#table_name').select2(); // Обновляем select2
+
+        if(selectedValue == 'Publications') {
+            $('#type_publication_div').hide();
+        }
+        if( selectedValue == 'SecurityDocuments') {
+            $('#type_documents_div').hide();
+            $('#type_property_div').hide();
+        }
+        $('#table_name').select2();
+        $('#type_publication').select2();
+        $('#type_documents').select2();
+        $('#type_property').select2();
         updateHiddenField(); // Обновляем скрытое поле
     });
 
