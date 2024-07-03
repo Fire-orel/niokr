@@ -31,6 +31,7 @@ $(document).ready(function() {
 
 
 
+
     $('#myTabGlav button[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
 
 
@@ -299,7 +300,53 @@ $(document).ready(function() {
 
 
 
+    var select2Input = $('#id_full_name_author_publications');
 
+
+
+
+    select2Input.on('select2:open', function() {
+        var searchField = document.querySelector('.select2-container--open .select2-search__field');
+
+        if (searchField) {
+            $(searchField).select2({
+                ajax: {
+                    url: '/path/to/select2-data/',  // Замените на ваш URL для AJAX-запроса
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            q: params.term  // Параметр поиска
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data.results.map(function(item) {
+                                return {
+                                    id: item.id,
+                                    text: item.name
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1  // Минимальное количество символов для начала загрузки данных
+            });
+        }
+    });
+
+    select2Input.on('select2:open', function() {
+        var searchField = document.querySelector('.select2-container--open .select2-search__field');
+
+        if (searchField) {
+            searchField.addEventListener('input', function() {
+                var inputText = this.value;
+                console.log('Текущий текст: ' + inputText);
+                $('#live-text').text(inputText);
+            });
+        }
+    });
 
 
 });

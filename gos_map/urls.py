@@ -1,7 +1,7 @@
 from django.urls import path
 from .views.views import LoginView,HomeView,CheckMap,MapDetails,otchet,mapСompleted,deleteMap,UserDetail,mapReturn
 
-from gos_map.views.views_publication import addPublication,deletePublication,editPublication
+from gos_map.views.views_publication import addPublication,deletePublication,editPublication,FullNameAuthorListView
 
 from gos_map.views.views_security_documents import addSecurityDocuments,deleteSecurityDocuments,editSecurityDocuments
 
@@ -38,6 +38,10 @@ from gos_map.views.views_type_grant import addTypeGrant,editTypeGrant,deleteType
 from gos_map.views.views_form_participation import addFormParticipation,editFormParticipation,deleteFormParticipation
 
 urlpatterns = [
+
+   path('path/to/select2-data/', FullNameAuthorListView.as_view(), name='select2-data'),
+
+
     path('', LoginView.as_view(), name='login'),
     path('home/', HomeView.as_view(), name='home'),
     path('user_detail/', UserDetail.as_view(), name='user_detail'),
@@ -129,6 +133,8 @@ urlpatterns = [
     path('add_form_participation/',addFormParticipation.as_view(),name='add_form_participation'),
     path('edit_form_participation/<int:pk>/',editFormParticipation.as_view(),name='edit_form_participation'),
     path('delete_form_participation/<int:pk>/',deleteFormParticipation.as_view(),name='delete_form_participation'),
+
+
 
 
     path("otchet/", otchet.as_view(), name="otchet")

@@ -3,6 +3,9 @@ from django import forms
 from .models import Map,Publications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,FullNameАuthor,InternationalCooperation,Department,TypePublications,TypeDocuments,TypeProperty,TypeMonographs,TypeParticipation,TypeEvent,TypeLevel,TypeGrant,FormParticipation
 from datetime import datetime
 from django_select2.forms import Select2TagWidget
+from django.core.cache import cache
+
+
 
 
 class LoginForm(forms.Form):
@@ -53,12 +56,13 @@ class MapForms(forms.ModelForm):
 class PublicationForms(forms.ModelForm):
     full_name_author_publications = forms.ModelMultipleChoiceField(
         label='ФИО автора',
-        queryset=FullNameАuthor.objects.all(),
+        queryset=FullNameАuthor.objects.none(),
         widget=forms.SelectMultiple(attrs={
             'class': 'select2',
             'multiple': 'multiple',
             'data-tags': 'true',
-            'value': 'full_name'
+            'value': 'full_name',
+            
             }),
         required=False,
         to_field_name='full_name'
@@ -78,11 +82,12 @@ class PublicationForms(forms.ModelForm):
             'data-placeholder': 'Выберите автора или введите нового',
             'style': 'width: 100%'  # Пример установки стиля для ширины поля
         })
+        # self.fields['full_name_author_publications'].queryset =
 
 class SecurityDocumentsForms(forms.ModelForm):
     full_name_author_security_documents = forms.ModelMultipleChoiceField(
         label='ФИО автора',
-        queryset=FullNameАuthor.objects.all(),
+        queryset=FullNameАuthor.objects.none(),
         widget=forms.SelectMultiple(attrs={
             'class': 'select2',
             'multiple': 'multiple',
@@ -109,7 +114,7 @@ class SecurityDocumentsForms(forms.ModelForm):
 class MonographsForms(forms.ModelForm):
     full_name_author_monographs = forms.ModelMultipleChoiceField(
         label='Автор(ы) ФИО (полностью)',
-        queryset=FullNameАuthor.objects.all(),
+        queryset=FullNameАuthor.objects.none(),
         widget=forms.SelectMultiple(attrs={
             'class': 'select2',
             'multiple': 'multiple',
@@ -142,7 +147,7 @@ class MonographsForms(forms.ModelForm):
 class EventForms(forms.ModelForm):
     full_name_author_event = forms.ModelMultipleChoiceField(
         label='ФИО участников ЗабГУ',
-        queryset=FullNameАuthor.objects.all(),
+        queryset=FullNameАuthor.objects.none(),
         widget=forms.SelectMultiple(attrs={
             'class': 'select2',
             'multiple': 'multiple',
@@ -175,7 +180,7 @@ class GrantForms(forms.ModelForm):
 
     project_manager = forms.ModelMultipleChoiceField(
         label='Руководитель проекта (ФИО полностью)',
-        queryset=FullNameАuthor.objects.all(),
+        queryset=FullNameАuthor.objects.none(),
         widget=forms.SelectMultiple(attrs={
             'class': 'select2',
             'multiple': 'multiple',
@@ -186,7 +191,7 @@ class GrantForms(forms.ModelForm):
     )
     full_name_performer = forms.ModelMultipleChoiceField(
         label='ФИО (полностью) исполнителей',
-        queryset=FullNameАuthor.objects.all(),
+        queryset=FullNameАuthor.objects.none(),
         widget=forms.SelectMultiple(attrs={
             'class': 'select2',
             'multiple': 'multiple',
@@ -218,7 +223,7 @@ class GrantForms(forms.ModelForm):
 class NIRSForms(forms.ModelForm):
     full_name_students = forms.ModelMultipleChoiceField(
         label='ФИО студентов',
-        queryset=FullNameАuthor.objects.all(),
+        queryset=FullNameАuthor.objects.none(),
         widget=forms.SelectMultiple(attrs={
             'class': 'select2',
             'multiple': 'multiple',
@@ -229,7 +234,7 @@ class NIRSForms(forms.ModelForm):
     )
     full_name_scientific_supervisor = forms.ModelMultipleChoiceField(
         label='ФИО научного руководителя',
-        queryset=FullNameАuthor.objects.all(),
+        queryset=FullNameАuthor.objects.none(),
         widget=forms.SelectMultiple(attrs={
             'class': 'select2',
             'multiple': 'multiple',
@@ -265,7 +270,7 @@ class PopularSciencePublicationsForms(forms.ModelForm):
 
     full_name_author = forms.ModelMultipleChoiceField(
         label='Ф.И.О. автора (полностью)',
-        queryset=FullNameАuthor.objects.all(),
+        queryset=FullNameАuthor.objects.none(),
         widget=forms.SelectMultiple(attrs={
             'class': 'select2',
             'multiple': 'multiple',
@@ -297,7 +302,7 @@ class ScientificDirectionsForms(forms.ModelForm):
 
     leading_scientists = forms.ModelMultipleChoiceField(
         label='Ведущие ученые в данной области (1-3 человека)',
-        queryset=FullNameАuthor.objects.all(),
+        queryset=FullNameАuthor.objects.none(),
         widget=forms.SelectMultiple(attrs={
             'class': 'select2',
             'multiple': 'multiple',
