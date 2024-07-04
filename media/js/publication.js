@@ -175,6 +175,7 @@ $(document).ready(function() {
 
     });
     $('#id_full_name_author_publications').select2({
+
         multiple: true,
         tags: true,
         tokenSeparators: [','],  // Разделители для тегов
@@ -189,6 +190,28 @@ $(document).ready(function() {
                 text: term,
                 newTag: true // add additional parameters
             };
+        },
+        minimumInputLength: 2,
+        ajax: {
+            url: '/path/to/select2-data/', // Убедитесь, что URL правильный
+            dataType: 'json',
+
+            data: function(params) {
+                return {
+                    q: params.term // Передача введенного текста на сервер
+                };
+            },
+            processResults: function(data) {
+                return {
+                    results: data.results.map(function(item) {
+                        return {
+                            id: item.id,
+                            text: item.name
+                        };
+                    })
+                };
+            },
+            cache: true
         }
 
     });

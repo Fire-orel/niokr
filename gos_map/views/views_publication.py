@@ -118,16 +118,3 @@ class deletePublication(View):
             return JsonResponse({'error': str(e)}, status=500)
 
 
-class FullNameAuthorListView(View):
-    def get(self, request, *args, **kwargs):
-        try:
-            search_term = request.GET.get('q', '')
-            if search_term:
-                authors = FullNameАuthor.objects.filter(full_name__icontains=search_term)[:30]
-            else:
-                authors = FullNameАuthor.objects.none()
-
-            results = [{'id': author.pk, 'name': author.full_name} for author in authors]
-            return JsonResponse({'results': results})
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)

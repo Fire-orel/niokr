@@ -1,7 +1,7 @@
 from django.urls import path
-from .views.views import LoginView,HomeView,CheckMap,MapDetails,otchet,mapСompleted,deleteMap,UserDetail,mapReturn
+from .views.views import LoginView,HomeView,CheckMap,MapDetails,otchet,mapСompleted,deleteMap,UserDetail,mapReturn,FullNameAuthorListView
 
-from gos_map.views.views_publication import addPublication,deletePublication,editPublication,FullNameAuthorListView
+from gos_map.views.views_publication import addPublication,deletePublication,editPublication
 
 from gos_map.views.views_security_documents import addSecurityDocuments,deleteSecurityDocuments,editSecurityDocuments
 

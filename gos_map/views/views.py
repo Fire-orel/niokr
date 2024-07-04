@@ -5,15 +5,17 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.views import View
 from ldap3 import Server, Connection, ALL, NTLM
 from ..forms import LoginForm,MapForms,PublicationForms,SecurityDocumentsForms,MonographsForms,EventForms,GrantForms,NIRSForms,PopularSciencePublicationsForms,ScientificDirectionsForms,InternationalCooperationForms,TypePublicationsForms,TypeDocumentsForms,TypePropertyForms,TypeMonographsForms,TypeParticipationForms,TypeEventForms,TypeLevelForms,TypeGrantForms,FormParticipationForms
-from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation,Faculty,Department,TypeDocuments,TypeProperty,TypeMonographs,TypeParticipation,TypeEvent,TypeLevel,TypeGrant,FormParticipation
+from ..models import UserManager,Map,Publications,TypePublications,SecurityDocuments,Monographs,Event,Grant,NIRS,PopularSciencePublications,ScientificDirections,InternationalCooperation,Faculty,Department,TypeDocuments,TypeProperty,TypeMonographs,TypeParticipation,TypeEvent,TypeLevel,TypeGrant,FormParticipation,FullNameАuthor
 from django.views.generic import ListView,DetailView,UpdateView
 from django.http import JsonResponse,HttpResponseRedirect,HttpResponse
 from openpyxl import Workbook
 import zipfile
 import io
 import os
+from django.db.models import Q
 from dotenv import load_dotenv
 load_dotenv()
+
 
 
 
@@ -373,6 +375,24 @@ class mapReturn(View):
         map.status="Редактируется"
         map.save()
         return redirect('home')
+
+
+
+class FullNameAuthorListView(View):
+    def get(self, request, *args, **kwargs):
+        try:
+            search_term = request.GET.get('q', '')
+            if search_term:
+                authors = FullNameАuthor.objects.filter(Q(full_name__icontains=search_term))[:30]
+            else:
+                authors = FullNameАuthor.objects.none()
+
+            results = [{'id': author.pk, 'name': author.full_name} for author in authors]
+            return JsonResponse({'results': results})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+
 
 
 
