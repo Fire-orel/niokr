@@ -39,7 +39,7 @@ from gos_map.views.views_form_participation import addFormParticipation,editForm
 
 urlpatterns = [
 
-   path('path/to/select2-data/', FullNameAuthorListView.as_view(), name='select2-data'),
+   path('full_name_authorList', FullNameAuthorListView.as_view(), name='select2-data'),
 
 
     path('', LoginView.as_view(), name='login'),

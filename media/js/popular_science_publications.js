@@ -170,7 +170,7 @@ $(document).ready(function() {
         },
         minimumInputLength: 2,
         ajax: {
-            url: '/path/to/select2-data/', // Убедитесь, что URL правильный
+            url: '/full_name_authorList', // Убедитесь, что URL правильный
             dataType: 'json',
 
             data: function(params) {
