@@ -45,7 +45,7 @@ class MapForms(forms.ModelForm):
         elif user.position=="ЗД":
             self.fields['department'].queryset=Department.objects.filter(faculty=user.faculty)
         elif user.position=="ЗК":
-            self.fields['department'].queryset=Department.objects.filter(name_department=user.department)
+            self.fields['department'].queryset=Department.objects.filter(pk=user.department)
         else:
             self.fields['department'].queryset=Department.objects.all()
 
@@ -62,7 +62,7 @@ class PublicationForms(forms.ModelForm):
             'multiple': 'multiple',
             'data-tags': 'true',
             'value': 'full_name',
-            
+
             }),
         required=False,
         to_field_name='full_name'
