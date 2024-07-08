@@ -174,9 +174,10 @@ class HomeView(View):
                 maps=maps|Map.objects.filter(department=department)
         elif position =="ЗК":
             departmentss=UserManager.objects.get(pk=user_id).department
-            departments_list=Department.objects.filter(name_department=departmentss)
+            departments_list=Department.objects.filter(pk=departmentss)
 
             maps = Map.objects.filter(responsible=UserManager.get_user_id(request.session.get("user_id")))
+            print(departments_list)
 
 
 
