@@ -40,7 +40,7 @@ class addGrant(View):
 
 
 
-        if type_grant!="" and name_fund!="" and name_competition!="" and kod_competition!="" and nomination!="" and name_project_topic!="" and project_manager!="" and number_project_team!="" and number_young_scientists!="" and full_name_performer!="" and winner!="":
+        if type_grant!="" and name_fund!="" and name_competition!="" and kod_competition!="" and nomination!="" and name_project_topic!="" and len(project_manager)!=0 and number_project_team!="" and number_young_scientists!="" and len(full_name_performer)!=0 and winner!="":
             status="Завершено"
 
         grant=Grant.objects.create(

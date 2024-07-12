@@ -36,7 +36,7 @@ class addEvent(View):
 
 
 
-        if type_participation!="" and full_name_author_event!="" and name_event_event!="" and level!="" and type_event!="" and title_report!="" and place_event!="" and date_event_event!="" and number_participants!="" and number_foreign_participants!="" and number_exhibits!="" and publication_collection!="" and awards!="" and link!="":
+        if type_participation!="" and len(full_name_author_event)!=0 and name_event_event!="" and level!="" and type_event!="" and title_report!="" and place_event!="" and date_event_event!="" and number_participants!="" and number_foreign_participants!="" and number_exhibits!="" and publication_collection!="" and awards!="" and link!="":
             status="Завершено"
 
         event=Event.objects.create(
@@ -114,7 +114,7 @@ class editEvent(View):
 
 
 
-        if type_participation!="" and full_name_author_event!="" and name_event_event!="" and level!="" and type_event!="" and title_report!="" and place_event!="" and date_event_event!="" and number_participants!="" and number_foreign_participants!="" and number_exhibits!="" and publication_collection!="" and awards!="" and link!="":
+        if type_participation!="" and len(full_name_author_event)!=0 and name_event_event!="" and level!="" and type_event!="" and title_report!="" and place_event!="" and date_event_event!="" and number_participants!="" and number_foreign_participants!="" and number_exhibits!="" and publication_collection!="" and awards!="" and link!="":
             status="Завершено"
 
         event.type_participation=TypeParticipation.objects.get(pk=type_participation)

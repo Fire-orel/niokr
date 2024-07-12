@@ -29,7 +29,7 @@ class addMonographs(View):
 
         print(full_name_author_optim)
 
-        if type_monographs!="" and full_name_author_Monographs!="" and name_works!="" and circulation!="" and volume_monographs!="" and publishing_house!="" and type_publishing_house!="" and year_of_publication_monographs!="":
+        if type_monographs!="" and len(full_name_author_Monographs)!=0 and name_works!="" and circulation!="" and volume_monographs!="" and publishing_house!="" and type_publishing_house!="" and year_of_publication_monographs!="":
             status="Завершено"
 
         monographs=Monographs.objects.create(
@@ -94,7 +94,7 @@ class editMonographs(View):
         status='Редактируется'
 
 
-        if type_monographs!="" and full_name_author_Monographs!="" and name_works!="" and circulation!="" and volume_monographs!="" and publishing_house!="" and type_publishing_house!="" and year_of_publication_monographs!="":
+        if type_monographs!="" and len(full_name_author_Monographs)!=0 and name_works!="" and circulation!="" and volume_monographs!="" and publishing_house!="" and type_publishing_house!="" and year_of_publication_monographs!="":
             status="Завершено"
 
 

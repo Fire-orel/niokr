@@ -35,7 +35,7 @@ class addScientificDirections(View):
 
 
 
-        if name_scientific_direction!="" and name_scientific_school!="" and leading_scientists!="" and number_defended_doctoral_dissertations!="" and number_defended_PhD_theses!="" and number_monographs!="" and number_articles_WoS_Scopus!="" and number_articles_VAK!="" and number_articles_RIHC!="" and number_applications_inventions!="" and number_security_documents_received!="" and number_organized!="" and amount_funding!="":
+        if name_scientific_direction!="" and name_scientific_school!="" and len(leading_scientists)!=0 and number_defended_doctoral_dissertations!="" and number_defended_PhD_theses!="" and number_monographs!="" and number_articles_WoS_Scopus!="" and number_articles_VAK!="" and number_articles_RIHC!="" and number_applications_inventions!="" and number_security_documents_received!="" and number_organized!="" and amount_funding!="":
             status="Завершено"
 
         scientificdirections=ScientificDirections.objects.create(
@@ -114,7 +114,7 @@ class editScientificDirections(View):
 
 
 
-        if name_scientific_direction!="" and name_scientific_school!="" and leading_scientists!="" and number_defended_doctoral_dissertations!="" and number_defended_PhD_theses!="" and number_monographs!="" and number_articles_WoS_Scopus!="" and number_articles_VAK!="" and number_articles_RIHC!="" and number_applications_inventions!="" and number_security_documents_received!="" and number_organized!="" and amount_funding!="":
+        if name_scientific_direction!="" and name_scientific_school!="" and len(leading_scientists)!=0 and number_defended_doctoral_dissertations!="" and number_defended_PhD_theses!="" and number_monographs!="" and number_articles_WoS_Scopus!="" and number_articles_VAK!="" and number_articles_RIHC!="" and number_applications_inventions!="" and number_security_documents_received!="" and number_organized!="" and amount_funding!="":
             status="Завершено"
 
 

@@ -28,7 +28,7 @@ class addPopularSciencePublications(View):
 
 
 
-        if full_name_author!="" and name_publication_popular_science_publications!="" and place_publication_popular_science_publications!="" and volume_popular_science_publications!="" and note!="":
+        if len(full_name_author)!=0 and name_publication_popular_science_publications!="" and place_publication_popular_science_publications!="" and volume_popular_science_publications!="" and note!="":
             status="Завершено"
 
         popular_science_publications=PopularSciencePublications.objects.create(
@@ -90,7 +90,7 @@ class editPopularSciencePublications(View):
 
 
 
-        if full_name_author!="" and name_publication_popular_science_publications!="" and place_publication_popular_science_publications!="" and volume_popular_science_publications!="" and note!="":
+        if len(full_name_author)!=0 and name_publication_popular_science_publications!="" and place_publication_popular_science_publications!="" and volume_popular_science_publications!="" and note!="":
             status="Завершено"
 
         popular_science_publications.full_name_author=full_name_author_optim

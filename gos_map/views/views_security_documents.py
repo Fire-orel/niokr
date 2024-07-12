@@ -23,7 +23,7 @@ class addSecurityDocuments(View):
         status='Редактируется'
 
 
-        if type_document!="" and type_property!="" and full_name_author_security_documents!="" and name_publication_security_documents!="" and application_number!="":
+        if type_document!="" and type_property!="" and len(full_name_author_security_documents)!=0 and name_publication_security_documents!="" and application_number!="":
             status="Завершено"
         securitydocuments=SecurityDocuments.objects.create(
                 id_map = Map.get_map_id(request.session.get('map_id')),
@@ -80,7 +80,7 @@ class editSecurityDocuments(View):
         status='Редактируется'
 
 
-        if type_document!="" and type_property!="" and full_name_author_security_documents!="" and name_publication_security_documents!="" and application_number!="":
+        if type_document!="" and type_property!="" and len(full_name_author_security_documents)!=0 and name_publication_security_documents!="" and application_number!="":
             status="Завершено"
 
         securitydocuments.type_document=TypeDocuments.objects.get(pk=type_document)

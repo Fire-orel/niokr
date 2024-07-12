@@ -37,7 +37,7 @@ class addNIRS(View):
 
 
 
-        if full_name_students!="" and form_participation!="" and name_event_nirs!="" and full_name_scientific_supervisor!="" and awards_diplomas!="" and date_event_nirs!="":
+        if len(full_name_students)!=0 and form_participation!="" and name_event_nirs!="" and len(full_name_scientific_supervisor)!=0 and awards_diplomas!="" and date_event_nirs!="":
             status="Завершено"
 
         nirs=NIRS.objects.create(
@@ -108,7 +108,7 @@ class editNIRS(View):
 
 
 
-        if full_name_students!="" and form_participation!="" and name_event_nirs!="" and full_name_scientific_supervisor!="" and awards_diplomas!="" and date_event_nirs!="":
+        if len(full_name_students)!=0 and form_participation!="" and name_event_nirs!="" and len(full_name_scientific_supervisor)!=0 and awards_diplomas!="" and date_event_nirs!="":
             status="Завершено"
 
 

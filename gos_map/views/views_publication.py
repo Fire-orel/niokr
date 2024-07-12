@@ -15,6 +15,7 @@ class addPublication(View):
         volume_publication = request.POST.get("volume_publication")
         eLIBRARY_ID = request.POST.get("eLIBRARY_ID")
         doi_publication = request.POST.get("doi_publication")
+        print(full_name_author_publications)
 
 
         full_name_author_optim=""
@@ -27,7 +28,7 @@ class addPublication(View):
         status='Редактируется'
 
 
-        if type_publication!="" and full_name_author_publications!="" and name_publication_publications!="" and exit_data!="" and place_publication_publications!="" and eLIBRARY_ID!="" and doi_publication!="":
+        if type_publication!="" and len(full_name_author_publications)!=0 and name_publication_publications!="" and exit_data!="" and place_publication_publications!="" and eLIBRARY_ID!="" and doi_publication!="":
             status="Завершено"
 
         publication=Publications.objects.create(
@@ -83,7 +84,7 @@ class editPublication(View):
         status='Редактируется'
 
 
-        if type_publication!="" and full_name_author_publications!="" and name_publication_publications!="" and exit_data!="" and place_publication_publications!="" and eLIBRARY_ID!="" and doi_publication!="":
+        if type_publication!="" and len(full_name_author_publications)!=0 and name_publication_publications!="" and exit_data!="" and place_publication_publications!="" and eLIBRARY_ID!="" and doi_publication!="":
             status="Завершено"
 
 
@@ -116,5 +117,3 @@ class deletePublication(View):
             return JsonResponse({'error': 'Publication not found'}, status=404)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
-
-
